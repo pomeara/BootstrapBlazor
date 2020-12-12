@@ -252,6 +252,11 @@
             获得/设置 初始化设备列表文字 默认为 正在识别摄像头
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.BarcodeReader.NotFoundDevicesString">
+            <summary>
+            获得/设置 未找到视频相关设备文字 默认为 未找到视频相关设备
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.BarcodeReader.ScanType">
             <summary>
             获得/设置 扫描方式 默认 Camera 从摄像头进行条码扫描
@@ -265,6 +270,11 @@
         <member name="P:BootstrapBlazor.Components.BarcodeReader.OnResult">
             <summary>
             获得/设置 扫码结果回调方法
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.BarcodeReader.AutoStart">
+            <summary>
+            获得/设置 自动开启摄像头 默认为 false
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.BarcodeReader.AutoStop">
@@ -285,6 +295,11 @@
         <member name="P:BootstrapBlazor.Components.BarcodeReader.OnClose">
             <summary>
             获得/设置 关闭扫码回调方法
+            </summary>
+        </member>
+        <member name="M:BootstrapBlazor.Components.BarcodeReader.OnInitialized">
+            <summary>
+            OnInitialized 方法
             </summary>
         </member>
         <member name="M:BootstrapBlazor.Components.BarcodeReader.OnAfterRenderAsync(System.Boolean)">
@@ -1095,9 +1110,24 @@
             
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.Camera.AutoStart">
+            <summary>
+            获得/设置 是否自动开启摄像头 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Camera.FrontText">
+            <summary>
+            获得/设置 前置摄像头显示文本 默认前置
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Camera.BackText">
+            <summary>
+            获得/设置 后置摄像头显示文本 默认后置
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.Camera.ShowPreview">
             <summary>
-            获得/设置 是否显示 照片预览
+            获得/设置 是否显示 照片预览 默认为 false 不预览
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.Camera.DeviceLabel">
@@ -1132,7 +1162,32 @@
         </member>
         <member name="P:BootstrapBlazor.Components.Camera.OnCapture">
             <summary>
-            获得/设置 开始扫码回调方法
+            获得/设置 扫码成功回调方法
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Camera.PlayText">
+            <summary>
+            获得/设置 开启按钮显示文本 默认为开启
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Camera.StopText">
+            <summary>
+            获得/设置 关闭按钮显示文本 默认为关闭
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Camera.PhotoText">
+            <summary>
+            获得/设置 拍照按钮显示文本 默认为拍照
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Camera.NotFoundDevicesString">
+            <summary>
+            获得/设置 未找到视频相关设备文字 默认为 未找到视频相关设备
+            </summary>
+        </member>
+        <member name="M:BootstrapBlazor.Components.Camera.OnInitialized">
+            <summary>
+            OnInitialized 方法
             </summary>
         </member>
         <member name="M:BootstrapBlazor.Components.Camera.OnAfterRenderAsync(System.Boolean)">
@@ -2183,6 +2238,16 @@
             获得/设置 组件值改变时回调委托供双向绑定使用
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.DatePickerBody.MaxValue">
+            <summary>
+            获得/设置 当前日期最大值
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.DatePickerBody.MinValue">
+            <summary>
+            获得/设置 当前日期最小值
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.DatePickerBody.Ranger">
             <summary>
             获得/设置 是否为 Range 内使用 默认为 false
@@ -2394,6 +2459,16 @@
         <member name="P:BootstrapBlazor.Components.DateTimePicker`1.ShowSidebar">
             <summary>
             获得/设置 是否显示快捷侧边栏 默认不显示
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.DateTimePicker`1.MaxValue">
+            <summary>
+            获得/设置 当前日期最大值
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.DateTimePicker`1.MinValue">
+            <summary>
+            获得/设置 当前日期最小值
             </summary>
         </member>
         <member name="M:BootstrapBlazor.Components.DateTimePicker`1.OnInitialized">
@@ -2615,6 +2690,11 @@
         <member name="P:BootstrapBlazor.Components.DateTimeRange.OnConfirm">
             <summary>
             点击确认按钮回调委托方法
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.DateTimeRange.OnClearValue">
+            <summary>
+            点击情况按钮回调委托方法
             </summary>
         </member>
         <member name="M:BootstrapBlazor.Components.DateTimeRange.OnInitialized">
@@ -3105,6 +3185,16 @@
             获得/设置 设置组件高度
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.Editor.ToolbarItems">
+            <summary>
+            获得/设置 富文本框工具栏工具，默认为空使用默认值
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Editor.CustomerToolbarButtons">
+            <summary>
+            获得/设置 自定义按钮
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.Editor.Value">
             <summary>
             获得/设置 组件值
@@ -3113,6 +3203,16 @@
         <member name="P:BootstrapBlazor.Components.Editor.ValueChanged">
             <summary>
             获得/设置 组件值变化后的回调委托
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Editor.OnValueChanged">
+            <summary>
+            获得/设置 组件值变化后的回调委托
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.Editor.OnClickButton">
+            <summary>
+            获取/设置 插件点击时的回调委托
             </summary>
         </member>
         <member name="M:BootstrapBlazor.Components.Editor.OnInitialized">
@@ -3133,11 +3233,50 @@
             </summary>
             <param name="value"></param>
         </member>
+        <member name="M:BootstrapBlazor.Components.Editor.GetToolBar">
+            <summary>
+            获取编辑器的 toolbar
+            </summary>
+            <returns>toolbar</returns>
+        </member>
+        <member name="M:BootstrapBlazor.Components.Editor.GetPluginAttrs">
+            <summary>
+            获取插件信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BootstrapBlazor.Components.Editor.ClickPluginItem(System.String)">
+            <summary>
+            插件点击事件
+            </summary>
+            <param name="pluginItemName">插件名</param>
+            <returns>插件回调的文本</returns>
+        </member>
         <member name="M:BootstrapBlazor.Components.Editor.Dispose(System.Boolean)">
             <summary>
             Dispose 方法
             </summary>
             <param name="disposing"></param>
+        </member>
+        <member name="T:BootstrapBlazor.Components.EditorToolbarButton">
+            <summary>
+            富文本框插件信息
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.EditorToolbarButton.ButtonName">
+            <summary>
+            获取或设置 插件名称
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.EditorToolbarButton.IconClass">
+            <summary>
+            获取或设置 插件图标
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.EditorToolbarButton.Tooltip">
+            <summary>
+            获取或设置 插件的提示信息
+            </summary>
         </member>
         <member name="T:BootstrapBlazor.Components.EditorForm`1">
             <summary>
@@ -3162,6 +3301,11 @@
         <member name="P:BootstrapBlazor.Components.EditorForm`1.ShowLabel">
             <summary>
             获得/设置 是否显示前置标签 默认为 true 显示标签
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.EditorForm`1.AutoGenerateAllItem">
+            <summary>
+            获得/设置 是否自动生成模型的所有属性 默认为 true 生成所有属性
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.EditorForm`1.CascadedEditContext">
@@ -3233,7 +3377,7 @@
             获得/设置 绑定字段值变化回调委托
             </summary>
         </member>
-        <member name="P:BootstrapBlazor.Components.EditorItem`1.FieldType">
+        <member name="P:BootstrapBlazor.Components.EditorItem`1.PropertyType">
             <summary>
             获得/设置 绑定列类型
             </summary>
@@ -3261,6 +3405,11 @@
         <member name="P:BootstrapBlazor.Components.EditorItem`1.EditTemplate">
             <summary>
             获得/设置 编辑模板
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.EditorItem`1.Order">
+            <summary>
+            获得/设置 显示顺序
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.EditorItem`1.EditorItems">
@@ -3305,7 +3454,7 @@
             
             </summary>
         </member>
-        <member name="P:BootstrapBlazor.Components.IEditorItem.FieldType">
+        <member name="P:BootstrapBlazor.Components.IEditorItem.PropertyType">
             <summary>
             获得/设置 绑定列类型
             </summary>
@@ -3350,7 +3499,7 @@
             获得/设置 绑定数据模型
             </summary>
         </member>
-        <member name="P:BootstrapBlazor.Components.EditorForm.InternalEditorItem`1.FieldType">
+        <member name="P:BootstrapBlazor.Components.EditorForm.InternalEditorItem`1.PropertyType">
             <summary>
             获得/设置 字段数据类型
             </summary>
@@ -3752,6 +3901,11 @@
             获得/设置 是否显示返回顶端按钮
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.LayoutBase.OnClickMenu">
+            <summary>
+            获得/设置 点击菜单时回调委托方法 默认为 null
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.LayoutBase.OnCollapsed">
             <summary>
             获得/设置 收缩展开回调委托
@@ -3770,7 +3924,7 @@
             </summary>
             <returns></returns>
         </member>
-        <member name="M:BootstrapBlazor.Components.LayoutBase.OnClickMenu(BootstrapBlazor.Components.MenuItem)">
+        <member name="M:BootstrapBlazor.Components.LayoutBase.ClickMenu(BootstrapBlazor.Components.MenuItem)">
             <summary>
             点击菜单时回调此方法
             </summary>
@@ -3983,6 +4137,11 @@
         <member name="T:BootstrapBlazor.Components.MenuItem">
             <summary>
             MenuItem 组件
+            </summary>
+        </member>
+        <member name="F:BootstrapBlazor.Components.MenuItem._items">
+            <summary>
+            
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.MenuItem.Parent">
@@ -5142,6 +5301,21 @@
             Search 组件基类
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.SearchBase.ClearButtonColor">
+            <summary>
+            Clear button color
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.SearchBase.ClearButtonIcon">
+            <summary>
+            Clear button icon
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.SearchBase.ClearButtonText">
+            <summary>
+            Clear button text
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.SearchBase.SearchButtonColor">
             <summary>
             获得/设置 搜索按钮颜色
@@ -5162,7 +5336,18 @@
             获得/设置 点击搜索按钮时回调委托
             </summary>
         </member>
-        <member name="M:BootstrapBlazor.Components.SearchBase.OnClick">
+        <member name="P:BootstrapBlazor.Components.SearchBase.OnClear">
+            <summary>
+            获得/设置 点击搜索按钮时回调委托
+            </summary>
+        </member>
+        <member name="M:BootstrapBlazor.Components.SearchBase.OnSearchClick">
+            <summary>
+            点击搜索按钮时触发此方法
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BootstrapBlazor.Components.SearchBase.OnClearClick">
             <summary>
             点击搜索按钮时触发此方法
             </summary>
@@ -6312,6 +6497,163 @@
             </summary>
             <param name="active"></param>
         </member>
+        <member name="T:BootstrapBlazor.Components.AutoGenerateColumnAttribute">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Order">
+            <summary>
+            获得/设置 显示顺序
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Ignore">
+            <summary>
+            获得/设置 是否忽略 默认为 false 不忽略
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Editable">
+            <summary>
+            获得/设置 当前列是否可编辑 默认为 true 当设置为 false 时自动生成编辑 UI 不生成此列
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Readonly">
+            <summary>
+            获得/设置 当前列编辑时是否只读 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Sortable">
+            <summary>
+            获得/设置 是否允许排序 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.DefaultSort">
+            <summary>
+            获得/设置 是否为默认排序列 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.DefaultSortOrder">
+            <summary>
+            获得/设置 是否为默认排序规则 默认为 SortOrder.Unset
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Filterable">
+            <summary>
+            获得/设置 是否允许过滤数据 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Searchable">
+            <summary>
+            获得/设置 是否参与搜索 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Width">
+            <summary>
+            获得/设置 列宽
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Fixed">
+            <summary>
+            获得/设置 是否固定本列 默认 false 不固定
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Visible">
+            <summary>
+            获得/设置 列是否显示 默认为 true 可见的
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.AllowTextWrap">
+            <summary>
+            获得/设置 本列是否允许换行 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.TextEllipsis">
+            <summary>
+            获得/设置 本列文本超出省略 默认为 false
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.CssClass">
+            <summary>
+            获得/设置 列 td 自定义样式 默认为 null 未设置
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.ShownWithBreakPoint">
+            <summary>
+            获得/设置 显示节点阈值 默认值 BreakPoint.None 未设置
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.FormatString">
+            <summary>
+            获得/设置 格式化字符串 如时间类型设置 yyyy-MM-dd
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Align">
+            <summary>
+            获得/设置 文字对齐方式 默认为 Alignment.None
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.ShowTips">
+            <summary>
+            获得/设置 字段鼠标悬停提示
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Formatter">
+            <summary>
+            获得/设置 列格式化回调委托
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.EditTemplate">
+            <summary>
+            获得/设置 编辑模板
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Template">
+            <summary>
+            获得/设置 显示模板
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.SearchTemplate">
+            <summary>
+            获得/设置 搜索模板
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.FilterTemplate">
+            <summary>
+            获得/设置 过滤模板
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Filter">
+            <summary>
+            获得/设置 列过滤器
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.PropertyType">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.Text">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.AutoGenerateColumnAttribute.FieldName">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:BootstrapBlazor.Components.AutoGenerateColumnAttribute.GetDisplayName">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BootstrapBlazor.Components.AutoGenerateColumnAttribute.GetFieldName">
+            <summary>
+            
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:BootstrapBlazor.Components.DefaultExcelExport">
             <summary>
             
@@ -6766,6 +7108,21 @@
             </summary>
             <param name="disposing"></param>
         </member>
+        <member name="M:BootstrapBlazor.Components.InternalTableColumn.#ctor(System.String,System.Type,System.String)">
+            <summary>
+            构造函数
+            </summary>
+            <param name="fieldName">字段名称</param>
+            <param name="fieldType">字段类型</param>
+            <param name="fieldText">显示文字</param>
+        </member>
+        <member name="M:BootstrapBlazor.Components.InternalTableColumn.CopyValue(BootstrapBlazor.Components.ITableColumn,BootstrapBlazor.Components.ITableColumn)">
+            <summary>
+            属性赋值方法
+            </summary>
+            <param name="source"></param>
+            <param name="dest"></param>
+        </member>
         <member name="T:BootstrapBlazor.Components.ITable">
             <summary>
             ITable 接口
@@ -6889,6 +7246,11 @@
         <member name="P:BootstrapBlazor.Components.ITableColumn.ShowTips">
             <summary>
             字段鼠标悬停提示
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.ITableColumn.Order">
+            <summary>
+            获得/设置 顺序号
             </summary>
         </member>
         <member name="T:BootstrapBlazor.Components.ITableExcelExport">
@@ -7355,6 +7717,11 @@
             获得/设置 单选模式下双击即编辑本行 默认为 false
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.Table`1.AutoGenerateColumns">
+            <summary>
+            获得/设置 是否自动生成列信息 默认为 false
+            </summary>
+        </member>
         <member name="M:BootstrapBlazor.Components.Table`1.ClickRow(`0)">
             <summary>
             单选模式下选择行时调用此方法
@@ -7592,11 +7959,6 @@
         <member name="P:BootstrapBlazor.Components.Table`1.DeleteButtonToastResultContent">
             <summary>
             删除按钮结果 Toast 提示 Content 文字
-            </summary>
-        </member>
-        <member name="M:BootstrapBlazor.Components.Table`1.OnInitLocalization">
-            <summary>
-            本地化信息初始化方法
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.Table`1.IsPagination">
@@ -8008,7 +8370,7 @@
             获得/设置 相关过滤器
             </summary>
         </member>
-        <member name="P:BootstrapBlazor.Components.TableColumn`1.FieldType">
+        <member name="P:BootstrapBlazor.Components.TableColumn`1.PropertyType">
             <summary>
             获得/设置 绑定列类型
             </summary>
@@ -8088,6 +8450,11 @@
             获得/设置 是否显示本列 默认 true 显示
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.TableColumn`1.ShowTips">
+            <summary>
+            获得/设置 字段鼠标悬停提示
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.TableColumn`1.CssClass">
             <summary>
             获得/设置 列 td 自定义样式 默认为 null 未设置
@@ -8134,6 +8501,11 @@
             获得/设置 显示节点阈值 默认值 BreakPoint.None 未设置
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.TableColumn`1.Order">
+            <summary>
+            获得/设置 显示顺序
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.TableColumn`1.Table">
             <summary>
             获得/设置 Table 实例
@@ -8157,11 +8529,6 @@
         <member name="M:BootstrapBlazor.Components.TableColumn`1.GetFieldName">
             <summary>
             获取绑定字段信息方法
-            </summary>
-        </member>
-        <member name="P:BootstrapBlazor.Components.TableColumn`1.ShowTips">
-            <summary>
-            获得/设置 字段鼠标悬停提示
             </summary>
         </member>
         <member name="T:BootstrapBlazor.Components.TableColumnContext`2">
@@ -9244,6 +9611,11 @@
             获得/设置 重置按钮显示文字
             </summary>
         </member>
+        <member name="P:BootstrapBlazor.Components.Upload.ImageUrl">
+            <summary>
+            获得/设置 默认初始化图片地址
+            </summary>
+        </member>
         <member name="P:BootstrapBlazor.Components.Upload.Localizer">
             <summary>
             
@@ -9620,12 +9992,17 @@
         </member>
         <member name="P:BootstrapBlazor.Components.ValidateBase`1.Id">
             <summary>
-            获得 当前组件 Id
+            获得/设置 当前组件 Id
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.ValidateBase`1.ChildContent">
             <summary>
-            获得 子组件 RenderFragment 实例
+            获得/设置 子组件 RenderFragment 实例
+            </summary>
+        </member>
+        <member name="P:BootstrapBlazor.Components.ValidateBase`1.SkipValidate">
+            <summary>
+            获得/设置 是否不进行验证 默认为 false
             </summary>
         </member>
         <member name="P:BootstrapBlazor.Components.ValidateBase`1.ShowLabel">
@@ -10315,6 +10692,11 @@
         <member name="F:BootstrapBlazor.Components.FilterAction.NotContains">
             <summary>
             不包含
+            </summary>
+        </member>
+        <member name="F:BootstrapBlazor.Components.FilterAction.CustomPredicate">
+            <summary>
+            自定义条件
             </summary>
         </member>
         <member name="T:BootstrapBlazor.Components.FilterLogic">
@@ -11053,10 +11435,18 @@
         </member>
         <member name="M:Microsoft.AspNetCore.Components.Forms.FieldIdentifierExtensions.GetDisplayName(System.Object,System.String)">
             <summary>
-            
+            获取显示名称方法
             </summary>
-            <param name="model"></param>
-            <param name="fieldName"></param>
+            <param name="model">模型实例</param>
+            <param name="fieldName">字段名称</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.AspNetCore.Components.Forms.FieldIdentifierExtensions.GetDisplayName(System.Type,System.String)">
+            <summary>
+            获取显示名称方法
+            </summary>
+            <param name="modelType">模型类型</param>
+            <param name="fieldName">字段名称</param>
             <returns></returns>
         </member>
         <member name="T:System.Linq.LambdaExtensions">
