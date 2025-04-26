@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 默认 Html2Image 实现
+/// Default Html2Image implementation
 /// </summary>
 class DefaultHtml2ImageService : IHtml2Image
 {

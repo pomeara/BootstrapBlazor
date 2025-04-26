@@ -8,22 +8,22 @@ using Microsoft.Extensions.Caching.Memory;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 默认 IP 地理位置定位器
+/// Default IP geolocation locator
 /// </summary>
 public abstract class DefaultIpLocatorProvider : IIpLocatorProvider
 {
     /// <summary>
-    /// 获得 Ip 定位结果缓存
+    /// Gets the IP location result cache
     /// </summary>
     protected MemoryCache IpCache { get; } = new(new MemoryCacheOptions());
 
     /// <summary>
-    /// 获得 IpLocator 配置信息
+    /// Gets the IpLocator configuration information
     /// </summary>
     protected IpLocatorOptions Options { get; }
 
     /// <summary>
-    /// 构造函数
+    /// Constructor
     /// </summary>
     protected DefaultIpLocatorProvider(IOptions<BootstrapBlazorOptions> options)
     {
@@ -32,7 +32,7 @@ public abstract class DefaultIpLocatorProvider : IIpLocatorProvider
     }
 
     /// <summary>
-    /// 获得 本机地址列表
+    /// Gets the list of localhost addresses
     /// </summary>
     private readonly List<string> _localhostList = [.. new[] { "::1", "127.0.0.1" }];
 
@@ -50,7 +50,7 @@ public abstract class DefaultIpLocatorProvider : IIpLocatorProvider
     {
         string? ret = null;
 
-        // 解析本机地址
+        // Resolve localhost address
         if (string.IsNullOrEmpty(ip) || _localhostList.Any(p => p == ip))
         {
             ret = "localhost";
@@ -80,7 +80,7 @@ public abstract class DefaultIpLocatorProvider : IIpLocatorProvider
     }
 
     /// <summary>
-    /// 内部定位方法
+    /// Internal location method
     /// </summary>
     /// <param name="ip"></param>
     /// <returns></returns>

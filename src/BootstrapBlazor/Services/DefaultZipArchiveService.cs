@@ -13,9 +13,9 @@ class DefaultZipArchiveService : IZipArchiveService
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    /// <param name="files">要归档的文件集合</param>
-    /// <param name="options">归档配置</param>
-    /// <returns>归档数据流</returns>
+    /// <param name="files">Files to be archived</param>
+    /// <param name="options">Archive configuration</param>
+    /// <returns>Archive data stream</returns>
     public async Task<Stream> ArchiveAsync(IEnumerable<string> files, ArchiveOptions? options = null)
     {
         var stream = new MemoryStream();
@@ -29,9 +29,9 @@ class DefaultZipArchiveService : IZipArchiveService
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    /// <param name="archiveFileName">归档文件</param>
-    /// <param name="files">要归档的文件集合</param>
-    /// <param name="options">归档配置</param>
+    /// <param name="archiveFileName">Archive file name</param>
+    /// <param name="files">Files to be archived</param>
+    /// <param name="options">Archive configuration</param>
     public async Task ArchiveAsync(string archiveFileName, IEnumerable<string> files, ArchiveOptions? options = null)
     {
         using var stream = File.OpenWrite(archiveFileName);
@@ -61,8 +61,8 @@ class DefaultZipArchiveService : IZipArchiveService
     /// <summary>
     /// <inheritdoc/>
     /// </summary>
-    /// <param name="archiveFileName">归档文件</param>
-    /// <param name="directoryName">要归档文件夹</param>
+    /// <param name="archiveFileName">Archive file name</param>
+    /// <param name="directoryName">Directory to be archived</param>
     /// <param name="compressionLevel"></param>
     /// <param name="includeBaseDirectory"></param>
     /// <param name="encoding"></param>
@@ -85,9 +85,9 @@ class DefaultZipArchiveService : IZipArchiveService
     /// <inheritdoc/>
     /// </summary>
     /// <param name="archiveFile">归档文件</param>
-    /// <param name="destinationDirectoryName">解压缩文件夹</param>
-    /// <param name="overwriteFiles">是否覆盖文件 默认 false 不覆盖</param>
-    /// <param name="encoding">编码方式 默认 null 内部使用 UTF-8</param>
+    /// <param name="destinationDirectoryName">Destination directory for extraction</param>
+    /// <param name="overwriteFiles">Whether to overwrite files, default false</param>
+    /// <param name="encoding">Encoding method, default null uses UTF-8 internally</param>
     /// <returns></returns>
     public bool ExtractToDirectory(string archiveFile, string destinationDirectoryName, bool overwriteFiles = false, Encoding? encoding = null)
     {
@@ -104,8 +104,8 @@ class DefaultZipArchiveService : IZipArchiveService
     /// </summary>
     /// <param name="archiveFile">归档文件</param>
     /// <param name="entryFile">解压缩文件</param>
-    /// <param name="overwriteFiles">是否覆盖文件 默认 false 不覆盖</param>
-    /// <param name="encoding">编码方式 默认 null 内部使用 UTF-8</param>
+    /// <param name="overwriteFiles">Whether to overwrite files, default false</param>
+    /// <param name="encoding">Encoding method, default null uses UTF-8 internally</param>
     /// <returns></returns>
     public ZipArchiveEntry? GetEntry(string archiveFile, string entryFile, bool overwriteFiles = false, Encoding? encoding = null)
     {

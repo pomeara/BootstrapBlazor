@@ -6,17 +6,17 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 自定义验证类
+/// Custom validation class
 /// </summary>
 /// <param name="attribute"></param>
 public class FormItemValidator(ValidationAttribute attribute) : ValidatorBase
 {
     /// <summary>
-    /// 验证方法
+    /// Validation method
     /// </summary>
-    /// <param name="propertyValue">待校验值</param>
-    /// <param name="context">ValidateContext 实例</param>
-    /// <param name="results">ValidateResult 集合实例</param>
+    /// <param name="propertyValue">Value to validate</param>
+    /// <param name="context">ValidateContext instance</param>
+    /// <param name="results">ValidateResult collection instance</param>
     public override void Validate(object? propertyValue, ValidationContext context, List<ValidationResult> results)
     {
         var result = attribute.GetValidationResult(propertyValue, context);
@@ -27,7 +27,7 @@ public class FormItemValidator(ValidationAttribute attribute) : ValidatorBase
     }
 
     /// <summary>
-    /// 是否为 RequiredAttribute 标签特性
+    /// Whether it is a RequiredAttribute tag feature
     /// </summary>
     public bool IsRequired => attribute is RequiredAttribute;
 }

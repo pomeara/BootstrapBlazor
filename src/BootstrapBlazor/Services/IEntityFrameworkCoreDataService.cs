@@ -6,18 +6,18 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// IEntityFrameworkCoreDataService 接口
+/// IEntityFrameworkCoreDataService interface
 /// </summary>
 public interface IEntityFrameworkCoreDataService
 {
     /// <summary>
-    /// 取消方法，由于编辑时使用的是克隆数据，常见取消用法不需要写任何代码，可用于保存数据下次编辑时恢复
+    /// Cancel method, since cloned data is used during editing, common cancel usage requires no code and can save data for next edit
     /// </summary>
     /// <returns></returns>
     Task CancelAsync();
 
     /// <summary>
-    /// 编辑方法，可对未提供编辑 UI 的数据进行填充
+    /// Edit method, can populate data without edit UI
     /// </summary>
     /// <param name="model"></param>
     /// <returns></returns>

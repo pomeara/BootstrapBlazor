@@ -9,7 +9,7 @@ using System.Net.Http.Json;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 百度搜索引擎 IP 定位器
+/// Baidu search engine IP locator
 /// </summary>
 public class BaiduIpLocatorProvider(IHttpClientFactory httpClientFactory, IOptions<BootstrapBlazorOptions> options, ILogger<BaiduIpLocatorProvider> logger) : DefaultIpLocatorProvider(options)
 {
@@ -38,20 +38,20 @@ public class BaiduIpLocatorProvider(IHttpClientFactory httpClientFactory, IOptio
     }
 
     /// <summary>
-    /// 获得 HttpClient 实例方法
+    /// Get HttpClient instance method
     /// </summary>
     /// <returns></returns>
     protected virtual HttpClient GetHttpClient() => httpClientFactory.CreateClient();
 
     /// <summary>
-    /// 获得 Url 地址
+    /// Get URL address
     /// </summary>
     /// <param name="ip"></param>
     /// <returns></returns>
     protected virtual string GetUrl(string ip) => $"https://sp0.baidu.com/8aQDcjqpAAV3otqbppnN2DJv/api.php?resource_id=6006&query={ip}";
 
     /// <summary>
-    /// 请求获得地理位置接口方法
+    /// Request to get geographic location interface method
     /// </summary>
     /// <param name="url"></param>
     /// <param name="client"></param>
@@ -70,12 +70,12 @@ public class BaiduIpLocatorProvider(IHttpClientFactory httpClientFactory, IOptio
     class LocationResult
     {
         /// <summary>
-        /// 获得/设置 结果状态返回码 为 0 时通讯正常
+        /// Get/Set result status return code, communication is normal when 0
         /// </summary>
         public string? Status { get; set; }
 
         /// <summary>
-        /// 获得/设置 定位信息
+        /// Get/Set location information
         /// </summary>
         public List<LocationData>? Data { get; set; }
 
@@ -98,7 +98,7 @@ public class BaiduIpLocatorProvider(IHttpClientFactory httpClientFactory, IOptio
     class LocationData
     {
         /// <summary>
-        /// 获得/设置 定位信息
+        /// Get/Set location information
         /// </summary>
         public string? Location { get; set; }
     }

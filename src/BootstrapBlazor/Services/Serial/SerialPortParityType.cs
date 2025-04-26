@@ -6,23 +6,23 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 校验位枚举
+/// Parity enumeration
 /// </summary>
 [JsonEnumConverter(true)]
 public enum SerialPortParityType
 {
     /// <summary>
-    /// 每个数据字不发送奇偶校验位
+    /// No parity bit is sent with each data word
     /// </summary>
     None,
 
     /// <summary>
-    /// 数据字加上奇偶校验位具有偶奇偶校验
+    /// Data word plus parity bit has even parity
     /// </summary>
     Even,
 
     /// <summary>
-    /// 数据字加奇偶校验位具有奇校验
+    /// Data word plus parity bit has odd parity
     /// </summary>
     Odd
 }

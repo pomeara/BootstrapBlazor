@@ -21,7 +21,7 @@ public partial class DropUpload
     public RenderFragment? BodyTemplate { get; set; }
 
     /// <summary>
-    ///获得/设置 图标模板 默认 null
+    ///Gets/sets the icon template, default is null
     /// </summary>
     [Parameter]
     public RenderFragment? IconTemplate { get; set; }

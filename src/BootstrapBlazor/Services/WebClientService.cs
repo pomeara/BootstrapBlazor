@@ -9,7 +9,7 @@ using System.Text.Json.Serialization;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// WebClient 服务类
+/// WebClient service class
 /// </summary>
 /// <param name="ipLocatorFactory"></param>
 /// <param name="options"></param>
@@ -29,7 +29,7 @@ public class WebClientService(IIpLocatorFactory ipLocatorFactory,
     private IIpLocatorProvider? _provider;
 
     /// <summary>
-    /// 获得 ClientInfo 实例方法
+    /// Get ClientInfo instance method
     /// </summary>
     /// <returns></returns>
     public async Task<ClientInfo> GetClientInfo()
@@ -47,7 +47,7 @@ public class WebClientService(IIpLocatorFactory ipLocatorFactory,
             {
                 _interop ??= DotNetObjectReference.Create(this);
                 await _jsModule.InvokeVoidAsync("ping", "ip.axd", _interop, nameof(SetData));
-                // 等待 SetData 方法执行完毕
+                // Wait for SetData method to complete
                 await _taskCompletionSource.Task.WaitAsync(TimeSpan.FromSeconds(3));
             }
         }
@@ -56,7 +56,7 @@ public class WebClientService(IIpLocatorFactory ipLocatorFactory,
             logger.LogError(ex, "{GetClientInfo} throw exception", nameof(GetClientInfo));
         }
 
-        // 补充 IP 地址信息
+        // Supplement IP address information
         if (options.CurrentValue.WebClientOptions.EnableIpLocator && string.IsNullOrEmpty(_client.City))
         {
             _provider ??= ipLocatorFactory.Create(options.CurrentValue.IpLocatorOptions.ProviderName);
@@ -66,7 +66,7 @@ public class WebClientService(IIpLocatorFactory ipLocatorFactory,
     }
 
     /// <summary>
-    /// SetData 方法由 JS 调用
+    /// SetData method called by JS
     /// </summary>
     /// <param name="client"></param>
     [JSInvokable]
@@ -86,10 +86,10 @@ public class WebClientService(IIpLocatorFactory ipLocatorFactory,
     {
         if (disposing)
         {
-            // 销毁 DotNetObjectReference 实例
+            // Dispose DotNetObjectReference instance
             _interop?.Dispose();
 
-            // 销毁 JSModule
+            // Dispose JSModule
             if (_jsModule != null)
             {
                 await _jsModule.DisposeAsync();
@@ -115,53 +115,53 @@ public class WebClientService(IIpLocatorFactory ipLocatorFactory,
 public class ClientInfo
 {
     /// <summary>
-    /// 获得/设置 链接 Id
+    /// Gets/Sets the connection Id
     /// </summary>
     public string? Id { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端IP
+    /// Gets/Sets the client IP
     /// </summary>
     public string? Ip { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端地点
+    /// Gets/Sets the client location
     /// </summary>
     public string? City { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端浏览器
+    /// Gets/Sets the client browser
     /// </summary>
     public string? Browser { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端操作系统
+    /// Gets/Sets the client operating system
     /// </summary>
     public string? OS { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端设备类型
+    /// Gets/Sets the client device type
     /// </summary>
     [JsonConverter(typeof(JsonStringEnumConverter))]
     public WebClientDeviceType Device { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端浏览器语言
+    /// Gets/Sets the client browser语言
     /// </summary>
     public string? Language { get; set; }
 
     /// <summary>
-    /// 获取/设置 请求网址
+    /// Gets/Sets the request URL
     /// </summary>
     public string? RequestUrl { get; set; }
 
     /// <summary>
-    /// 获得/设置 客户端 UserAgent
+    /// Gets/Sets the client UserAgent
     /// </summary>
     public string? UserAgent { get; set; }
 
     /// <summary>
-    /// 获得/设置 浏览器引擎信息
+    /// Gets/Sets the browser engine information
     /// </summary>
     public string? Engine { get; set; }
 }

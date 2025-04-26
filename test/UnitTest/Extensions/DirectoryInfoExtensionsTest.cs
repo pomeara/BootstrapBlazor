@@ -17,11 +17,11 @@ public class DirectoryInfoExtensionsTest
         }
 
 
-        // 创建 SourceDir
+        // Create SourceDir
         var sourceDir = CreateDir(Path.Combine(rootDir, "test1"));
-        // 创建临时测试目录
+        // Create temporary test directory
         CreateDir(Path.Combine(sourceDir, "test"));
-        // 创建临时测试文件
+        // Create temporary test file
         using var file = File.OpenWrite(Path.Combine(sourceDir, "test.log"));
         file.Close();
 

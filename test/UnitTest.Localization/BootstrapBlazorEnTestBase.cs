@@ -9,7 +9,7 @@ public class BootstrapBlazorEnTestBase : BootstrapBlazorTestBase
 {
     protected override void ConfigureServices(IServiceCollection services)
     {
-        // 支持 微软 resx 格式资源文件
+        // Supports Microsoft resx format resource files
         services.AddLocalization(option => option.ResourcesPath = "Resources");
         services.AddBootstrapBlazor(localizationConfigure: options =>
         {
@@ -19,7 +19,7 @@ public class BootstrapBlazorEnTestBase : BootstrapBlazorTestBase
 
     protected override void ConfigureConfiguration(IServiceCollection services)
     {
-        // 增加单元测试 appsettings.json 配置文件
+        // Add unit test appsettings.json configuration file
         services.AddConfiguration("en-US");
     }
 }

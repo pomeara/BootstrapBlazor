@@ -12,36 +12,36 @@ using System.Globalization;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// Required 验证实现类
+/// Implementation class for required field validation
 /// </summary>
 public class RequiredValidator : ValidatorBase
 {
     /// <summary>
-    /// 获得/设置 错误描述信息 默认为 null 需要赋值
+    /// Gets/Sets the error description message, defaults to null and needs to be assigned
     /// </summary>
     public string? ErrorMessage { get; set; }
 
     /// <summary>
-    /// 获得/设置 是否允许空字符串 默认 false 不允许
+    /// Gets/Sets whether empty strings are allowed, defaults to false (not allowed)
     /// </summary>
     public bool AllowEmptyString { get; set; }
 
     /// <summary>
-    /// 获得/设置 IStringLocalizerFactory 注入服务实例 默认为 null
+    /// Gets/Sets the IStringLocalizerFactory injection service instance, defaults to null
     /// </summary>
     public IStringLocalizerFactory? LocalizerFactory { get; set; }
 
     /// <summary>
-    /// 获得/设置 Json 资源文件配置 默认为 null
+    /// Gets/Sets the Json resource file configuration, defaults to null
     /// </summary>
     public JsonLocalizationOptions? Options { get; set; }
 
     /// <summary>
-    /// 验证方法
+    /// Validation method
     /// </summary>
-    /// <param name="propertyValue">待校验值</param>
-    /// <param name="context">ValidateContext 实例</param>
-    /// <param name="results">ValidateResult 集合实例</param>
+    /// <param name="propertyValue">Value to validate</param>
+    /// <param name="context">ValidateContext instance</param>
+    /// <param name="results">ValidateResult collection instance</param>
     public override void Validate(object? propertyValue, ValidationContext context, List<ValidationResult> results)
     {
         if (string.IsNullOrEmpty(ErrorMessage))
@@ -86,13 +86,13 @@ public class RequiredValidator : ValidatorBase
     }
 
     /// <summary>
-    /// 获得当前验证规则资源文件中 Key 格式
+    /// Gets the Key format in the current validation rule resource file
     /// </summary>
     /// <returns></returns>
     protected virtual string GetRuleKey() => GetType().Name.Split(".").Last().Replace("Validator", "");
 
     /// <summary>
-    /// 通过资源文件获取 ErrorMessage 方法
+    /// Method to get ErrorMessage through resource files
     /// </summary>
     /// <param name="context"></param>
     /// <param name="localizerFactory"></param>
@@ -103,12 +103,12 @@ public class RequiredValidator : ValidatorBase
         var errorMessage = ErrorMessage;
         if (!string.IsNullOrEmpty(context.MemberName) && !string.IsNullOrEmpty(errorMessage))
         {
-            // 查找 resx 资源文件中的 ErrorMessage
+            // Find ErrorMessage in resx resource files
             var memberName = context.MemberName;
 
             if (localizerFactory != null)
             {
-                // 查找微软格式 resx 格式资源文件
+                // Find Microsoft format resx resource files
                 var isResx = false;
                 if (options is { ResourceManagerStringLocalizerType: not null })
                 {
@@ -120,7 +120,7 @@ public class RequiredValidator : ValidatorBase
                     }
                 }
 
-                // 查找 json 格式资源文件
+                // Find json format resource files
                 if (!isResx && localizerFactory.Create(context.ObjectType).TryGetLocalizerString($"{memberName}.{GetRuleKey()}", out var msg))
                 {
                     errorMessage = msg;

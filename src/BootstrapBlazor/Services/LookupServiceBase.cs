@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// LookupService 基类
+/// LookupService base class
 /// </summary>
 public abstract class LookupServiceBase : ILookupService
 {

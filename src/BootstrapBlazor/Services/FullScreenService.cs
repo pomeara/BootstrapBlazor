@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// FullScreen 服务
+/// FullScreen service
 /// </summary>
 public class FullScreenService(IJSRuntime jSRuntime)
 {
@@ -14,7 +14,7 @@ public class FullScreenService(IJSRuntime jSRuntime)
     private JSModule? _module = null;
 
     /// <summary>
-    /// 全屏方法，已经全屏时再次调用后退出全屏
+    /// Fullscreen method, calling again when already fullscreen will exit fullscreen
     /// </summary>
     /// <param name="option"></param>
     /// <param name="token"></param>

@@ -8,36 +8,36 @@ using System.Globalization;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 选项最大数验证实现类
+/// Implementation class for minimum number of options validation
 /// </summary>
 public class MaxValidator : ValidatorBase
 {
     /// <summary>
-    /// 获得/设置 错误描述信息
+    /// Gets/Sets the error description message
     /// </summary>
     public string? ErrorMessage { get; set; }
 
     /// <summary>
-    /// 获得/设置 值
+    /// Gets/Sets the value
     /// </summary>
     public int Value { get; set; }
 
     /// <summary>
-    /// 获得/设置 分割回调方法 默认 使用 ',' 分割
+    /// Gets/Sets the split callback method, defaults to using ',' as separator
     /// </summary>
     public Func<string, int> SplitCallback { get; set; } = value => value.Split(',', StringSplitOptions.RemoveEmptyEntries).Length;
 
     /// <summary>
-    /// 获得 ErrorMessage 方法
+    /// Gets the ErrorMessage method
     /// </summary>
     protected virtual string GetErrorMessage() => ErrorMessage ?? "At most {0} items can be selected";
 
     /// <summary>
-    /// 验证方法
+    /// Validation method
     /// </summary>
-    /// <param name="propertyValue">待校验值</param>
-    /// <param name="context">ValidateContext 实例</param>
-    /// <param name="results">ValidateResult 集合实例</param>
+    /// <param name="propertyValue">Value to validate</param>
+    /// <param name="context">ValidateContext instance</param>
+    /// <param name="results">ValidateResult collection instance</param>
     public override void Validate(object? propertyValue, ValidationContext context, List<ValidationResult> results)
     {
         if (!Validate(propertyValue))
@@ -48,7 +48,7 @@ public class MaxValidator : ValidatorBase
     }
 
     /// <summary>
-    /// 检查 Value 是否合法 返回 true 表示合法
+    /// Checks if Value is valid, returns true if valid
     /// </summary>
     /// <param name="propertyValue"></param>
     protected virtual bool Validate(object? propertyValue)
@@ -75,7 +75,7 @@ public class MaxValidator : ValidatorBase
     }
 
     /// <summary>
-    /// 验证方法 小于等于 Value 时 返回 true
+    /// Validation method returns true when count is greater than or equal to Value
     /// </summary>
     protected virtual bool Validate(int count) => count <= Value;
 }

@@ -25,7 +25,7 @@ public static class ValidationContextExtensions
         var attribute = context.ObjectInstance.GetType().GetCustomAttribute<MetadataTypeAttribute>();
         if (attribute != null && attribute.MetadataClassType.GetInterfaces().Any(x => x.Equals(typeof(T))))
         {
-            //此处是否需要缓存？
+            //Is caching needed here?
             ret = ActivatorUtilities.CreateInstance(context, attribute.MetadataClassType) as T;
         }
         return ret;

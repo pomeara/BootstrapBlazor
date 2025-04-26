@@ -31,7 +31,7 @@ public interface ICacheManager
     Task<TItem> GetOrCreateAsync<TItem>(object key, Func<ICacheEntry, Task<TItem>> factory);
 
     /// <summary>
-    /// 获取指定键值
+    /// Gets the value associated with the specified key
     /// </summary>
     /// <typeparam name="TItem"></typeparam>
     /// <param name="key"></param>
@@ -40,35 +40,35 @@ public interface ICacheManager
     bool TryGetValue<TItem>(object key, [NotNullWhen(true)] out TItem? value);
 
     /// <summary>
-    /// 设置 App 开始时间
+    /// Sets the application start time
     /// </summary>
     void SetStartTime();
 
     /// <summary>
-    /// 获取 App 开始时间
+    /// Gets the application start time
     /// </summary>
     /// <returns></returns>
     DateTimeOffset GetStartTime();
 
     /// <summary>
-    /// 通过指定 key 清除缓存方法
+    /// Clears cache by specified key
     /// </summary>
     /// <param name="key"></param>
     void Clear(object? key = null);
 
     /// <summary>
-    /// 获得 缓存数量
+    /// Gets the number of cache entries
     /// </summary>
     long Count { get; }
 
 #if NET9_0_OR_GREATER
     /// <summary>
-    /// 获得 缓存键集合
+    /// Gets the collection of cache keys
     /// </summary>
     IEnumerable<object> Keys { get; }
 
     /// <summary>
-    /// 通过指定 key 获取缓存项 <see cref="ICacheEntry"/> 实例
+    /// Gets the cache entry instance by specified key
     /// </summary>
     /// <param name="key"></param>
     /// <param name="entry"></param>

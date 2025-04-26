@@ -6,55 +6,55 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// ISerialPort 接口
+/// ISerialPort interface
 /// </summary>
 public interface ISerialPort : IAsyncDisposable
 {
     /// <summary>
-    /// 获得 端口是否打开
+    /// Gets whether the port is open
     /// </summary>
     bool IsOpen { get; }
 
     /// <summary>
-    /// 关闭端口方法
+    /// Closes the port
     /// </summary>
     /// <returns></returns>
     Task<bool> Close(CancellationToken token = default);
 
     /// <summary>
-    /// 打开端口方法
+    /// Opens the port
     /// </summary>
     /// <returns></returns>
     Task<bool> Open(SerialPortOptions options, CancellationToken token = default);
 
     /// <summary>
-    /// 接收数据回调方法
+    /// Data receive callback method
     /// </summary>
     /// <returns></returns>
     Func<byte[], Task>? DataReceive { get; set; }
 
     /// <summary>
-    /// 写入数据方法
+    /// Writes data
     /// </summary>
     /// <returns></returns>
     Task<bool> Write(byte[] data, CancellationToken token = default);
 
     /// <summary>
-    /// 获得 Usb 设备信息
+    /// Gets USB device information
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
     Task<SerialPortUsbInfo?> GetUsbInfo(CancellationToken token = default);
 
     /// <summary>
-    /// 获得设备参数
+    /// Gets device parameters
     /// </summary>
     /// <param name="token"></param>
     /// <returns></returns>
     Task<SerialPortSignals?> GetSignals(CancellationToken token = default);
 
     /// <summary>
-    /// 设置设备参数
+    /// Sets device parameters
     /// </summary>
     /// <param name="options"></param>
     /// <param name="token"></param>

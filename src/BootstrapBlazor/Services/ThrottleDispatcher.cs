@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 限流器泛型类
+/// Generic throttle dispatcher class
 /// </summary>
 public class ThrottleDispatcher(ThrottleOptions options)
 {
@@ -16,23 +16,23 @@ public class ThrottleDispatcher(ThrottleOptions options)
     private bool _busy;
 
     /// <summary>
-    /// 判断是否等待方法
+    /// Determines whether to wait
     /// </summary>
     /// <returns></returns>
     protected virtual bool ShouldWait() => _busy || _invokeTime.HasValue && (DateTime.UtcNow - _invokeTime.Value) < options.Interval;
 
     /// <summary>
-    /// 异步限流方法
+    /// Asynchronous throttling method
     /// </summary>
-    /// <param name="function">异步回调方法</param>
-    /// <param name="cancellationToken">取消令牌</param>
+    /// <param name="function">Asynchronous callback method</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     public Task ThrottleAsync(Func<Task> function, CancellationToken cancellationToken = default) => InternalThrottleAsync(() => Task.Run(function), cancellationToken);
 
     /// <summary>
-    /// 同步限流方法
+    /// Synchronous throttling method
     /// </summary>
-    /// <param name="action">同步回调方法</param>
-    /// <param name="cancellationToken">取消令牌</param>
+    /// <param name="action">Synchronous callback method</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     public void Throttle(Action action, CancellationToken cancellationToken = default)
     {
         var task = InternalThrottleAsync(() => Task.Run(() =>
@@ -65,15 +65,15 @@ public class ThrottleDispatcher(ThrottleOptions options)
     }
 
     /// <summary>
-    /// 任务实例
+    /// Task instance
     /// </summary>
     protected Task LastTask => _lastTask ?? Task.CompletedTask;
 
     /// <summary>
-    /// 限流异步方法
+    /// Asynchronous throttling method
     /// </summary>
-    /// <param name="function">异步回调方法</param>
-    /// <param name="cancellationToken">取消令牌</param>
+    /// <param name="function">Asynchronous callback method</param>
+    /// <param name="cancellationToken">Cancellation token</param>
     private Task InternalThrottleAsync(Func<Task> function, CancellationToken cancellationToken = default)
     {
         if (ShouldWait())

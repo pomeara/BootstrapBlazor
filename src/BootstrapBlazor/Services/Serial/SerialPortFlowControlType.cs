@@ -6,18 +6,18 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 流量控制方法
+/// Flow control method
 /// </summary>
 [JsonEnumConverter(true)]
 public enum SerialPortFlowControlType
 {
     /// <summary>
-    /// 未启用流量控制
+    /// Flow control not enabled
     /// </summary>
     None,
 
     /// <summary>
-    /// 启用使用 RTS 和 CTS 信号的硬件流控制
+    /// Enable hardware flow control using RTS and CTS signals
     /// </summary>
     Hardware,
 }

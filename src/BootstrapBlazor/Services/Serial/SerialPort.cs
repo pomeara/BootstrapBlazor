@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 串口通讯类
+/// Serial port communication class
 /// </summary>
 class SerialPort(JSModule jsModule, string serialPortId) : ISerialPort
 {
@@ -64,7 +64,7 @@ class SerialPort(JSModule jsModule, string serialPortId) : ISerialPort
     }
 
     /// <summary>
-    /// 接收数据回调方法 由 Javascript 调用
+    /// Data received callback method called by Javascript
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>

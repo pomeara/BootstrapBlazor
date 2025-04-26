@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// Title 服务
+/// Title service
 /// </summary>
 public class TitleService(IJSRuntime jSRuntime)
 {
@@ -14,7 +14,7 @@ public class TitleService(IJSRuntime jSRuntime)
     private JSModule? _module = null;
 
     /// <summary>
-    /// 设置当前网页 Title 方法
+    /// Method to set current webpage title
     /// </summary>
     /// <returns></returns>
     public async Task SetTitle(string title, CancellationToken token = default)

@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 内部默认字典服务实现类
+/// Internal default dictionary service implementation
 /// </summary>
 class NullLookupService : LookupServiceBase
 {

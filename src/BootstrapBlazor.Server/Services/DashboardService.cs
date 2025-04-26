@@ -20,7 +20,7 @@ class DashboardService
     /// <returns></returns>
     public Task<DashboardData> GetDashboardDataAsync()
     {
-        //填充随机数据，仅做展示用
+        //Generate random data for display only
         var data = new DashboardData
         {
             TestDayCount = _random.Next(10, 99),
@@ -37,19 +37,19 @@ class DashboardService
             TestKKSGroupList = GetTestKKSGroup()
         };
 
-        //日签发占比
+        //Daily issuance ratio
         var dayScale = Math.Round(data.TestApprovedDayCount / (double)data.TestDayCount * 100, 1);
         data.TestApprovedDayScale = dayScale is double.NaN ? 0 : dayScale;
 
-        //月签发占比
+        //Monthly issuance ratio
         var monthScale = Math.Round(data.TestApprovedMonthCount / (double)data.TestMonthCount * 100, 1);
         data.TestApprovedMonthScale = monthScale is double.NaN ? 0 : monthScale;
 
-        //年签发占比
+        //Yearly issuance ratio
         var yearScale = Math.Round(data.TestApprovedYearCount / (double)data.TestYearCount * 100, 1);
         data.TestApprovedYearScale = yearScale is double.NaN ? 0 : yearScale;
 
-        //全部签发占比
+        //Total issuance ratio
         var allScale = Math.Round(data.TestApprovedAllCount / (double)data.TestAllCount * 100, 1);
         data.TestApprovedAllScale = allScale is double.NaN ? 0 : allScale;
 
@@ -64,7 +64,7 @@ class DashboardService
     {
         var result = new List<TestDayGroupData>();
 
-        //按照当前月的每一天填充数据
+        //Fill data for each day of current month
         for (var i = 1; i <= 30; i++)
         {
             result.Add(new TestDayGroupData() { Key = i, Count = _random.Next(1, 99) });

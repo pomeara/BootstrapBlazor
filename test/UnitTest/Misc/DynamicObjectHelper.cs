@@ -15,7 +15,7 @@ internal static class DynamicObjectHelper
             new("Name", typeof(string))
         };
 
-        // 创建动态类型基类是 DynamicObject
+        // Create dynamic type with base class DynamicObject
         var instanceType = EmitHelper.CreateTypeByName(typeName, cols, typeof(DynamicObject));
         return instanceType!;
     }
@@ -24,7 +24,7 @@ internal static class DynamicObjectHelper
     {
         var instanceType = CreateDynamicType(typeName);
 
-        // 创建动态类型实例
+        // Create dynamic object instance
         return Activator.CreateInstance(instanceType)!;
     }
 }

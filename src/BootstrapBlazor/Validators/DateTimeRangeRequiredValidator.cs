@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// DateTimeRange 验证
+/// Implementation class for DateTimeRange validation
 /// </summary>
 public class DateTimeRangeRequiredValidator : RequiredValidator
 {

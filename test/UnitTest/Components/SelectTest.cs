@@ -33,7 +33,7 @@ public class SelectTest : BootstrapBlazorTestBase
         {
             await ctx.Instance.ConfirmSelectedItem(0);
 
-            // 搜索 T
+            // Search for T
             await ctx.Instance.TriggerOnSearch("T");
             await ctx.Instance.ConfirmSelectedItem(0);
         });
@@ -824,7 +824,7 @@ public class SelectTest : BootstrapBlazorTestBase
         cut.SetParametersAndRender(pb => pb.Add(a => a.ShowSearch, true));
         cut.InvokeAsync(async () =>
         {
-            // 搜索 T
+            // Search for T
             cut.Find(".search-text").Input("T");
             await cut.Instance.ConfirmSelectedItem(0);
         });

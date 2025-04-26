@@ -8,27 +8,27 @@ using System.Text.Json.Serialization;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 串口信号设置
+/// Serial port signal settings
 /// </summary>
 public class SerialPortSignalsOptions
 {
     /// <summary>
-    /// 中断
-    /// <para></para>如果 Break 为 true，则表示已中断。如果 Break 为 false，则表示未中断。
+    /// Break
+    /// <para></para>If Break is true, it means interrupted. If Break is false, it means not interrupted.
     /// </summary>
     [JsonPropertyName("break")]
     public bool Break { get; set; }
 
     /// <summary>
-    /// 数据终端准备就绪 DTR（Data Terminal Ready）
-    /// <para></para>如果 DTR 为 true，则表示已准备好接收数据。如果 DTR 为 false，则表示未准备好接收数据。Pin 4
+    /// Data Terminal Ready (DTR)
+    /// <para></para>If DTR is true, ready to receive data. If DTR is false, not ready to receive data. Pin 4
     /// </summary>
     [JsonPropertyName("dataTerminalReady")]
     public bool DTR { get; set; }
 
     /// <summary>
-    /// 请求发送 RTS（Request To Send）
-    /// <para></para>如果 RTS 为 true，则表示已准备好发送数据。如果 RTS 为 false，则表示未准备好发送数据。Pin 7
+    /// Request To Send (RTS)
+    /// <para></para>If RTS is true, ready to send data. If RTS is false, not ready to send data. Pin 7
     /// </summary>
     [JsonPropertyName("requestToSend")]
     public bool RTS { get; set; }

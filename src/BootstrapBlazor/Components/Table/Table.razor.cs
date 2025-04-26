@@ -1635,7 +1635,7 @@ public partial class Table<TItem> : ITable, IModelEqualityComparer<TItem> where 
                 // 弹出关联菜单
                 await OnContextMenu(args, item);
 
-                //延时防止重复激活菜单功能
+                //Delay to prevent duplicate menu activation
                 await Task.Delay(delay);
             }
             IsBusy = false;

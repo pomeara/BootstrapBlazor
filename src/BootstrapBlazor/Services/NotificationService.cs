@@ -8,7 +8,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 浏览器通知服务
+/// Browser notification service
 /// </summary>
 public class NotificationService : IAsyncDisposable
 {
@@ -21,7 +21,7 @@ public class NotificationService : IAsyncDisposable
     private ICacheManager Cache { get; }
 
     /// <summary>
-    /// 构造函数
+    /// Constructor
     /// </summary>
     /// <param name="runtime"></param>
     /// <param name="cache"></param>
@@ -35,9 +35,9 @@ public class NotificationService : IAsyncDisposable
     private Task<JSModule> LoadModule() => JSRuntime.LoadModuleByName("noti");
 
     /// <summary>
-    /// 检查浏览器通知权限状态
+    /// Check browser notification permission status
     /// </summary>
-    /// <param name="requestPermission">是否请求权限 默认 true</param>
+    /// <param name="requestPermission">Whether to request permission, default is true</param>
     /// <returns></returns>
     public async ValueTask<bool> CheckPermission(bool requestPermission = true)
     {
@@ -46,9 +46,9 @@ public class NotificationService : IAsyncDisposable
     }
 
     /// <summary>
-    /// 发送浏览器通知
+    /// Send browser notification
     /// </summary>
-    /// <param name="item">NotificationItem 实例</param>
+    /// <param name="item">NotificationItem instance</param>
     /// <returns></returns>
     public async Task<bool> Dispatch(NotificationItem item)
     {
@@ -63,7 +63,7 @@ public class NotificationService : IAsyncDisposable
     }
 
     /// <summary>
-    /// 消息通知回调方法由 JS 点击触发
+    /// Message notification callback method triggered by JS click
     /// </summary>
     /// <returns></returns>
     [JSInvokable]
@@ -89,10 +89,10 @@ public class NotificationService : IAsyncDisposable
     {
         if (disposing)
         {
-            // 销毁 DotNetObjectReference 实例
+            // Dispose DotNetObjectReference instance
             Interop.Dispose();
 
-            // 销毁 JSModule
+            // Dispose JSModule
             if (Module != null)
             {
                 await Module.DisposeAsync();

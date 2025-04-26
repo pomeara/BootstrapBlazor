@@ -8,7 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// IIPLocatorFactory 接口实现类
+/// IIPLocatorFactory interface implementation
 /// </summary>
 class DefaultIpLocatorFactory : IIpLocatorFactory
 {
@@ -33,7 +33,7 @@ class DefaultIpLocatorFactory : IIpLocatorFactory
     }
 
     /// <summary>
-    /// 创建 <see cref="IIpLocatorProvider"/> 实例方法
+    /// Method to create <see cref="IIpLocatorProvider"/> instance
     /// </summary>
     /// <param name="key"></param>
     public IIpLocatorProvider Create(string? key = null)

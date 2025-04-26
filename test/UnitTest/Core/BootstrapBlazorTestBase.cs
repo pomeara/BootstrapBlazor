@@ -17,7 +17,7 @@ public class BootstrapBlazorTestBase : TestBase, IDisposable
 
         ConfigureConfiguration(Context.Services);
 
-        // 渲染 BootstrapBlazorRoot 组件 激活 ICacheManager 接口
+        // Render BootstrapBlazorRoot component to activate ICacheManager interface
         Cache = Context.Services.GetRequiredService<ICacheManager>();
     }
 
@@ -34,7 +34,7 @@ public class BootstrapBlazorTestBase : TestBase, IDisposable
 
     protected virtual void ConfigureConfiguration(IServiceCollection services)
     {
-        // 增加单元测试 appsettings.json 配置文件
+        // Add unit test appsettings.json configuration file
         services.AddConfiguration();
     }
 

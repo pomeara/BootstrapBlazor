@@ -107,9 +107,9 @@ public static class ServiceCollectionSharedExtensions
         //{
         //    option.UseConnectionString(FreeSql.DataType.Sqlite, Configuration.GetConnectionString("bb"))
 #if DEBUG
-        //         //开发环境:自动同步实体
+        //         //Development environment: auto sync entities
         //         .UseAutoSyncStructure(true)
-        //         //调试 sql 语句输出
+        //         //Debug SQL statement output
         //         .UseMonitorCommand(cmd => System.Console.WriteLine(cmd.CommandText))
 #endif
         //        ;

@@ -99,7 +99,7 @@ public class TableTest : BootstrapBlazorTestBase
             });
         });
 
-        // 编辑时触发 SelectedRow
+        // Trigger SelectedRow when editing
         cut.InvokeAsync(() =>
         {
             var button = cut.Find("button");
@@ -4573,51 +4573,51 @@ public class TableTest : BootstrapBlazorTestBase
         var checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(1, checkboxs);
 
-        //点击下页按钮翻页
+        //Click next page button
         var nextBtn = cut.Find(".fa-angle-right");
         await cut.InvokeAsync(() => nextBtn.Click());
 
-        //选中行数为空
+        //Selected rows count is empty
         checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(0, checkboxs);
 
-        //点击下页按钮翻页
+        //Click next page button
         await cut.InvokeAsync(() => nextBtn.Click());
 
-        //点击表头CheckBox
+        //Click header checkbox
         input = cut.FindComponents<Checkbox<Foo>>()[0];
         await cut.InvokeAsync(input.Instance.OnToggleClick);
 
-        //加上表头的复选框选中，结果有3项
+        //With header checkbox selected, total is 3 items
         checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(3, checkboxs);
 
-        //点击向前按钮翻页
+        //Click previous page button
         var prevBtn = cut.Find("i.fa-angle-left");
         await cut.InvokeAsync(() => prevBtn.Click());
 
-        //恢复选中行数为0
+        //Reset selected rows count to 0
         checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(0, checkboxs);
 
-        //点击向前按钮翻页
+        //Click previous page button
         await cut.InvokeAsync(() => prevBtn.Click());
 
-        //恢复选中行数为1
+        //Reset selected rows count to 1
         checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(1, checkboxs);
 
-        //点击向后翻页按钮
+        //Click next page button
         await cut.InvokeAsync(() => nextBtn.Click());
 
-        //恢复选中行数为0
+        //Reset selected rows count to 0
         checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(0, checkboxs);
 
-        //点击向后翻页按钮
+        //Click next page button
         await cut.InvokeAsync(() => nextBtn.Click());
 
-        //恢复选中行数为2，加上表头的复选框选中，结果有3项
+        //Reset selected rows count to 2, with header checkbox selected, total is 3 items
         checkboxs = inputs.Count(i => i.Instance.State == CheckboxState.Checked);
         Assert.Equal(3, checkboxs);
     }

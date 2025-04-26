@@ -51,7 +51,7 @@ public class ZipArchiveServiceTest : BootstrapBlazorTestBase
         archService.ExtractToDirectory(archiveFile, destFolder);
         Assert.True(Directory.Exists(destFolder));
 
-        // 打包文件夹单元测试
+        // Unit test for packing folder
         var tempFolder = Path.Combine(root, "test_temp");
         if (Directory.Exists(tempFolder))
         {

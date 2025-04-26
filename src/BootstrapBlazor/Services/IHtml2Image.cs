@@ -6,21 +6,21 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// IHtml2Image 接口
+/// IHtml2Image interface
 /// </summary>
 public interface IHtml2Image
 {
     /// <summary>
     /// Export method
     /// </summary>
-    /// <param name="selector">选择器</param>
+    /// <param name="selector">Selector</param>
     /// <param name="options"></param>
     Task<string?> GetDataAsync(string selector, IHtml2ImageOptions? options = null);
 
     /// <summary>
     /// Export method
     /// </summary>
-    /// <param name="selector">选择器</param>
+    /// <param name="selector">Selector</param>
     /// <param name="options"></param>
     Task<Stream?> GetStreamAsync(string selector, IHtml2ImageOptions? options = null);
 }

@@ -17,7 +17,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         var nodeCache = new TreeNodeCache<TreeViewItem<TreeFoo>, TreeFoo>(comparer);
         nodeCache.IsChecked(items);
 
-        // 设置 1010 节点为选中状态
+        // Set node 1010 to checked state
         var node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1010",
@@ -28,7 +28,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1020 节点为未确定状态
+        // Set node 1020 to indeterminate state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1020",
@@ -39,7 +39,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1040 节点为未选中状态
+        // Set node 1040 to unchecked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1040",
@@ -50,7 +50,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1100 子节点全部被选中
+        // Set all child nodes of 1100 to checked
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1130",
@@ -61,7 +61,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1100 子节点全部被选中
+        // Set all child nodes of 1100 to checked
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1140",
@@ -72,7 +72,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1100 子节点全部被选中
+        // Set all child nodes of 1100 to checked
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1150",
@@ -83,7 +83,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1100 子节点选中
+        // Set child nodes of 1100 to checked
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1100",
@@ -94,7 +94,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1080 节点为选中状态
+        // Set node 1080 to checked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1080",
@@ -105,7 +105,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1050 节点为选中状态
+        // Set node 1050 to checked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1050",
@@ -116,7 +116,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1020 节点为选中状态
+        // Set node 1020 to checked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1020",
@@ -136,8 +136,8 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         count = GetIndeterminateItemCount(nodeCache);
         Assert.Equal(3, count);
 
-        // 开始测试
-        // 设置 1030 节点为选中状态
+        // Start testing
+        // Set node 1030 to checked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1030",
@@ -159,7 +159,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1030 节点为选中状态
+        // Set node 1030 to checked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1030",
@@ -262,7 +262,7 @@ public class TreeNodeCacheTest : BootstrapBlazorTestBase
         };
         nodeCache.ToggleCheck(node);
 
-        // 设置 1080 节点为选中状态
+        // Set node 1080 to checked state
         node = new TreeViewItem<TreeFoo>(new TreeFoo()
         {
             Id = "1080",

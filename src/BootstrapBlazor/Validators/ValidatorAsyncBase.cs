@@ -6,7 +6,7 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// IValidator 异步实现类基类
+/// Base class for asynchronous IValidator implementation
 /// </summary>
 public abstract class ValidatorAsyncBase : IValidatorAsync
 {
@@ -17,7 +17,7 @@ public abstract class ValidatorAsyncBase : IValidatorAsync
     }
 
     /// <summary>
-    /// 数据验证方法
+    /// Data validation method
     /// </summary>
     /// <param name="propertyValue"></param>
     /// <param name="context"></param>

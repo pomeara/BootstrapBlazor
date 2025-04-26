@@ -6,18 +6,18 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 休假接口
+/// Holiday interface
 /// </summary>
 public interface ICalendarHolidays
 {
     /// <summary>
-    /// 是否为假日
+    /// Whether it's a holiday
     /// </summary>
     /// <returns></returns>
     bool IsHoliday(DateTime dt);
 
     /// <summary>
-    /// 是否为工作日
+    /// Whether it's a workday
     /// </summary>
     /// <returns></returns>
     bool IsWorkday(DateTime dt);

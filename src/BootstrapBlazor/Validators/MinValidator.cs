@@ -6,17 +6,17 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 选项最小数验证实现类
+/// Implementation class for minimum number of options validation
 /// </summary>
 public class MinValidator : MaxValidator
 {
     /// <summary>
-    /// 验证方法 大于等于 Value 时 返回 true
+    /// Validation method returns true when count is greater than or equal to Value
     /// </summary>
     protected override bool Validate(int count) => count >= Value;
 
     /// <summary>
-    /// 获得 ErrorMessage 方法
+    /// Gets the ErrorMessage method
     /// </summary>
     /// <returns></returns>
     protected override string GetErrorMessage() => ErrorMessage ?? "Select at least {0} items";

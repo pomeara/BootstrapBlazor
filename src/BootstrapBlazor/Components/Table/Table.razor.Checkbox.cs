@@ -38,7 +38,7 @@ public partial class Table<TItem>
     protected CheckboxState HeaderCheckState()
     {
         var ret = CheckboxState.UnChecked;
-        //过滤掉不可选择的记录
+        //Filter out unselectable records
         var filterRows = ShowRowCheckboxCallback == null ? Rows : Rows.Where(ShowRowCheckboxCallback);
         if (filterRows.Any())
         {

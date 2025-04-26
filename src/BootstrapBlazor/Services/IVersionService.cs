@@ -6,18 +6,18 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 组件版本号服务
+/// Component version service
 /// </summary>
 public interface IVersionService
 {
     /// <summary>
-    /// 获得 版本号
+    /// Gets the version number
     /// </summary>
     /// <returns></returns>
     string GetVersion();
 
     /// <summary>
-    /// 获得 版本号
+    /// Gets the version number
     /// </summary>
     /// <param name="url">当前资源 相对路径 如 ./css/site.css</param>
     /// <returns></returns>

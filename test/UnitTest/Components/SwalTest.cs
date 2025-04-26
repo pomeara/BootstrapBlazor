@@ -78,7 +78,7 @@ public class SwalTest : BootstrapBlazorTestBase
         Assert.Contains("swal2-question", cut.Markup);
         cut.InvokeAsync(() => modal.Instance.CloseCallback());
 
-        //测试 Content
+        //Test Content
         cut.InvokeAsync(() => swal.Show(new SwalOption()
         {
             Content = "I am Swal",
@@ -86,7 +86,7 @@ public class SwalTest : BootstrapBlazorTestBase
         Assert.Contains("I am Swal", cut.Markup);
         cut.InvokeAsync(() => modal.Instance.CloseCallback());
 
-        //测试 Title
+        //Test Title
         cut.InvokeAsync(() => swal.Show(new SwalOption()
         {
             Title = "I am Title",
@@ -94,7 +94,7 @@ public class SwalTest : BootstrapBlazorTestBase
         Assert.Contains("I am Title", cut.Markup);
         cut.InvokeAsync(() => modal.Instance.CloseCallback());
 
-        //测试 Title
+        //Test Title
         cut.InvokeAsync(() => swal.Show(new SwalOption()
         {
             Title = "I am Title",
@@ -103,7 +103,7 @@ public class SwalTest : BootstrapBlazorTestBase
         Assert.Contains("I am Title", cut.Markup);
         cut.InvokeAsync(() => modal.Instance.CloseCallback());
 
-        //测试关闭按钮
+        //Test close button
         cut.InvokeAsync(() => swal.Show(new SwalOption()
         {
             Content = "I am Swal",

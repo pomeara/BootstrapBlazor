@@ -6,12 +6,12 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 根组件接口
+/// Root component interface
 /// </summary>
 public interface IRootComponentGenerator
 {
     /// <summary>
-    /// 生成组件方法
+    /// Generate component method
     /// </summary>
     /// <returns></returns>
     RenderFragment Generator();

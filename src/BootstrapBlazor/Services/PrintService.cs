@@ -6,12 +6,12 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// Print 服务
+/// Print service
 /// </summary>
 public class PrintService(DialogService dialogService)
 {
     /// <summary>
-    /// 打印方法
+    /// Print method
     /// </summary>
     /// <param name="option"></param>
     /// <returns></returns>

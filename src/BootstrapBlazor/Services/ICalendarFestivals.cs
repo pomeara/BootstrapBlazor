@@ -6,12 +6,12 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 节日接口
+/// Festival interface
 /// </summary>
 public interface ICalendarFestivals
 {
     /// <summary>
-    /// 获得 节日键值对
+    /// Get festival key-value pairs
     /// </summary>
     /// <returns></returns>
     string? GetFestival(DateTime dt);

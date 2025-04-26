@@ -6,33 +6,33 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// 自动断帧方式
+/// Auto frame break method
 /// </summary>
 public enum AutoFrameBreakType
 {
     /// <summary>
-    /// 未启用自动断帧
+    /// Auto frame break not enabled
     /// </summary>
     None,
 
     /// <summary>
-    /// 字符断帧
+    /// Character frame break
     /// </summary>
     Character,
 
     /// <summary>
-    /// 空闲中断 (未完成)
+    /// Idle interrupt (not implemented)
     /// </summary>
     Timeout,
 
     /// <summary>
-    /// 帧头、帧尾 (未实现)
-    /// <para></para>例如: 帧头（AA 、BB） + 数据长度 + 数据  + CRC校验 + 帧尾（CC、DD）
+    /// Frame header and footer (not implemented)
+    /// <para></para>Example: Frame header (AA, BB) + data length + data + CRC check + frame footer (CC, DD)
     /// </summary>
     FrameTail,
 
     /// <summary>
-    /// 字符间隔 (未实现)
+    /// Character interval (not implemented)
     /// </summary>
     CharacterInterval,
 }

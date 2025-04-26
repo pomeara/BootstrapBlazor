@@ -36,12 +36,12 @@ public class MaskServiceTest : TestBase
         });
         cut.Contains("<div class=\"bb-mask-backdrop\"></div>");
 
-        // 点击按钮显示
+        // Click button to show
         var button = cut.Find("button");
         await cut.InvokeAsync(() => button.Click());
         cut.Contains("bb-mask-content");
 
-        // 关闭遮罩
+        // Close mask
         await cut.InvokeAsync(() => maskService.Close());
         cut.DoesNotContain("bb-mask-content");
     }
@@ -74,12 +74,12 @@ public class MaskServiceTest : TestBase
         });
         cut.Contains("<div class=\"bb-mask-backdrop\"></div>");
 
-        // 点击按钮显示
+        // Click button to show
         var button = cut.Find("button");
         await cut.InvokeAsync(() => button.Click());
         cut.Contains("bb-mask-content");
 
-        // 关闭遮罩
+        // Close mask
         await cut.InvokeAsync(() => maskService.Close(all: true));
         cut.DoesNotContain("bb-mask-content");
     }

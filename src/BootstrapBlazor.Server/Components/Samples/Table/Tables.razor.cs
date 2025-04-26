@@ -28,7 +28,7 @@ public partial class Tables
     {
         base.OnInitialized();
 
-        //获取随机数据
+        //Get random data
         //Get random data
         Items = Foo.GenerateFoo(FooLocalizer);
 

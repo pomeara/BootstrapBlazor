@@ -11,11 +11,11 @@ namespace BootstrapBlazor.Components;
 public interface ITableExport
 {
     /// <summary>
-    /// 导出 方法
+    /// Export method
     /// </summary>
-    /// <param name="items">导出数据集合</param>
-    /// <param name="cols">当前可见列数据集合 默认 null 导出全部列</param>
-    /// <param name="fileName">文件名 默认 null ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
+    /// <param name="items">Data collection to export</param>
+    /// <param name="cols">Currently visible column data collection, default null exports all columns</param>
+    /// <param name="fileName">File name, default null uses ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
     Task<bool> ExportAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, string? fileName = null);
 
     /// <summary>
@@ -28,11 +28,11 @@ public interface ITableExport
     Task<bool> ExportAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, TableExportOptions options, string? fileName = null) => ExportAsync(items, cols, fileName);
 
     /// <summary>
-    /// 导出 Excel 方法
+    /// Export to Excel method
     /// </summary>
-    /// <param name="items">导出数据集合</param>
-    /// <param name="cols">当前可见列数据集合 默认 null 导出全部列</param>
-    /// <param name="fileName">文件名 默认 null ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
+    /// <param name="items">Data collection to export</param>
+    /// <param name="cols">Currently visible column data collection, default null exports all columns</param>
+    /// <param name="fileName">File name, default null uses ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
     Task<bool> ExportExcelAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, string? fileName = null);
 
     /// <summary>
@@ -45,11 +45,11 @@ public interface ITableExport
     Task<bool> ExportExcelAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, TableExportOptions options, string? fileName = null) => ExportExcelAsync(items, cols, fileName);
 
     /// <summary>
-    /// 导出 Csv 方法
+    /// Export to CSV method
     /// </summary>
-    /// <param name="items">导出数据集合</param>
-    /// <param name="cols">当前可见列数据集合 默认 null 导出全部列</param>
-    /// <param name="fileName">文件名 默认 null ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
+    /// <param name="items">Data collection to export</param>
+    /// <param name="cols">Currently visible column data collection, default null exports all columns</param>
+    /// <param name="fileName">File name, default null uses ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
     Task<bool> ExportCsvAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, string? fileName = null);
 
     /// <summary>
@@ -62,11 +62,11 @@ public interface ITableExport
     Task<bool> ExportCsvAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, TableExportOptions options, string? fileName = null) => ExportCsvAsync(items, cols, fileName);
 
     /// <summary>
-    /// 导出 Pdf 方法
+    /// Export to PDF method
     /// </summary>
-    /// <param name="items">导出数据集合</param>
-    /// <param name="cols">当前可见列数据集合 默认 null 导出全部列</param>
-    /// <param name="fileName">文件名 默认 null ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
+    /// <param name="items">Data collection to export</param>
+    /// <param name="cols">Currently visible column data collection, default null exports all columns</param>
+    /// <param name="fileName">File name, default null uses ExportData_{DateTime.Now:yyyyMMddHHmmss}.xlsx</param>
     Task<bool> ExportPdfAsync<TModel>(IEnumerable<TModel> items, IEnumerable<ITableColumn>? cols, string? fileName = null);
 
     /// <summary>

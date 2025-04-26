@@ -36,7 +36,7 @@ public class UploadTest : BootstrapBlazorTestBase
         cut.Contains("btn-primary");
         cut.Contains("TestPlaceHolder");
 
-        // 参数
+        // Parameters
         cut.SetParametersAndRender(pb => pb.Add(a => a.BrowserButtonIcon, "fa-solid fa-chrome"));
         cut.Contains("fa-solid fa-chrome");
 

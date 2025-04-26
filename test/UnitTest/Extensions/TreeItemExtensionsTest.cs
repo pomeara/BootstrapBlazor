@@ -8,7 +8,7 @@ namespace UnitTest.Extensions;
 public class TreeItemExtensionsTest
 {
     /// <summary>
-    /// 单一顶级树节点
+    /// Single top-level tree node
     /// </summary>
     [Fact]
     public void GetAllItems_Single()
@@ -30,7 +30,7 @@ public class TreeItemExtensionsTest
     }
 
     /// <summary>
-    /// 多顶级树节点
+    /// Multiple top-level tree nodes
     /// </summary>
     [Fact]
     public void GetAllItems_Multiple()

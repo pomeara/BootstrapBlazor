@@ -34,7 +34,7 @@ public partial class TableExtensionButton
     public void AddButton(ITableCellComponent button) => _buttons.Add(button);
 
     /// <summary>
-    ///从工具栏中移除按钮
+    ///Remove button from toolbar
     /// </summary>
     public void RemoveButton(ITableCellComponent button) => _buttons.Remove(button);
 

@@ -13,14 +13,14 @@ public class TreeViewTest : BootstrapBlazorTestBase
         var cut = Context.RenderComponent<TreeView<TreeFoo>>();
         cut.DoesNotContain("tree-root");
 
-        // 由于 Items 为空不生成 TreeItem 显示 loading
+        // Show loading when Items is empty and no TreeItem is generated
         cut.Contains("table-loading");
         cut.DoesNotContain("li");
 
         cut.SetParametersAndRender(pb => pb.Add(a => a.ShowSkeleton, true));
         cut.Contains("skeleton tree");
 
-        // 设置 Items
+        // Set Items
         cut.SetParametersAndRender(pb =>
         {
             pb.Add(a => a.Items, TreeFoo.GetTreeItems());
