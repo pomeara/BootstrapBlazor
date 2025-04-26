@@ -98,7 +98,7 @@ public class CalendarTest : BootstrapBlazorTestBase
         var buttons = cut.FindAll(".calendar-button-group button");
         await cut.InvokeAsync(() =>
         {
-            // btn 上一年
+            // Previous year button
             buttons[0].Click();
         });
         Assert.Contains($"{DateTime.Now.Year - 1} 年 {DateTime.Now.Month} 月", cut.Find(".calendar-title").ToMarkup());
@@ -106,14 +106,14 @@ public class CalendarTest : BootstrapBlazorTestBase
 
         await cut.InvokeAsync(() =>
         {
-            // btn 下一年
+            // Next year button
             buttons[4].Click();
         });
         Assert.Contains($"{DateTime.Now.Year} 年 {DateTime.Now.Month} 月", cut.Find(".calendar-title").ToMarkup());
 
         await cut.InvokeAsync(() =>
         {
-            // btn 上一月
+            // Previous month button
             buttons[1].Click();
         });
         Assert.Contains($"{DateTime.Now.AddMonths(-1).Year} 年 {DateTime.Now.AddMonths(-1).Month} 月", cut.Find(".calendar-title").ToMarkup());
@@ -121,14 +121,14 @@ public class CalendarTest : BootstrapBlazorTestBase
 
         await cut.InvokeAsync(() =>
         {
-            // btn 下一月
+            // Next month button
             buttons[3].Click();
         });
         Assert.Contains($"{DateTime.Now.Year} 年 {DateTime.Now.Month} 月", cut.Find(".calendar-title").ToMarkup());
 
         await cut.InvokeAsync(() =>
         {
-            // btn 今天
+            // Today button
             buttons[2].Click();
         });
         Assert.Contains(DateTime.Now.Day.ToString(), cut.Find(".current.is-selected.is-today").ToMarkup());
@@ -146,7 +146,7 @@ public class CalendarTest : BootstrapBlazorTestBase
 
         await cut.InvokeAsync(() =>
         {
-            // 点击第一个 current 得到本月 1号
+            // Click first current to get the 1st of current month
             cut.Find(".current").Click();
             Assert.Equal(1, value.Day);
 
@@ -171,18 +171,18 @@ public class CalendarTest : BootstrapBlazorTestBase
         await cut.InvokeAsync(() =>
         {
             var buttons = cut.FindAll(".calendar-button-group button");
-            // 上一周
+            // Previous week
             buttons[0].Click();
             var value = cut.Instance.Value;
             Assert.Contains($"第 {GetWeekCount()} 周", cut.Find(".calendar-title").ToMarkup());
             Assert.Equal(v, DateTime.Today.AddDays(-7));
 
-            // 下一周
+            // Next week
             buttons[2].Click();
             value = cut.Instance.Value;
             Assert.Contains($"第 {GetWeekCount()} 周", cut.Find(".calendar-title").ToMarkup());
 
-            // 本周
+            // Current week
             buttons[1].Click();
             value = cut.Instance.Value;
             Assert.Contains($"第 {GetWeekCount()} 周", cut.Find(".calendar-title").ToMarkup());
@@ -228,7 +228,7 @@ public class CalendarTest : BootstrapBlazorTestBase
         await cut.InvokeAsync(() =>
         {
             var buttons = cut.FindAll(".calendar-button-group button");
-            // 上一周
+            // Previous week
             buttons[0].Click();
         });
         Assert.NotEqual(v, DateTime.MinValue);

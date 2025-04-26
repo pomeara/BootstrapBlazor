@@ -79,10 +79,10 @@ public class RadioListGenericTest : BootstrapBlazorTestBase
             });
         });
 
-        // 候选项被禁用
+        // Candidate item is disabled
         cut.Contains("disabled=\"disabled\"");
 
-        // 组件被禁用
+        // Component is disabled
         cut.SetParametersAndRender(pb =>
         {
             pb.Add(a => a.IsDisabled, true);
@@ -114,8 +114,8 @@ public class RadioListGenericTest : BootstrapBlazorTestBase
         Assert.Null(cut.Instance.Value);
         Assert.Equal("<div class=\"radio-list form-control\" role=\"group\"></div>", cut.Markup);
 
-        // 组件值为 test
-        // 组件给的候选 Items 中无 test 选项
+        // Component value is test
+        // No test option in candidate Items
         var v = new Foo() { Id = 3, Name = "test" };
         cut.SetParametersAndRender(pb =>
         {

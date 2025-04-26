@@ -120,7 +120,7 @@ public class InputTest : BootstrapBlazorTestBase
         });
         cut.Contains("blazor:oninput");
 
-        // 输入字符
+        // Input character
         var input = cut.Find("input");
         await cut.InvokeAsync(() =>
         {
@@ -390,7 +390,7 @@ public class InputTest : BootstrapBlazorTestBase
             var input = cut.Find("input");
             input.Change("Test_Test");
 
-            // 保证 ValueChanged 先触发，再触发 OnValueChanged
+            // Ensure ValueChanged triggers first, then OnValueChanged
             Assert.Equal("Test_Test", foo.Name);
             Assert.Equal("Test_Test-Test_Test", val);
         });

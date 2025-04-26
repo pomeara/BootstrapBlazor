@@ -13,7 +13,7 @@ internal static class MenusLocalizerExtensions
     {
         var menus = new List<MenuItem>();
 
-        // 快速入门
+        // Quick Start
         var item = new DemoMenuItem()
         {
             Text = Localizer["GetStarted"],
