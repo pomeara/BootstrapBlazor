@@ -86,6 +86,9 @@ public static class BootstrapBlazorServiceCollectionExtensions
         services.TryAddScoped<IBrowserFingerService, DefaultBrowserFingerService>();
         services.TryAddScoped<ISerialService, DefaultSerialService>();
         services.TryAddScoped<IBluetooth, DefaultBluetooth>();
+        services.TryAddScoped<IMediaDevices, DefaultMediaDevices>();
+        services.TryAddScoped<IVideoDevice, DefaultVideoDevice>();
+        services.TryAddScoped<IAudioDevice, DefaultAudioDevice>();
         services.AddScoped<TabItemTextOptions>();
         services.AddScoped<DialogService>();
         services.AddScoped<MaskService>();

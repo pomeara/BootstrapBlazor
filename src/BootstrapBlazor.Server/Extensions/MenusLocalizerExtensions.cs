@@ -1550,6 +1550,18 @@ internal static class MenusLocalizerExtensions
                 },
                 new()
                 {
+                    IsNew = true,
+                    Text = Localizer["AudioDevice"],
+                    Url = "audio-device"
+                },
+                new()
+                {
+                    IsNew = true,
+                    Text = Localizer["VideoDevice"],
+                    Url = "video-device"
+                },
+                new()
+                {
                     Text = Localizer["WebSerial"],
                     Url = "web-serial"
                 },
