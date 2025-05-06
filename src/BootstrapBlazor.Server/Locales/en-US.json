@@ -7128,7 +7128,7 @@
     "VideoDeviceOpenText": "Open",
     "VideoDeviceCloseText": "Close",
     "VideoDeviceCaptureText": "Capture",
-    "VideoDeviceFlipText": "Flip"
+    "VideoDeviceDownloadText": "Download"
   },
   "BootstrapBlazor.Server.Components.Samples.AudioDevices": {
     "AudioDeviceTitle": "IAudioDevice",
@@ -7137,6 +7137,9 @@
     "BaseUsageIntro": "Perform different operations by calling different API methods",
     "AudioDeviceRequestText": "List",
     "AudioDeviceOpenText": "Record",
-    "AudioDeviceCloseText": "Stop"
+    "AudioDeviceCloseText": "Stop",
+    "AudioDevicePauseText": "Pause",
+    "AudioDeviceResumeText": "Resume",
+    "AudioDeviceDownloadText": "Download"
   }
 }
