@@ -5,7 +5,7 @@ on:
     types: [opened, edited]
 
 env:
-  REPO_OWNER: ArgoZhang
+  REPO_OWNER: 
 
 jobs:
   add_reviewers:
