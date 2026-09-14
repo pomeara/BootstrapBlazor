@@ -1,0 +1,11 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Search input with clear button. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    <BootstrapInput TValue="string" Value="@Query" ValueChanged="OnQueryChanged" PlaceHolder="@Placeholder" class="flex-grow-1" />
+    @if (!string.IsNullOrEmpty(Query))
+    {
+        <Button Color="Color.Secondary" Size="Size.Small" OnClick="Clear" Icon="fa-solid fa-xmark" title="@ClearTooltipText" />
+    }
+</div>

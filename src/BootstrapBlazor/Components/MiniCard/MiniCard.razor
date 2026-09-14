@@ -1,0 +1,19 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Compact card for inline display in navbars and headers. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <div class="mini-card-icon">
+            <i class="@Icon"></i>
+        </div>
+    }
+    <div class="mini-card-body">
+        @if (!string.IsNullOrEmpty(Title))
+        {
+            <span class="mini-card-title">@Title</span>
+        }
+        @ChildContent
+    </div>
+</div>

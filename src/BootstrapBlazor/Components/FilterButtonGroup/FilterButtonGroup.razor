@@ -1,0 +1,10 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Filter button group with optional counts. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    @foreach (var filter in Filters)
+    {
+        <Button Color="@(filter.Key == SelectedFilter ? Color.Primary : Color.Secondary)" Size="Size.Small" OnClick="@(() => SelectFilter(filter.Key))">@filter.Value (@GetCount(filter.Key))</Button>
+    }
+</div>

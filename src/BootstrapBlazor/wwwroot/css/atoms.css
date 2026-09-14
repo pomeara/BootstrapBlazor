@@ -210,3 +210,27 @@
     flex-shrink: 0;
     vertical-align: middle;
 }
+
+/* ---------------------------------- */
+/* MiniCard — compact navbar/header chip */
+/* ---------------------------------- */
+.mini-card {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.35rem 0.75rem;
+    border-radius: 0.5rem;
+    font-size: 0.875rem;
+    background-color: var(--bs-secondary-bg);
+    color: var(--bs-body-color);
+}
+.mini-card--primary { background-color: var(--bs-primary-bg-subtle); color: var(--bs-primary-text-emphasis); }
+.mini-card--success { background-color: var(--bs-success-bg-subtle); color: var(--bs-success-text-emphasis); }
+.mini-card--warning { background-color: var(--bs-warning-bg-subtle); color: var(--bs-warning-text-emphasis); }
+.mini-card--info    { background-color: var(--bs-info-bg-subtle);    color: var(--bs-info-text-emphasis); }
+.mini-card--danger  { background-color: var(--bs-danger-bg-subtle);  color: var(--bs-danger-text-emphasis); }
+.mini-card--dark    { background-color: var(--bs-dark-bg-subtle);    color: var(--bs-dark-text-emphasis); }
+.mini-card--outline { background-color: transparent; border: 1px solid var(--bs-border-color); }
+.mini-card-icon { display: flex; align-items: center; }
+.mini-card-title { font-weight: 600; white-space: nowrap; }
+.mini-card-body { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }

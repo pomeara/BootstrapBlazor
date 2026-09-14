@@ -1,0 +1,18 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Toggle between two view modes (e.g. Card vs Table). *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    @if (Mode == ViewToggleMode.DualButton)
+    {
+        <Button Color="@(CurrentView == PrimaryView ? Color.Primary : Color.Secondary)" Icon="@PrimaryIcon" Size="Size.Small" OnClick="@(() => SetView(PrimaryView))" title="@PrimaryTitle" />
+        <Button Color="@(CurrentView == SecondaryView ? Color.Primary : Color.Secondary)" Icon="@SecondaryIcon" Size="Size.Small" OnClick="@(() => SetView(SecondaryView))" title="@SecondaryTitle" />
+    }
+    else
+    {
+        var toggleView = CurrentView == PrimaryView ? SecondaryView : PrimaryView;
+        var toggleIcon = CurrentView == PrimaryView ? SecondaryIcon : PrimaryIcon;
+        var toggleTitle = CurrentView == PrimaryView ? SecondaryTitle : PrimaryTitle;
+        <Button Color="Color.Secondary" Icon="@toggleIcon" Size="Size.Small" OnClick="@(() => SetView(toggleView))" title="@toggleTitle" />
+    }
+</div>

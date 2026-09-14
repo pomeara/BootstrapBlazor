@@ -1,0 +1,14 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Action card with icon, title, description, and call-to-action button. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    <div class="card-body text-center">
+        <div class="mb-3 mt-2">
+            <i class="@Icon @IconColor fa-3x"></i>
+        </div>
+        <h5 class="fw-bold">@Title</h5>
+        <p class="text-body-secondary small px-3">@Description</p>
+        <Button Color="@ButtonColor" Size="Size.Small" Text="@ButtonText" Icon="fa-solid fa-arrow-right" OnClick="OnClick" />
+    </div>
+</div>

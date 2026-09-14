@@ -1,0 +1,7 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Toolbar-friendly dropdown for page headers. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    <Dropdown TValue="string" Items="@Items" @bind-Value="_selectedValue" OnSelectedItemChanged="HandleSelected" ShowSplit="false" class="header-dropdown-btn" />
+</div>
