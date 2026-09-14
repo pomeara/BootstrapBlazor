@@ -140,7 +140,42 @@ internal static class MenusLocalizerExtensions
         };
         AddQuickStar(item);
 
+        item = new DemoMenuItem()
+        {
+            Text = "UI Kit",
+            Icon = "fa-fw fa-solid fa-puzzle-piece"
+        };
+        AddUiKit(item);
+
         return menus;
+
+        void AddUiKit(DemoMenuItem item)
+        {
+            item.Items = new List<DemoMenuItem>
+            {
+                new()
+                {
+                    Text = "UI Atoms",
+                    Url = "ui-atoms"
+                },
+                new()
+                {
+                    Text = "UI Molecules",
+                    Url = "ui-molecules"
+                },
+                new()
+                {
+                    Text = "AI Atoms",
+                    Url = "ai-atoms"
+                },
+                new()
+                {
+                    Text = "AI Catalog",
+                    Url = "ai-catalog"
+                }
+            };
+            AddBadge(item, count: 4);
+        }
 
         void AddBootstrapBlazorUtility(DemoMenuItem item)
         {

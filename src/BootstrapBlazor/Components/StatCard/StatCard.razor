@@ -43,6 +43,10 @@ else
                         <div>
                             <h3 class="mb-0">@Prefix@FormattedValue@Suffix</h3>
                             <p class="mb-0 small">@Label</p>
+                            @if (!string.IsNullOrEmpty(SubText))
+                            {
+                                <p class="mb-0 small opacity-75">@SubText</p>
+                            }
                         </div>
                     </div>
                 }
@@ -50,6 +54,10 @@ else
                 {
                     <h3>@Prefix@FormattedValue@Suffix</h3>
                     <p class="mb-0">@Label</p>
+                    @if (!string.IsNullOrEmpty(SubText))
+                    {
+                        <p class="mb-0 small opacity-75">@SubText</p>
+                    }
                 }
             </div>
         </div>

@@ -1,0 +1,73 @@
+@page "/ui-atoms"
+@namespace BootstrapBlazor.Server.Components.Samples
+@using BootstrapBlazor.Components
+
+<h3>UI Kit — Stat &amp; Status Atoms</h3>
+
+<DemoBlock Title="StatCard" Introduction="Compact KPI tile with icon, prefix/suffix and optional click affordance." Name="StatCard">
+    <div class="row g-3">
+        <div class="col-6 col-md-3">
+            <StatCard Label="Requests" Value="1284" Icon="fa-solid fa-paper-plane" Color="primary" />
+        </div>
+        <div class="col-6 col-md-3">
+            <StatCard Label="Errors" Value="3" Icon="fa-solid fa-triangle-exclamation" Color="danger" Suffix="%" />
+        </div>
+        <div class="col-6 col-md-3">
+            <StatCard Label="Latency" Value="42" Icon="fa-solid fa-gauge-high" Color="success" Suffix="ms" SubText="p95" />
+        </div>
+        <div class="col-6 col-md-3">
+            <StatCard Label="Cost" Value="17.4" Icon="fa-solid fa-coins" Color="warning" Prefix="$" Clickable="true" />
+        </div>
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="HeaderMetric" Introduction="Inline key/value metric for header bars." Name="HeaderMetric">
+    <div class="d-flex align-items-center gap-4">
+        <HeaderMetric Label="Uptime" Value="99.98%" />
+        <HeaderMetric Label="Queue" Value="12" ValueColor="text-warning" />
+        <HeaderMetric Label="Region" Value="au-east" ValueColor="text-info" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="NavBarStat" Introduction="Icon + value + label chip for navigation bars." Name="NavBarStat">
+    <div class="d-flex align-items-center gap-3">
+        <NavBarStat Label="Models" Value="225" Icon="fa-solid fa-cube" Color="Color.Primary" />
+        <NavBarStat Label="Online" Value="8" Icon="fa-solid fa-plug-circle-check" Color="Color.Success" />
+        <NavBarStat Label="Quota" Value='@("72%")' Icon="fa-solid fa-chart-pie" Color="Color.Warning" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="SectionTitle" Introduction="Section heading with icon and optional badge fragment." Name="SectionTitle">
+    <SectionTitle Icon="fa-solid fa-layer-group" Title="Providers">
+        <Badge><span class="badge bg-info ms-2">12 configured</span></Badge>
+    </SectionTitle>
+    <SectionTitle Icon="fa-solid fa-shield-halved" IconColor="text-success" Title="Security">
+        <Badge><span class="badge bg-success ms-2">All checks passed</span></Badge>
+    </SectionTitle>
+</DemoBlock>
+
+<DemoBlock Title="EmptyState" Introduction="Friendly empty placeholder with optional action." Name="EmptyState">
+    <EmptyState Icon="fa-solid fa-inbox" Title="No providers yet" Description="Connect a provider to see its models here." ActionText="Connect provider" />
+</DemoBlock>
+
+<DemoBlock Title="LoadingState" Introduction="Centred spinner with message." Name="LoadingState">
+    <LoadingState Message="Fetching catalog..." />
+</DemoBlock>
+
+<DemoBlock Title="ControlTag" Introduction="Small capability/control chip." Name="ControlTag">
+    <div class="d-flex gap-2">
+        <ControlTag Name="Vision" Category="Input" />
+        <ControlTag Name="Tools" Category="Runtime" />
+        <ControlTag Name="Streaming" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="BadgeList" Introduction="Renders a list as badges with overflow counter." Name="BadgeList">
+    <BadgeList Items='@(new object[] { "vision", "audio", "tools", "code", "reasoning", "streaming", "json-mode" })' BadgeColor="bg-info" />
+</DemoBlock>
+
+<DemoBlock Title="TruncatedText" Introduction="Truncates long text with an ellipsis tooltip." Name="TruncatedText">
+    <div style="max-width: 320px;">
+        <TruncatedText Value="meta-llama/llama-3.2-90b-vision-instruct:free" MaxLength="24" />
+    </div>
+</DemoBlock>

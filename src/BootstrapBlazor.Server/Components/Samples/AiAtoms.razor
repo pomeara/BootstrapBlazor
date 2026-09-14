@@ -1,0 +1,130 @@
+@page "/ai-atoms"
+@namespace BootstrapBlazor.Server.Components.Samples
+@using BootstrapBlazor.Components
+
+<h3>AI Kit — Model &amp; Provider Atoms</h3>
+
+<DemoBlock Title="TierBadge / StateBadge / EloBadge / NewBadge" Introduction="Model metadata badges — tier, enabled state, arena ELO and freshness." Name="ModelBadges">
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <TierBadge Tier="best" />
+        <TierBadge Tier="fast" />
+        <TierBadge Tier="vision" />
+        <TierBadge Tier="coding" />
+        <TierBadge Tier="reasoning" />
+        <StateBadge State="enabled" />
+        <StateBadge State="disabled" />
+        <EloBadge Elo="1421" Rank="3" />
+        <NewBadge FirstSeenUtc="_recent" />
+        <FavouriteStar Favourite="true" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="CapabilityTag / ModelCapabilityBadge" Introduction="Capability chips — plain tag and colour-coded badge variants." Name="Capability">
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <CapabilityTag Capability="vision" />
+        <CapabilityTag Capability="code" />
+        <CapabilityTag Capability="function-calling" />
+        <CapabilityTag Capability="reasoning" />
+        <CapabilityTag Capability="streaming" />
+        <ModelCapabilityBadge CapabilityName="vision" />
+        <ModelCapabilityBadge CapabilityName="tools" />
+        <ModelCapabilityBadge CapabilityName="audio" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="BenchmarkScoreBadge" Introduction="Leaderboard score chip — colour/icon keyed by benchmark category." Name="Benchmark">
+    <div class="d-flex align-items-center gap-2 flex-wrap">
+        <BenchmarkScoreBadge Key="composite" Score="87.3" />
+        <BenchmarkScoreBadge Key="coding" Score="72.1" />
+        <BenchmarkScoreBadge Key="math" Score="91.0" />
+        <BenchmarkScoreBadge Key="vision" Score="64.8" />
+        <BenchmarkScoreBadge Key="best" Score="95.2" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="QuotaStatusBadge / QuotaWindowBar" Introduction="Quota health — status pill and per-window utilisation bar with reset countdown." Name="Quota">
+    <div class="d-flex align-items-center gap-2 flex-wrap mb-3">
+        <QuotaStatusBadge UsagePercent="42" StatusText="Healthy" />
+        <QuotaStatusBadge UsagePercent="84" StatusText="Warning" />
+        <QuotaStatusBadge IsExceeded="true" UsagePercent="100" />
+    </div>
+    <div style="max-width: 480px;">
+        <QuotaWindowBar Label="Monthly" Percent="72" Used="72000" Limit="100000" ResetsAt="_reset" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="ProviderIcon / ProviderBadge" Introduction="Provider identity — icon, fallback glyph, and composite badge with state + favourite." Name="Provider">
+    <div class="d-flex align-items-center gap-4 flex-wrap">
+        <ProviderBadge ProviderName="openai" IconPath="" State="enabled" Favourite="true" ShowMeta="true" />
+        <ProviderBadge ProviderName="anthropic" IconPath="" State="enabled" ShowMeta="true" />
+        <ProviderBadge ProviderName="ollama" IconPath="" State="disabled" ShowMeta="true" />
+        <ProviderIcon ProviderName="groq" />
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="ModelCard" Introduction="Compact model card — header, badges, capabilities, pricing rows." Name="ModelCard">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <ModelCard Model="_card1" />
+        </div>
+        <div class="col-md-4">
+            <ModelCard Model="_card2" />
+        </div>
+        <div class="col-md-4">
+            <ModelCard Model="_card3" />
+        </div>
+    </div>
+</DemoBlock>
+
+@code {
+    private DateTimeOffset _recent = DateTimeOffset.UtcNow.AddDays(-2);
+
+    private DateTimeOffset _reset = DateTimeOffset.UtcNow.AddDays(9);
+
+    private ModelCardModel _card1 = new()
+    {
+        Id = "llama-3.2-90b",
+        DisplayName = "Llama 3.2 90B",
+        Family = "llama",
+        Tier = "best",
+        ArenaElo = 1388,
+        LeaderboardRank = 5,
+        ParameterCount = "90B",
+        ContextWindow = 131072,
+        FirstSeenUtc = DateTimeOffset.UtcNow.AddDays(-2),
+        Recommended = true,
+        SupportsVision = true,
+        SupportsTools = true,
+        PricePerMillionInput = 0.9m,
+        PricePerMillionOutput = 0.9m
+    };
+
+    private ModelCardModel _card2 = new()
+    {
+        Id = "qwen3-coder-30b",
+        DisplayName = "Qwen3 Coder 30B",
+        Family = "qwen",
+        Tier = "coding",
+        ArenaElo = 1291,
+        ParameterCount = "30B",
+        ContextWindow = 262144,
+        Quantization = "Q4_K_M",
+        IsLocal = true,
+        SupportsReasoning = true,
+        SupportsTools = true,
+        IsFree = true
+    };
+
+    private ModelCardModel _card3 = new()
+    {
+        Id = "gpt-4o-mini-audio",
+        DisplayName = "GPT-4o Mini Audio",
+        Family = "gpt",
+        Tier = "fast",
+        ContextWindow = 128000,
+        SupportsAudio = true,
+        SupportsVision = true,
+        PricePerMillionInput = 0.15m,
+        PricePerMillionOutput = 0.6m
+    };
+}

@@ -1,0 +1,124 @@
+@page "/ai-catalog"
+@namespace BootstrapBlazor.Server.Components.Samples
+@using BootstrapBlazor.Components
+
+<h3>AI Kit — Catalog Molecules</h3>
+
+<DemoBlock Title="CatalogHeader" Introduction="Dark catalog banner — title, badge, tab pills and stats/toolbar/action slots." Name="CatalogHeader">
+    <CatalogHeader Title="Catalog" SubTitle="225 models across 12 providers"
+                   BadgeText="synced 2h ago" ActiveTab="@_tab" OnTabChanged="OnTabChanged">
+        <Stats>
+            <NavBarStat Label="Providers" Value="12" Icon="fa-solid fa-plug" Color="Color.Info" />
+        </Stats>
+        <Actions>
+            <Button Color="Color.Link" Size="Size.Small" Icon="fa-solid fa-rotate" title="Refresh">Refresh</Button>
+        </Actions>
+    </CatalogHeader>
+    <div class="small text-body-secondary mt-1">Active tab: @_tab</div>
+</DemoBlock>
+
+<DemoBlock Title="CatalogSearchHeader" Introduction="Search/filter banner for the models view — search input, family and provider dropdowns, favourites toggle." Name="CatalogSearchHeader">
+    <CatalogSearchHeader SubTitle="filter the model grid" BadgeText="68 free"
+                         SearchText="@_search" SearchTextChanged="OnSearchChanged"
+                         FamilyItems="_families" SelectedFamily="@_family" SelectedFamilyChanged="OnFamilyChanged"
+                         ProviderItems="_providers" SelectedProvider="@_provider" SelectedProviderChanged="OnProviderChanged"
+                         ShowOnlyFavourites="@_fav" ShowOnlyFavouritesChanged="OnFavChanged" />
+    <div class="small text-body-secondary mt-1">
+        Search: @_search · Family: @_family · Provider: @_provider · Favourites only: @_fav
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="ProviderSignupCard" Introduction="Sign-up teaser for a not-yet-configured provider." Name="ProviderSignupCard">
+    <div class="row g-3">
+        <div class="col-md-4">
+            <ProviderSignupCard Entry="_signup1" TopElo="1421" TopRank="3" />
+        </div>
+        <div class="col-md-4">
+            <ProviderSignupCard Entry="_signup2" />
+        </div>
+    </div>
+</DemoBlock>
+
+<DemoBlock Title="ProviderModelToolbar" Introduction="Parameter-driven provider/model picker with capability filter badges." Name="ProviderModelToolbar">
+    <ProviderModelToolbar Providers="_sets" SelectedProvider="@_selProvider" SelectedProviderChanged="OnSelProviderChanged"
+                          SelectedModel="@_selModel" SelectedModelChanged="OnSelModelChanged" />
+    <div class="small text-body-secondary mt-2">Provider: @_selProvider · Model: @_selModel</div>
+</DemoBlock>
+
+@code {
+    private string _tab = "providers";
+    private string _search = "";
+    private string _family = "";
+    private string _provider = "";
+    private bool _fav;
+    private string _selProvider = "openrouter";
+    private string _selModel = "llama-3.2-70b";
+
+    private ProviderCatalogEntry _signup1 = new()
+    {
+        Label = "OpenRouter",
+        Category = "aggregator",
+        Description = "One key, hundreds of models across every major lab.",
+        Url = "https://openrouter.ai",
+        ModelCount = 320
+    };
+
+    private ProviderCatalogEntry _signup2 = new()
+    {
+        Label = "Groq",
+        Category = "cloud",
+        Description = "",
+        Url = "https://groq.com",
+        ModelCount = 24
+    };
+
+    private List<SelectedItem> _families = new()
+    {
+        new("", "All families"),
+        new("llama", "llama"),
+        new("gpt", "gpt"),
+        new("qwen", "qwen"),
+        new("claude", "claude")
+    };
+
+    private List<SelectedItem> _providers = new()
+    {
+        new("", "All providers"),
+        new("openrouter", "OpenRouter"),
+        new("groq", "Groq"),
+        new("ollama", "Ollama")
+    };
+
+    private List<ProviderModelSet> _sets = new()
+    {
+        new()
+        {
+            Name = "openrouter",
+            DisplayName = "OpenRouter",
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama-3.2-70b", DisplayName = "Llama 3.2 70B", Capabilities = { "text", "vision" } },
+                new() { Id = "qwen3-coder", DisplayName = "Qwen3 Coder", Capabilities = { "text", "code" } },
+                new() { Id = "gpt-4o", DisplayName = "GPT-4o", Capabilities = { "text", "vision", "audio" } }
+            }
+        },
+        new()
+        {
+            Name = "ollama",
+            DisplayName = "Ollama (local)",
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama3.2:8b", DisplayName = "Llama 3.2 8B", Capabilities = { "text" } },
+                new() { Id = "deepseek-r1:14b", DisplayName = "DeepSeek R1 14B", Capabilities = { "text", "reasoning" } }
+            }
+        }
+    };
+
+    private void OnTabChanged(string tab) => _tab = tab;
+    private void OnSearchChanged(string value) => _search = value;
+    private void OnFamilyChanged(string value) => _family = value;
+    private void OnProviderChanged(string value) => _provider = value;
+    private void OnFavChanged(bool value) => _fav = value;
+    private void OnSelProviderChanged(string value) => _selProvider = value;
+    private void OnSelModelChanged(string value) => _selModel = value;
+}
