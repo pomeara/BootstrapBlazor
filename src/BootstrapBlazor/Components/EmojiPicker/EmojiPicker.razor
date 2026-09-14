@@ -1,0 +1,48 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Emoji picker — click the current value to open a categorised grid. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    <div class="emoji-selected-display mb-2">
+        <span class="selected-emoji" @onclick="TogglePicker" title="Click to change">
+            @if (!string.IsNullOrEmpty(Value))
+            {
+                <span class="emoji-display-lg">@Value</span>
+            }
+            else
+            {
+                <span class="text-body-secondary emoji-display-sm">@Placeholder</span>
+            }
+        </span>
+    </div>
+
+    @if (_showPicker)
+    {
+        <div class="emoji-picker-dropdown card shadow-lg">
+            <div class="card-header py-2 px-3 d-flex justify-content-between align-items-center">
+                <small class="fw-bold">Select Emoji</small>
+                <button type="button" class="btn-close btn-close-sm" @onclick="ClosePicker"></button>
+            </div>
+            <div class="card-body p-2">
+                <div class="emoji-categories d-flex flex-wrap gap-1 mb-2 border-bottom pb-2">
+                    @foreach (var category in _emojiCategories.Keys)
+                    {
+                        <button type="button"
+                                class="btn btn-sm @(_selectedCategory == category ? "btn-primary" : "btn-outline-secondary")"
+                                @onclick="() => _selectedCategory = category">
+                            @GetCategoryIcon(category)
+                        </button>
+                    }
+                </div>
+                <div class="emoji-grid">
+                    <div class="d-flex flex-wrap gap-1">
+                        @foreach (var emoji in _emojiCategories[_selectedCategory])
+                        {
+                            <button type="button" class="btn btn-sm btn-ghost emoji-btn p-1" @onclick="() => SelectEmoji(emoji)" title="@emoji">@emoji</button>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>

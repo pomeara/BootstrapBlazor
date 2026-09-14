@@ -1,0 +1,55 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Space-saving select that collapses to a single chip and expands on demand. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    @if (!_isExpanded)
+    {
+        var hasSelection = _selectedItem != null;
+        <button type="button" class="spring-chip @(hasSelection ? "spring-chip-selected" : "")" title="@Title" @onclick="Expand">
+            @if (hasSelection && ItemTemplate is not null)
+            {
+                <span class="spring-chip-template">@ItemTemplate(_selectedItem!)</span>
+            }
+            else
+            {
+                @if (hasSelection && !string.IsNullOrEmpty(_selectedItem!.Icon))
+                {
+                    <i class="fa-solid @_selectedItem.Icon spring-chip-icon"></i>
+                }
+                <span class="spring-chip-label">@(hasSelection ? _selectedItem!.Label : Placeholder)</span>
+            }
+            <i class="fa-solid fa-up-right-and-down-left-from-center spring-expand-icon" title="Click to expand"></i>
+        </button>
+    }
+    else
+    {
+        <div class="spring-options">
+            @foreach (var item in Items)
+            {
+                var isSelected = item.Value == _selectedValue;
+                if (ItemTemplate is null)
+                {
+                    <Button Size="Size.Small"
+                            Color="@(isSelected ? Color.Primary : Color.Secondary)"
+                            IsOutline="@(!isSelected)"
+                            Icon="@(item.Icon != null ? $"fa-solid {item.Icon}" : null)"
+                            Text="@item.Label"
+                            OnClick="() => SelectItem(item)" />
+                }
+                else
+                {
+                    <Button Size="Size.Small"
+                            Color="@(isSelected ? Color.Primary : Color.Secondary)"
+                            IsOutline="@(!isSelected)"
+                            OnClick="() => SelectItem(item)">
+                        @ItemTemplate(item)
+                    </Button>
+                }
+            }
+            <button type="button" class="spring-close" @onclick="Collapse" aria-label="Close">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    }
+</div>
