@@ -638,3 +638,30 @@ html[data-bs-theme="dark"] img.provider-icon {
 .lqc .lqc-bars { display: grid; gap: .55rem; }
 .lqc .lqc-footer { display: flex; flex-wrap: nowrap; align-items: center; justify-content: space-between; gap: .75rem; min-width: 0; overflow: hidden; }
 .lqc .lqc-meta { display: flex; flex-direction: row; flex-wrap: nowrap; align-items: center; gap: .35rem; flex-shrink: 0; font-size: .78rem; color: var(--bs-secondary-color); white-space: nowrap; }
+
+/* ---- CardModelSelector ---- */
+.card-model-selector .provider-card { background: var(--bs-tertiary-bg); border: 1px solid var(--bs-border-color); border-radius: 8px; padding: .75rem 1rem; transition: all .2s ease; min-width: 120px; cursor: pointer; }
+.card-model-selector .provider-card:hover:not(.disabled) { background: var(--bs-secondary-bg); }
+.card-model-selector .provider-card.selected { background: rgba(var(--bs-primary-rgb, 13, 110, 253), .15); border-color: var(--bs-primary); }
+.card-model-selector .provider-card.disabled { opacity: .5; cursor: not-allowed; }
+.card-model-selector .cms-provider-icon { font-size: 1.1rem; color: var(--bs-body-secondary); width: 24px; text-align: center; }
+.card-model-selector .model-cards-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: .5rem; max-height: 220px; overflow-y: auto; }
+.card-model-selector .model-card { background: var(--bs-tertiary-bg); border: 1px solid var(--bs-border-color); border-radius: 6px; padding: .5rem .75rem; cursor: pointer; transition: all .15s ease; }
+.card-model-selector .model-card:hover { background: var(--bs-secondary-bg); }
+.card-model-selector .model-card.selected { background: rgba(var(--bs-primary-rgb, 13, 110, 253), .1); border-color: var(--bs-primary); }
+.card-model-selector .cms-model-icon { font-size: .95rem; color: var(--bs-body-secondary); width: 18px; text-align: center; }
+.card-model-selector .status-text { font-size: .65rem; }
+.card-model-selector .status-online { color: var(--bs-success); }
+.card-model-selector .model-name { max-width: 150px; }
+.card-model-selector .param-text { font-size: .65rem; }
+.card-model-selector .price-badge, .card-model-selector .size-badge { font-size: .65rem; }
+.card-model-selector .quant-badge, .card-model-selector .ctx-badge { font-size: .6rem; }
+
+/* ---- ProviderModelSelector / NavBarModelSelector ---- */
+.provider-model-selector { display: flex; flex-direction: column; gap: .25rem; }
+.provider-model-selector .select,
+.navbar-model-selector .select { min-width: 160px; max-width: 260px; }
+.navbar-model-selector .nms-separator { font-size: .8rem; user-select: none; }
+.navbar-model-selector .nms-status-badge { font-size: .6rem; letter-spacing: .04em; }
+.navbar-model-selector.navbar-model-selector-compact .select { min-width: 120px; max-width: 200px; font-size: .8rem; }
+.navbar-model-selector.navbar-model-selector-compact { gap: .4rem; }

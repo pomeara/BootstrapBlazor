@@ -45,4 +45,13 @@ public sealed record ProviderModelEntry
 
     /// <summary>Input price per million tokens, when paid.</summary>
     public decimal? PricePerMillionInput { get; init; }
+
+    /// <summary>Human parameter-count label (e.g. "8B", "70B") — card selectors show it as text.</summary>
+    public string? ParameterCount { get; init; }
+
+    /// <summary>On-disk size in bytes (local runtimes) — card selectors show it as a badge.</summary>
+    public long? SizeBytes { get; init; }
+
+    /// <summary>Quantization label (e.g. "Q4_K_M") — card selectors show it as a badge.</summary>
+    public string? Quantization { get; init; }
 }

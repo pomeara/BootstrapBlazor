@@ -35,11 +35,19 @@ public abstract class ModelSelectorBase : BootstrapComponentBase
     [Parameter]
     public EventCallback<string?> SelectedModelChanged { get; set; }
 
+    /// <summary>Raised when <see cref="SelectProvider"/> switches the active provider set.</summary>
+    [Parameter]
+    public EventCallback<string?> ProviderChanged { get; set; }
+
     /// <summary>When true (default), an unset or invalid selection auto-picks the first usable
     /// model of the current provider so hosts never hold a null selection against a populated
     /// provider. Set false to keep a deliberately empty rest state.</summary>
     [Parameter]
     public bool AutoSelect { get; set; } = true;
+
+    /// <summary>Provider sets deduplicated by name (first wins) — render sources iterate this.</summary>
+    protected IEnumerable<ProviderModelSet> Sets =>
+        Providers.Where(p => !string.IsNullOrEmpty(p.Name)).DistinctBy(p => p.Name, StringComparer.OrdinalIgnoreCase);
 
     /// <summary>Resolved set for the current <see cref="Provider"/> — null when unset or unknown.</summary>
     protected ProviderModelSet? CurrentSet { get; private set; }
@@ -64,7 +72,38 @@ public abstract class ModelSelectorBase : BootstrapComponentBase
             return;
         }
 
+        // Never-empty invariant: with auto-select on, an unset provider falls to the
+        // favourite-online set so model selectors start usable instead of blank.
+        if (string.IsNullOrEmpty(Provider) && AutoSelect)
+        {
+            var defaultSet = DefaultSet(Providers);
+            if (defaultSet is not null)
+            {
+                Provider = defaultSet.Name;
+            }
+        }
+
         _lastProvider = Provider;
+        ResolveCurrent();
+    }
+
+    /// <summary>Switches the active provider set and raises <see cref="ProviderChanged"/>.
+    /// Re-resolves the model list and auto-selects a default model when enabled.</summary>
+    protected void SelectProvider(string? name)
+    {
+        if (string.Equals(Provider, name, StringComparison.OrdinalIgnoreCase))
+        {
+            return;
+        }
+
+        Provider = name;
+        _lastProvider = name;
+        ResolveCurrent();
+        _ = ProviderChanged.InvokeAsync(name);
+    }
+
+    private void ResolveCurrent()
+    {
         CurrentSet = FindSet(Providers, Provider);
         CurrentModels = CurrentSet is null ? [] : FilterModels(CurrentSet.Models);
         ModelsById = CurrentModels.ToDictionary(m => m.Id, StringComparer.OrdinalIgnoreCase);
@@ -162,6 +201,16 @@ public abstract class ModelSelectorBase : BootstrapComponentBase
         null or 0 => "Free",
         < 0.01m => $"${price.Value:F4}",
         _ => $"${price.Value:F2}"
+    };
+
+    /// <summary>Formats a byte count as a human size (e.g. 4900000000 → "4.6 GB").</summary>
+    protected static string FormatSize(long? bytes) => bytes switch
+    {
+        null or 0 => "",
+        >= 1_073_741_824 => $"{bytes.Value / 1_073_741_824.0:F1} GB",
+        >= 1_048_576 => $"{bytes.Value / 1_048_576.0:F0} MB",
+        >= 1_024 => $"{bytes.Value / 1_024.0:F0} KB",
+        _ => $"{bytes.Value} B"
     };
 
     /// <summary>Builds the dropdown text for a model: display name plus context-window and,

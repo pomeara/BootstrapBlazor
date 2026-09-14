@@ -1,0 +1,46 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.ModelSelectorBase
+
+@* Two compact dropdowns (provider / model) for nav bars and headers, with an optional
+   READY/OFFLINE badge for the active provider. Model items carry the per-model atoms. *@
+<div class="navbar-model-selector d-flex align-items-center gap-2 @(IsCompact ? "navbar-model-selector-compact" : "")" @attributes="AdditionalAttributes">
+    <Select TValue="string" Items="_providerItems" @bind-Value="ProviderValue"
+            Color="Color.None" Size="Size.Small" IsDisabled="@IsLoading" ShowLabel="false" IsPopover="true">
+        <ItemTemplate>
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-server text-body-secondary"></i>
+                <span>@context?.Text</span>
+            </div>
+        </ItemTemplate>
+    </Select>
+
+    <span class="text-secondary nms-separator">/</span>
+
+    <Select TValue="string" Items="_modelItems" @bind-Value="ModelValue"
+            Color="Color.None" Size="Size.Small" IsDisabled="@(CurrentSet is null || IsLoading)" ShowLabel="false" IsPopover="true">
+        <ItemTemplate>
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-cube text-body-secondary"></i>
+                <span>@context?.Text</span>
+                @if (context?.Value is string v && ModelsById.TryGetValue(v, out var model))
+                {
+                    @if (model.Favourite)
+                    {
+                        <FavouriteStar Favourite="true" />
+                    }
+                    <EloBadge Elo="@model.ArenaElo" Rank="@model.LeaderboardRank" />
+                    <TierBadge Tier="@model.Tier" />
+                    @if (!string.IsNullOrEmpty(model.State) && !model.State.Equals("enabled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <StateBadge State="@model.State" />
+                    }
+                }
+            </div>
+        </ItemTemplate>
+    </Select>
+
+    @if (ShowStatusBadge && CurrentSet is not null)
+    {
+        <Badge Color="@(CurrentSet.IsOnline ? Color.Success : Color.Danger)" class="nms-status-badge">@(CurrentSet.IsOnline ? "READY" : "OFFLINE")</Badge>
+    }
+</div>

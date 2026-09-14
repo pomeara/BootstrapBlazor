@@ -1,0 +1,97 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.ModelSelectorBase
+
+@* Provider cards + model cards grid — a browse-style picker for hosts that want the
+   provider choice visible as tiles instead of a dropdown. Selection state lives in
+   Provider/SelectedModel; the host owns the data via Providers. *@
+<div class="card-model-selector @CssClass" @attributes="AdditionalAttributes">
+    @if (ShowLabel)
+    {
+        <div class="d-flex justify-content-between align-items-center mb-2">
+            <label class="cms-label text-secondary small text-uppercase fw-bold mb-0">@LabelText</label>
+            @if (ShowRefresh)
+            {
+                <Button Color="Color.Link" Size="Size.Small" IsDisabled="@IsLoading" OnClick="RefreshAsync">
+                    <i class="@(IsLoading ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-rotate")"></i>
+                </Button>
+            }
+        </div>
+    }
+
+    <div class="provider-cards d-flex gap-2 mb-3">
+        @foreach (var provider in Sets)
+        {
+            <div class="provider-card @(Provider == provider.Name ? "selected" : "") @(!provider.IsOnline ? "disabled" : "")"
+                 role="button" @onclick="() => SelectProviderIfOnline(provider.Name)">
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-server cms-provider-icon"></i>
+                    <div>
+                        <div class="fw-bold small">@(string.IsNullOrEmpty(provider.DisplayName) ? provider.Name : provider.DisplayName)</div>
+                        <div class="status-text @(provider.IsOnline ? "status-online" : "text-secondary")">@(provider.IsOnline ? "Online" : "Offline")</div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+
+    @if (CurrentSet is not null)
+    {
+        @if (IsLoading)
+        {
+            <div class="text-center py-4">
+                <Spinner Size="Size.Small" Color="Color.Primary" />
+                <div class="text-secondary small mt-2">Loading models...</div>
+            </div>
+        }
+        else if (CurrentModels.Count == 0)
+        {
+            <div class="text-center py-4 text-secondary small fst-italic">No models available</div>
+        }
+        else
+        {
+            <div class="model-cards-grid">
+                @foreach (var model in CurrentModels)
+                {
+                    <div class="model-card @(SelectedModel == model.Id ? "selected" : "")" role="button" @onclick="() => SelectModel(model)">
+                        <div class="d-flex justify-content-between align-items-start">
+                            <div class="d-flex align-items-center gap-2">
+                                <i class="fa-solid fa-cube cms-model-icon"></i>
+                                <div>
+                                    <div class="model-name fw-bold small text-truncate">@ShortenModelName(model.Id)</div>
+                                    @if (!string.IsNullOrEmpty(model.ParameterCount))
+                                    {
+                                        <div class="param-text text-secondary">@model.ParameterCount params</div>
+                                    }
+                                </div>
+                            </div>
+                            <div class="d-flex flex-wrap gap-1 justify-content-end">
+                                @if (model.IsFree)
+                                {
+                                    <Badge Color="Color.Success" class="price-badge">Free</Badge>
+                                }
+                                else if (model.PricePerMillionInput.HasValue)
+                                {
+                                    <Badge Color="Color.Warning" class="price-badge">@FormatPrice(model.PricePerMillionInput)/M</Badge>
+                                }
+                                @if (model.SizeBytes.HasValue)
+                                {
+                                    <Badge Color="Color.Info" class="size-badge">@FormatSize(model.SizeBytes)</Badge>
+                                }
+                            </div>
+                        </div>
+                        <div class="mt-1 d-flex flex-wrap gap-1">
+                            @if (!string.IsNullOrEmpty(model.Quantization))
+                            {
+                                <Badge Color="Color.Secondary" class="quant-badge">@model.Quantization</Badge>
+                            }
+                            @if (model.ContextWindow.HasValue)
+                            {
+                                <Badge Color="Color.Primary" class="ctx-badge">@(model.ContextWindow.Value >= 1000 ? $"{model.ContextWindow.Value / 1000}K" : model.ContextWindow.Value.ToString()) ctx</Badge>
+                            }
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    }
+</div>

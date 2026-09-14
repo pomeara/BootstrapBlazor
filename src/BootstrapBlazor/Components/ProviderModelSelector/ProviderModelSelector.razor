@@ -1,0 +1,53 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.ModelSelectorBase
+
+@* Compact provider/model dropdown pair for forms and toolbars — model items carry the
+   per-model atoms (favourite, ELO, tier, state) via the shared ModelsById lookup. *@
+<div class="provider-model-selector @CssClass" @attributes="AdditionalAttributes">
+    @if (ShowLabel)
+    {
+        <label class="form-label text-secondary small text-uppercase fw-bold mb-0">@LabelText</label>
+    }
+
+    <div class="d-flex gap-2 align-items-center">
+        <Select TValue="string" Items="_providerItems" @bind-Value="ProviderValue"
+                Color="Color.None" Size="Size.Small" IsDisabled="@IsDisabled" ShowLabel="false" IsPopover="true">
+            <ItemTemplate>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-server text-body-secondary"></i>
+                    <span>@context?.Text</span>
+                </div>
+            </ItemTemplate>
+        </Select>
+
+        <Select TValue="string" Items="_modelItems" @bind-Value="ModelValue"
+                Color="Color.None" Size="Size.Small" IsDisabled="@(CurrentSet is null || IsDisabled || IsLoading)" ShowLabel="false" IsPopover="true">
+            <ItemTemplate>
+                <div class="d-flex align-items-center gap-2">
+                    <i class="fa-solid fa-cube text-body-secondary"></i>
+                    <span>@context?.Text</span>
+                    @if (context?.Value is string v && ModelsById.TryGetValue(v, out var model))
+                    {
+                        @if (model.Favourite)
+                        {
+                            <FavouriteStar Favourite="true" />
+                        }
+                        <EloBadge Elo="@model.ArenaElo" Rank="@model.LeaderboardRank" />
+                        <TierBadge Tier="@model.Tier" />
+                        @if (!string.IsNullOrEmpty(model.State) && !model.State.Equals("enabled", StringComparison.OrdinalIgnoreCase))
+                        {
+                            <StateBadge State="@model.State" />
+                        }
+                    }
+                </div>
+            </ItemTemplate>
+        </Select>
+
+        @if (ShowRefresh)
+        {
+            <Button Color="Color.Secondary" Size="Size.Small" IsOutline="true" IsDisabled="@IsLoading" OnClick="RefreshAsync">
+                <i class="@(IsLoading ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-rotate")"></i>
+            </Button>
+        }
+    </div>
+</div>

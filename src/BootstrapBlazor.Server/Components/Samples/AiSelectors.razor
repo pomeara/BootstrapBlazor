@@ -24,11 +24,37 @@
     <span class="small text-body-secondary ms-2">Model: @(_groupedModel ?? "—")</span>
 </DemoBlock>
 
+<DemoBlock Title="CardModelSelector" Introduction="Provider tiles + model card grid — price/size/quantization/context badges per model; the offline tile is visible but not selectable; refresh raises OnRefresh." Name="CardModelSelector">
+    <CardModelSelector Providers="_cardSets" Provider="@_cardProvider" ProviderChanged="OnCardProviderChanged"
+                       SelectedModel="@_cardModel" SelectedModelChanged="OnCardModelChanged" OnRefresh="OnCardRefresh" />
+    <span class="small text-body-secondary ms-2">Model: @(_cardModel ?? "—") @(_cardRefreshed ? "(refreshed)" : "")</span>
+</DemoBlock>
+
+<DemoBlock Title="ProviderModelSelector" Introduction="Provider + model dropdown pair for forms and toolbars — picking a provider re-resolves its models with the shared auto-select policy; refresh is a host callback." Name="ProviderModelSelector">
+    <ProviderModelSelector Providers="_sets" Provider="@_pmProvider" ProviderChanged="OnPmProviderChanged"
+                           SelectedModel="@_pmModel" SelectedModelChanged="OnPmModelChanged" OnRefresh="OnPmRefresh" />
+    <span class="small text-body-secondary ms-2">@(_pmProvider ?? "—") / @(_pmModel ?? "—") @(_pmRefreshed ? "(refreshed)" : "")</span>
+</DemoBlock>
+
+<DemoBlock Title="NavBarModelSelector" Introduction="Slim provider/model pair for nav bars with a READY/OFFLINE badge for the active provider; model items carry favourite/ELO/tier/state atoms." Name="NavBarModelSelector">
+    <NavBarModelSelector Providers="_sets" Provider="@_navProvider" ProviderChanged="OnNavProviderChanged"
+                         SelectedModel="@_navModel" SelectedModelChanged="OnNavModelChanged" />
+    <div class="small text-body-secondary mt-1">@(_navProvider ?? "—") / @(_navModel ?? "—")</div>
+</DemoBlock>
+
 @code {
     private string? _provider = "openrouter";
     private string? _model;
     private string? _manualModel;
     private string? _groupedModel;
+    private string? _cardProvider;
+    private string? _cardModel;
+    private bool _cardRefreshed;
+    private string? _pmProvider = "groq";
+    private string? _pmModel;
+    private bool _pmRefreshed;
+    private string? _navProvider;
+    private string? _navModel;
 
     private List<ProviderModelSet> _sets = new()
     {
@@ -80,4 +106,63 @@
     private void OnModelChanged(string? value) => _model = value;
     private void OnManualModelChanged(string? value) => _manualModel = value;
     private void OnGroupedModelChanged(string? value) => _groupedModel = value;
+
+    private void OnCardProviderChanged(string? value) => _cardProvider = value;
+    private void OnCardModelChanged(string? value) => _cardModel = value;
+    private Task OnCardRefresh() { _cardRefreshed = true; return Task.CompletedTask; }
+
+    private void OnPmProviderChanged(string? value)
+    {
+        _pmProvider = value;
+        _pmModel = null;
+    }
+    private void OnPmModelChanged(string? value) => _pmModel = value;
+    private Task OnPmRefresh() { _pmRefreshed = true; return Task.CompletedTask; }
+
+    private void OnNavProviderChanged(string? value)
+    {
+        _navProvider = value;
+        _navModel = null;
+    }
+    private void OnNavModelChanged(string? value) => _navModel = value;
+
+    // Card selector gets enriched local-runtime metadata (sizes, quantization) that only
+    // card surfaces show; the dropdown demos reuse _sets as-is.
+    private List<ProviderModelSet> _cardSets = new()
+    {
+        new()
+        {
+            Name = "ollama",
+            DisplayName = "Ollama",
+            IsOnline = true,
+            IsFavourite = true,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama3.2:8b", Family = "llama", IsFree = true, Favourite = true, ContextWindow = 131072, ParameterCount = "8B", SizeBytes = 4_700_000_000, Quantization = "Q4_K_M" },
+                new() { Id = "deepseek-r1:14b", Family = "deepseek", IsFree = true, Tier = "reasoning", ContextWindow = 131072, ParameterCount = "14B", SizeBytes = 9_000_000_000, Quantization = "Q4_K_M" },
+                new() { Id = "qwen3-coder:30b", Family = "qwen", IsFree = true, Tier = "coding", ContextWindow = 262144, ParameterCount = "30B", SizeBytes = 19_000_000_000, Quantization = "Q3_K_L" }
+            }
+        },
+        new()
+        {
+            Name = "groq",
+            DisplayName = "Groq",
+            IsOnline = true,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama-3.1-8b-instant", Family = "llama", IsFree = true, Tier = "fast", ContextWindow = 131072, ParameterCount = "8B" },
+                new() { Id = "mixtral-8x7b-32768", Family = "mixtral", PricePerMillionInput = 0.24m, ContextWindow = 32768, ParameterCount = "8x7B" }
+            }
+        },
+        new()
+        {
+            Name = "zhipu",
+            DisplayName = "z.ai",
+            IsOnline = false,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "glm-5.3-flash", Family = "glm", IsFree = true, ContextWindow = 200000 }
+            }
+        }
+    };
 }
