@@ -1,0 +1,43 @@
+@namespace BootstrapBlazor.Components
+
+@* Per-model cost breakdown from a scanned agent. Shows the opus-fallback fix in action:
+   reported (often $0) vs computed vs effective cost per model. *@
+<Card class="agent-cost-breakdown-card h-100">
+    <HeaderTemplate>
+        <span class="fw-bold">
+            <i class="fa-solid fa-coins me-2 text-warning" />
+            Cost Breakdown by Model
+        </span>
+    </HeaderTemplate>
+    <BodyTemplate>
+        @if (Cost.PerModel.Count == 0)
+        {
+            <div class="text-center py-3 text-secondary">
+                <i class="fa-solid fa-circle-info me-1" />
+                No per-model usage data available.
+            </div>
+        }
+        else
+        {
+            <Table TItem="AgentModelCost"
+                   Items="@Cost.PerModel"
+                   IsStriped="true"
+                   IsBordered="true"
+                   ShowSearch="false"
+                   ShowToolbar="false"
+                   ShowLineNo="true"
+                   RenderMode="TableRenderMode.Table">
+                <TableColumns>
+                    <TableColumn @bind-Field="@context.Model" Text="Model" Width="240" />
+                    <TableColumn @bind-Field="@context.ReportedCostUsd" Text="Reported ($)" Align="Alignment.Right" FormatString="F4" />
+                    <TableColumn @bind-Field="@context.ComputedCostUsd" Text="Computed ($)" Align="Alignment.Right" FormatString="F4" />
+                    <TableColumn @bind-Field="@context.CostUsd" Text="Effective ($)" Align="Alignment.Right" FormatString="F4" />
+                </TableColumns>
+            </Table>
+            <div class="cost-total-row mt-2">
+                <span class="stat-label">All-Time Total:</span>
+                <span class="fw-bold ms-2">$@Cost.AllTime.ToString("F4")</span>
+            </div>
+        }
+    </BodyTemplate>
+</Card>

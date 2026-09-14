@@ -1,0 +1,61 @@
+@namespace BootstrapBlazor.Components
+
+@* KPI summary for one scanned agent: totals + cost buckets. *@
+<Card class="agent-usage-summary-card h-100">
+    <HeaderTemplate>
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <span class="fw-bold">
+                <i class="fa-solid fa-robot me-2 text-primary" />
+                @(string.IsNullOrEmpty(Report.DisplayName) ? Report.Agent : Report.DisplayName)
+            </span>
+            <Badge Color="Color.Secondary">@Report.Agent</Badge>
+        </div>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <div class="agent-usage-stats">
+            <div class="agent-stat">
+                <i class="fa-solid fa-comments stat-icon-messages me-2" />
+                <span class="stat-label">Total Messages</span>
+                <span class="fw-bold ms-auto">@Report.TotalMessages.ToString("N0")</span>
+            </div>
+            <div class="agent-stat">
+                <i class="fa-solid fa-link stat-icon-sessions me-2" />
+                <span class="stat-label">Sessions</span>
+                <span class="fw-bold ms-auto">@Report.TotalSessions.ToString("N0")</span>
+            </div>
+            <div class="agent-stat">
+                <i class="fa-solid fa-dollar-sign stat-icon-today me-2" />
+                <span class="stat-label">Cost Today</span>
+                <span class="fw-bold ms-auto">$@Report.Cost.Today.ToString("F2")</span>
+            </div>
+            <div class="agent-stat">
+                <i class="fa-solid fa-calendar-days stat-icon-month me-2" />
+                <span class="stat-label">Cost This Month</span>
+                <span class="fw-bold ms-auto">$@Report.Cost.ThisMonth.ToString("F2")</span>
+            </div>
+            <div class="agent-stat">
+                <i class="fa-solid fa-clock-rotate-left stat-icon-7d me-2" />
+                <span class="stat-label">Cost Last 7 Days</span>
+                <span class="fw-bold ms-auto">$@Report.Cost.Last7Days.ToString("F2")</span>
+            </div>
+            <div class="agent-stat">
+                <i class="fa-solid fa-infinity stat-icon-alltime me-2" />
+                <span class="stat-label">Cost All-Time</span>
+                <span class="fw-bold ms-auto">$@Report.Cost.AllTime.ToString("F2")</span>
+            </div>
+            <div class="agent-stat">
+                <i class="fa-solid fa-arrow-trend-up stat-icon-projection me-2" />
+                <span class="stat-label">Month Projection</span>
+                <span class="fw-bold ms-auto">$@Report.Cost.MonthlyProjection.ToString("F2")</span>
+            </div>
+        </div>
+    </BodyTemplate>
+    <FooterTemplate>
+        @if (!string.IsNullOrEmpty(Report.Cost.Strategy))
+        {
+            <div class="stat-footer">
+                Cost strategy: <code>@Report.Cost.Strategy</code>
+            </div>
+        }
+    </FooterTemplate>
+</Card>

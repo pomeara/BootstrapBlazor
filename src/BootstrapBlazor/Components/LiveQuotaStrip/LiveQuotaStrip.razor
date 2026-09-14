@@ -1,0 +1,22 @@
+@namespace BootstrapBlazor.Components
+
+@if (Quotas is null || Quotas.Count == 0)
+{
+    <span class="live-quota-strip text-body-secondary small">@EmptyText</span>
+}
+else
+{
+    <span class="live-quota-strip d-inline-flex align-items-center gap-1">
+        @foreach (var quota in Quotas.Where(q => string.IsNullOrEmpty(q.Error)))
+        {
+            <Badge Color="@ColorFor(quota.SessionPercent)" class="text-capitalize" title="@($"{quota.Provider}: 5h {quota.SessionPercent:F0}%")">
+                @quota.Provider
+                <span class="fw-semibold ms-1">@quota.SessionPercent.ToString("F0")%</span>
+                @if (quota.WeeklyPercent > 0)
+                {
+                    <span class="opacity-75">&middot; @quota.WeeklyPercent.ToString("F0")%mo</span>
+                }
+            </Badge>
+        }
+    </span>
+}

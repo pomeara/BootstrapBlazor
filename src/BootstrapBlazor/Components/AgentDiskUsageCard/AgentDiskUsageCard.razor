@@ -1,0 +1,59 @@
+@namespace BootstrapBlazor.Components
+
+@* Disk-usage report for a scanned agent's base directory. Shows each top-level entry's
+   size + whether it is safe-to-delete / keep. Total shown in the header. *@
+<Card class="agent-disk-usage-card h-100">
+    <HeaderTemplate>
+        <span class="fw-bold">
+            <i class="fa-solid fa-hard-drive me-2 text-secondary" />
+            Disk Usage
+            <Badge Color="Color.Info" class="ms-2">@FormatBytes(Disk.TotalBytes)</Badge>
+        </span>
+    </HeaderTemplate>
+    <BodyTemplate>
+        @if (Disk.Entries.Count == 0)
+        {
+            <div class="text-center py-3 text-secondary">
+                <i class="fa-solid fa-circle-info me-1" />
+                No disk-usage data available.
+            </div>
+        }
+        else
+        {
+            <Table TItem="AgentDiskEntry"
+                   Items="@Disk.Entries"
+                   IsStriped="true"
+                   IsBordered="true"
+                   ShowSearch="false"
+                   ShowToolbar="false"
+                   ShowLineNo="true"
+                   RenderMode="TableRenderMode.Table">
+                <TableColumns>
+                    <TableColumn @bind-Field="@context.Name" Text="Name" />
+                    <TableColumn @bind-Field="@context.Kind" Text="Type" Width="90" />
+                    <TableColumn @bind-Field="@context.Bytes" Text="Size" Align="Alignment.Right" Width="120">
+                        <Template Context="ctx">
+                            <span>@FormatBytes(ctx.Row.Bytes)</span>
+                        </Template>
+                    </TableColumn>
+                    <TableColumn @bind-Field="@context.SafeToDelete" Text="Status" Width="160">
+                        <Template Context="ctx">
+                            @if (ctx.Row.SafeToDelete)
+                            {
+                                <Badge Color="Color.Success">Safe to delete</Badge>
+                            }
+                            else if (ctx.Row.Keep)
+                            {
+                                <Badge Color="Color.Warning">Keep</Badge>
+                            }
+                            else
+                            {
+                                <Badge Color="Color.Secondary">&mdash;</Badge>
+                            }
+                        </Template>
+                    </TableColumn>
+                </TableColumns>
+            </Table>
+        }
+    </BodyTemplate>
+</Card>

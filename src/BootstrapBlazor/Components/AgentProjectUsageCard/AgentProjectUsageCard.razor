@@ -1,0 +1,39 @@
+@namespace BootstrapBlazor.Components
+
+@* Per-project attribution from a scanned agent's history log. Shows which projects/repos
+   consumed the most messages, all-time and this month. *@
+<Card class="agent-project-usage-card h-100">
+    <HeaderTemplate>
+        <span class="fw-bold">
+            <i class="fa-solid fa-folder-tree me-2 text-info" />
+            Usage by Project
+        </span>
+    </HeaderTemplate>
+    <BodyTemplate>
+        @if (Projects.Count == 0)
+        {
+            <div class="text-center py-3 text-secondary">
+                <i class="fa-solid fa-circle-info me-1" />
+                No project attribution available.
+            </div>
+        }
+        else
+        {
+            <Table TItem="AgentProjectUsage"
+                   Items="@Projects"
+                   IsStriped="true"
+                   IsBordered="true"
+                   ShowSearch="false"
+                   ShowToolbar="false"
+                   ShowLineNo="true"
+                   RenderMode="TableRenderMode.Table">
+                <TableColumns>
+                    <TableColumn @bind-Field="@context.Project" Text="Project" />
+                    <TableColumn @bind-Field="@context.MessagesTotal" Text="Messages (All-Time)" Align="Alignment.Right" FormatString="#,##0" />
+                    <TableColumn @bind-Field="@context.MessagesThisMonth" Text="Messages (This Month)" Align="Alignment.Right" FormatString="#,##0" />
+                    <TableColumn @bind-Field="@context.SessionsThisMonth" Text="Sessions (Month)" Align="Alignment.Right" FormatString="#,##0" />
+                </TableColumns>
+            </Table>
+        }
+    </BodyTemplate>
+</Card>

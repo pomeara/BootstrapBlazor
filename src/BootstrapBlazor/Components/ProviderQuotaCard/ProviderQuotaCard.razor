@@ -1,0 +1,72 @@
+@namespace BootstrapBlazor.Components
+
+<Card class="provider-quota-card h-100">
+    <HeaderTemplate>
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <span class="d-flex align-items-center gap-1">
+                <span class="fw-bold">@Status.ProviderId</span>
+                @if (Health is not null)
+                {
+                    <span class="badge rounded-pill @HealthChipClass" title="@HealthTitle"><i class="@HealthIcon" /></span>
+                }
+            </span>
+            <QuotaStatusBadge IsExceeded="@Status.IsOverAnyQuota"
+                              UsagePercent="@MaxUsagePercent" />
+        </div>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <div class="quota-metrics">
+            @if (Status.TokenLimit > 0)
+            {
+                <div class="quota-metric">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-secondary small">Tokens</span>
+                        <span class="small">@FormatNumber(Status.TokensUsed) / @FormatNumber(Status.TokenLimit)</span>
+                    </div>
+                    <Progress Value="@Status.TokenUsagePercent"
+                              Color="@GetProgressColor(Status.TokenUsagePercent)"
+                              ShowLabel="false"
+                              Height="6" />
+                </div>
+            }
+            @if (Status.RequestLimit > 0)
+            {
+                <div class="quota-metric">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-secondary small">Requests</span>
+                        <span class="small">@FormatNumber(Status.RequestsUsed) / @FormatNumber(Status.RequestLimit)</span>
+                    </div>
+                    <Progress Value="@Status.RequestUsagePercent"
+                              Color="@GetProgressColor(Status.RequestUsagePercent)"
+                              ShowLabel="false"
+                              Height="6" />
+                </div>
+            }
+            @if (Status.CostLimitUsd > 0)
+            {
+                <div class="quota-metric">
+                    <div class="d-flex justify-content-between align-items-center mb-1">
+                        <span class="text-secondary small">Cost</span>
+                        <span class="small">@Status.CostUsd.ToString("F2") / @Status.CostLimitUsd.ToString("F2") USD</span>
+                    </div>
+                    <Progress Value="@Status.CostUsagePercent"
+                              Color="@GetProgressColor(Status.CostUsagePercent)"
+                              ShowLabel="false"
+                              Height="6" />
+                </div>
+            }
+            @if (Status.TokenLimit == 0 && Status.RequestLimit == 0 && Status.CostLimitUsd == 0)
+            {
+                <div class="text-secondary small text-center py-2">
+                    No quota limits configured
+                </div>
+            }
+        </div>
+    </BodyTemplate>
+    <FooterTemplate>
+        <div class="d-flex justify-content-between align-items-center">
+            <span class="text-secondary small">@Status.Period</span>
+            <span class="text-secondary small">Key: @Status.ApiKeyPrefix</span>
+        </div>
+    </FooterTemplate>
+</Card>

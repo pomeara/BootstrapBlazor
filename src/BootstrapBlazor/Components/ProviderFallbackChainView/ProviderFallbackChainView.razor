@@ -1,0 +1,42 @@
+@namespace BootstrapBlazor.Components
+
+@if (Loading)
+{
+    <div class="text-muted"><i class="fa-solid fa-spinner fa-spin me-1"></i>Loading chain…</div>
+}
+else if (!string.IsNullOrEmpty(Error))
+{
+    <div class="alert alert-danger mb-0"><i class="fa-solid fa-circle-exclamation me-1"></i>@Error</div>
+}
+else if (Candidates.Count == 0)
+{
+    <div class="alert alert-info mb-0"><i class="fa-solid fa-circle-info me-1"></i>@EmptyText</div>
+}
+else
+{
+    <h6 class="fw-bold mb-2"><i class="fa-solid fa-list-ol me-1"></i>Fallback chain — resolved order (@Candidates.Count)</h6>
+    <div class="border rounded p-2">
+        @for (var i = 0; i < Candidates.Count; i++)
+        {
+            var index = i;
+            var candidate = Candidates[index];
+            <div class="d-flex align-items-center py-1 @(index > 0 ? "border-top" : "")">
+                <span class="text-muted me-2" style="min-width: 1.6em;">@(index + 1).</span>
+                <ProviderIcon ProviderName="@candidate.ProviderId" CssClass="me-2" />
+                <span class="flex-grow-1 text-truncate">
+                    <span class="fw-semibold">@(string.IsNullOrEmpty(candidate.Label) ? candidate.ModelId : candidate.Label)</span>
+                    <small class="text-muted ms-2">@candidate.ProviderId</small>
+                </span>
+                @if (candidate.Source == "favourite")
+                {
+                    <span class="badge text-bg-warning me-2"><i class="fa-solid fa-star me-1"></i>favourite</span>
+                }
+                else
+                {
+                    <span class="badge text-bg-secondary me-2">fallback</span>
+                }
+                <Switch Value="@candidate.Favourite" OnValueChanged="@(v => OnToggleAsync(candidate, v))" />
+            </div>
+        }
+    </div>
+}

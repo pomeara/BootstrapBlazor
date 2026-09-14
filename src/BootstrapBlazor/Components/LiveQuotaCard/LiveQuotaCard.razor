@@ -1,0 +1,67 @@
+@namespace BootstrapBlazor.Components
+
+<div class="lqc @HeatClass">
+    <Card>
+        <HeaderTemplate>
+            <ProviderIcon ProviderName="@Quota.Provider" CssClass="me-2" />
+            <span class="fw-semibold text-capitalize">@Quota.Provider</span>
+            @if (!string.IsNullOrEmpty(Quota.Account))
+            {
+                <Badge Color="Color.Secondary" class="ms-2">@Quota.Account</Badge>
+            }
+            @if (Detail == LiveQuotaDetailLevel.Compact)
+            {
+                <span class="ms-auto d-inline-flex align-items-center gap-1">
+                    @if (!string.IsNullOrEmpty(Quota.Error))
+                    {
+                        <Badge Color="Color.Secondary">unavailable</Badge>
+                    }
+                    else
+                    {
+                        <Badge Color="@LiveQuotaHeat.BadgeColor(Quota)">@HeadlinePercent.ToString("F0")%</Badge>
+                    }
+                </span>
+            }
+            else if (!string.IsNullOrEmpty(Quota.Error))
+            {
+                <Badge Color="Color.Secondary" class="ms-auto">unavailable</Badge>
+            }
+            else if (Quota.IsRateLimited)
+            {
+                <Badge Color="Color.Danger" class="ms-auto">rate-limited</Badge>
+            }
+            else
+            {
+                <Badge Color="@(Quota.Source == "api" ? Color.Success : Color.Info)" class="ms-auto">@Quota.Source</Badge>
+            }
+        </HeaderTemplate>
+        <BodyTemplate>
+            @if (Detail == LiveQuotaDetailLevel.Compact)
+            {
+                <div class="text-body-secondary small">windows hidden — compact detail</div>
+            }
+            else if (!string.IsNullOrEmpty(Quota.Error))
+            {
+                <Alert Color="Color.Warning" class="mb-0">@Quota.Error</Alert>
+            }
+            else
+            {
+                <div class="lqc-bars">
+                    @foreach (var window in Quota.Windows())
+                    {
+                        <QuotaWindowBar Label="@window.Label"
+                                        Percent="@window.Percent"
+                                        Used="@window.Used"
+                                        Limit="@window.Limit"
+                                        ResetsAt="@window.ResetsAt" />
+                    }
+                </div>
+            }
+        </BodyTemplate>
+        <FooterTemplate>
+            <div class="lqc-meta text-body-secondary small">
+                @Quota.Provider windows &mdash; @Quota.Windows().Count rendered
+            </div>
+        </FooterTemplate>
+    </Card>
+</div>

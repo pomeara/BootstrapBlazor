@@ -1,0 +1,45 @@
+@namespace BootstrapBlazor.Components
+
+<Card class="usage-summary-card h-100">
+    <HeaderTemplate>
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <span class="fw-bold">@Summary.ProviderId</span>
+            @if (Summary.ApiKeyPrefix != "*")
+            {
+                <Badge Color="Color.Secondary" class="ms-1" title="API key prefix (per-key burn)"><i class="fa-solid fa-key me-1" />@Summary.ApiKeyPrefix</Badge>
+            }
+            <Badge Color="Color.Info">
+                @Summary.Period
+            </Badge>
+        </div>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <div class="usage-summary-stats">
+            <div class="summary-stat">
+                <i class="fa-solid fa-paper-plane stat-icon-requests me-2" />
+                <span class="stat-label">Requests</span>
+                <span class="fw-bold ms-auto">@Summary.TotalRequests.ToString("N0")</span>
+            </div>
+            <div class="summary-stat">
+                <i class="fa-solid fa-coins stat-icon-tokens me-2" />
+                <span class="stat-label">Tokens</span>
+                <span class="fw-bold ms-auto">@Summary.TotalTokens.ToString("N0")</span>
+            </div>
+            <div class="summary-stat">
+                <i class="fa-solid fa-dollar-sign stat-icon-cost me-2" />
+                <span class="stat-label">Cost</span>
+                <span class="fw-bold ms-auto">$@Summary.TotalCostUsd.ToString("F2")</span>
+            </div>
+            <div class="summary-stat">
+                <i class="fa-solid fa-robot stat-icon-models me-2" />
+                <span class="stat-label">Models</span>
+                <span class="fw-bold ms-auto">@Summary.UniqueModelsUsed</span>
+            </div>
+        </div>
+    </BodyTemplate>
+    <FooterTemplate>
+        <div class="stat-footer">
+            @Summary.PeriodStart.ToString("yyyy-MM-dd") &mdash; @Summary.PeriodEnd.ToString("yyyy-MM-dd")
+        </div>
+    </FooterTemplate>
+</Card>
