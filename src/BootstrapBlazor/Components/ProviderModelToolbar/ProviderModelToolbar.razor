@@ -1,0 +1,47 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Parameter-driven provider/model toolbar with capability filtering. *@
+<div class="@ClassString" @attributes="AdditionalAttributes">
+    <Select TValue="string"
+            Items="ProviderItems"
+            @bind-Value="CurrentProvider"
+            ShowLabel="false"
+            PlaceHolder="Provider..."
+            OnSelectedItemChanged="OnProviderChangedAsync"
+            CssClass="toolbar-select"
+            IsPopover="true" />
+    <span class="text-body-secondary">/</span>
+    <Select TValue="string"
+            Items="FilteredModelItems"
+            @bind-Value="CurrentModel"
+            ShowLabel="false"
+            PlaceHolder="Model..."
+            CssClass="toolbar-select"
+            IsPopover="true" />
+    @if (ShowRefresh)
+    {
+        <Button Color="Color.Link"
+                Size="Size.Small"
+                IsDisabled="@IsLoading"
+                OnClick="OnRefreshAsync"
+                title="Refresh">
+            <i class="@(IsLoading ? "fa-solid fa-spinner fa-spin" : "fa-solid fa-rotate")"></i>
+        </Button>
+    }
+    @if (ShowCapabilities)
+    {
+        <div class="d-flex align-items-center gap-1 ms-2">
+            @foreach (var cap in CapabilityFilters)
+            {
+                var isActive = ActiveCapabilities.Contains(cap);
+                <Badge Color="@(isActive ? GetCapabilityColor(cap) : Color.Secondary)"
+                       class="cap-filter-badge"
+                       @onclick="@(() => ToggleCapability(cap))"
+                       title="@cap">
+                    <i class="@GetCapabilityIcon(cap) me-1"></i>@cap
+                </Badge>
+            }
+        </div>
+    }
+</div>

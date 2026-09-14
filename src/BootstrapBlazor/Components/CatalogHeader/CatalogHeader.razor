@@ -1,0 +1,38 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Dark catalog banner header — icon, title, badge, tab pills, and stat/toolbar/action slots. *@
+<div class="@ClassString" @attributes="AdditionalAttributes">
+    <div class="catalog-header-main d-flex align-items-center gap-2 flex-wrap">
+        <i class="@Icon @IconColor catalog-header-icon"></i>
+        <div class="catalog-header-titles">
+            <span class="catalog-header-title">@Title</span>
+            @if (!string.IsNullOrEmpty(SubTitle))
+            {
+                <span class="catalog-header-subtitle">@SubTitle</span>
+            }
+        </div>
+        @if (!string.IsNullOrEmpty(BadgeText))
+        {
+            <Badge Color="@BadgeColor">@BadgeText</Badge>
+        }
+        <div class="ms-auto d-flex align-items-center gap-2 flex-wrap">
+            @Stats
+            <div class="catalog-header-tabs d-flex align-items-center gap-1">
+                <span class="badge @GetTabClass("providers") catalog-header-tab" @onclick="@(() => SelectTab("providers"))" title="@PrimaryTabText">
+                    <i class="@PrimaryTabIcon me-1"></i>@PrimaryTabText
+                </span>
+                <span class="badge @GetTabClass("models") catalog-header-tab" @onclick="@(() => SelectTab("models"))" title="@SecondaryTabText">
+                    <i class="@SecondaryTabIcon me-1"></i>@SecondaryTabText
+                </span>
+            </div>
+            @if (Toolbar != null)
+            {
+                <div class="catalog-header-toolbar d-flex align-items-center gap-2 flex-nowrap">
+                    @Toolbar
+                </div>
+            }
+            @Actions
+        </div>
+    </div>
+</div>

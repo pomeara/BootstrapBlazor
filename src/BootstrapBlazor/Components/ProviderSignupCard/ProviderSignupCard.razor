@@ -1,0 +1,28 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Sign-up teaser card for a not-yet-configured provider — icon, blurb, model stats, sign-up link. *@
+<Card class="@ClassString" @attributes="AdditionalAttributes">
+    <HeaderTemplate>
+        <ProviderIcon ProviderName="@Entry.Label" IconPath="@Entry.IconPath" class="me-2" />
+        <span class="fw-semibold">@Entry.Label</span>
+        @if (!string.IsNullOrEmpty(Entry.Category))
+        {
+            <Badge Color="Color.Secondary" class="ms-2">@Entry.Category</Badge>
+        }
+    </HeaderTemplate>
+    <BodyTemplate>
+        <p class="small text-body-secondary mb-2 signup-blurb">@Description</p>
+        <div class="d-flex justify-content-between align-items-center small text-body-secondary mb-2">
+            <span><i class="fa-solid fa-cubes me-1"></i>@Entry.ModelCount models</span>
+            <EloBadge Elo="@TopElo" Rank="@TopRank" />
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Entry.Url))
+        {
+            <a href="@Entry.Url" target="_blank" rel="noopener noreferrer"
+               class="btn btn-sm btn-outline-primary w-100">
+                <i class="fa-solid fa-arrow-up-right-from-square me-1"></i>Sign up
+            </a>
+        }
+    </BodyTemplate>
+</Card>

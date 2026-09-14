@@ -1,0 +1,44 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Dark search/filter banner for catalog model browsing — search, family/provider dropdowns, favourites toggle. *@
+<div class="@ClassString" @attributes="AdditionalAttributes">
+    <i class="fa-solid fa-cube text-info catalog-header-icon"></i>
+    <div class="catalog-header-titles">
+        <span class="catalog-header-title">@Title</span>
+        @if (!string.IsNullOrEmpty(SubTitle))
+        {
+            <span class="catalog-header-subtitle">@SubTitle</span>
+        }
+    </div>
+    @if (!string.IsNullOrEmpty(BadgeText))
+    {
+        <Badge Color="Color.Warning">@BadgeText</Badge>
+    }
+    <div class="ms-auto d-flex align-items-center gap-2 flex-nowrap catalog-search-header-controls">
+        <BootstrapInput TValue="string"
+                        Value="SearchText"
+                        ValueChanged="SearchTextChanged"
+                        ValueExpression="() => SearchText"
+                        PlaceHolder="Search models..."
+                        Size="Size.Small"
+                        Width="160" />
+        <Select TValue="string"
+                Items="FamilyItems"
+                Value="SelectedFamily"
+                ValueChanged="SelectedFamilyChanged"
+                PlaceHolder="All families"
+                IsPopover="true"
+                ShowLabel="false"
+                Width="130" />
+        <Select TValue="string"
+                Items="ProviderItems"
+                Value="SelectedProvider"
+                ValueChanged="SelectedProviderChanged"
+                PlaceHolder="All providers"
+                IsPopover="true"
+                ShowLabel="false"
+                Width="130" />
+        <Switch Value="ShowOnlyFavourites" ValueChanged="ShowOnlyFavouritesChanged" OnText="Favourites" OffText="All" />
+    </div>
+</div>
