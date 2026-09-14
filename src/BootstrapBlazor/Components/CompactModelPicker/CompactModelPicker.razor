@@ -1,0 +1,47 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.ModelSelectorBase
+
+@* One-row model picker for toolbars/nav bars: icon + compact Select with per-model atoms,
+   optional ON/OFF status badge for the active provider. Selection policy comes from
+   ModelSelectorBase (auto-pick, filters). *@
+<div class="compact-model-picker d-inline-flex align-items-center @CssClass" @attributes="AdditionalAttributes">
+    @if (SelectedModel is not null)
+    {
+        <i class="fa-solid fa-cube compact-picker-icon"></i>
+    }
+    else if (!string.IsNullOrEmpty(Provider))
+    {
+        <ProviderIcon ProviderName="@Provider" CssClass="compact-picker-icon" />
+    }
+
+    <Select TValue="string" Items="_items" @bind-Value="ModelValue"
+            Color="Color.None" Size="Size.Small" ShowLabel="false"
+            PlaceHolder="@PlaceHolder" IsPopover="true">
+        <ItemTemplate>
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-cube"></i>
+                <span>@context?.Text</span>
+                @if (context?.Value is string v && ModelsById.TryGetValue(v, out var pm))
+                {
+                    @if (pm.Favourite)
+                    {
+                        <FavouriteStar Favourite="true" />
+                    }
+                    <EloBadge Elo="@pm.ArenaElo" Rank="@pm.LeaderboardRank" />
+                    <TierBadge Tier="@pm.Tier" />
+                    @if (!string.IsNullOrEmpty(pm.State) && !pm.State.Equals("enabled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <StateBadge State="@pm.State" />
+                    }
+                }
+            </div>
+        </ItemTemplate>
+    </Select>
+
+    @if (ShowStatusBadge && !string.IsNullOrEmpty(Provider))
+    {
+        <Badge Color="@(CurrentOnline ? Color.Success : Color.Danger)" class="compact-picker-status">
+            @(CurrentOnline ? "ON" : "OFF")
+        </Badge>
+    }
+</div>

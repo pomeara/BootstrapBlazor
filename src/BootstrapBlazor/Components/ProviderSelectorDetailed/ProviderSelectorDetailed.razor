@@ -1,0 +1,101 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.BootstrapComponentBase
+
+@* build.nvidia.com/models style — filter bar + detailed model-card grid.
+   Filters (search + capability toggles + free-only) drive a responsive card grid;
+   each card shows family icon, name, context, capability badges, pricing and a
+   Select action that raises SelectedModelChanged. *@
+<div class="provider-selector-detailed @CssClass" @attributes="AdditionalAttributes">
+
+    <Card class="mb-3">
+        <BodyTemplate>
+            <div class="d-flex flex-wrap align-items-center gap-2">
+                <div class="flex-grow-1">
+                    <BootstrapInput TValue="string" @bind-Value="_search" PlaceHolder="Search models, publishers..." />
+                </div>
+                <span class="text-body-secondary small align-self-center me-1">Modalities:</span>
+                <button type="button" class="btn btn-sm @(_fText ? "btn-primary" : "btn-outline-secondary")" @onclick="@(() => _fText = !_fText)"><i class="fa-solid fa-font me-1"></i>Text</button>
+                <button type="button" class="btn btn-sm @(_fVision ? "btn-primary" : "btn-outline-secondary")" @onclick="@(() => _fVision = !_fVision)"><i class="fa-solid fa-image me-1"></i>Vision</button>
+                <button type="button" class="btn btn-sm @(_fAudio ? "btn-primary" : "btn-outline-secondary")" @onclick="@(() => _fAudio = !_fAudio)"><i class="fa-solid fa-microphone me-1"></i>Audio</button>
+                <button type="button" class="btn btn-sm @(_fVideo ? "btn-primary" : "btn-outline-secondary")" @onclick="@(() => _fVideo = !_fVideo)"><i class="fa-solid fa-video me-1"></i>Video</button>
+                <span class="text-body-secondary small align-self-center ms-2 me-1">Capabilities:</span>
+                <button type="button" class="btn btn-sm @(_fReason ? "btn-primary" : "btn-outline-secondary")" @onclick="@(() => _fReason = !_fReason)"><i class="fa-solid fa-brain me-1"></i>Reasoning</button>
+                <button type="button" class="btn btn-sm @(_fTools ? "btn-primary" : "btn-outline-secondary")" @onclick="@(() => _fTools = !_fTools)"><i class="fa-solid fa-wrench me-1"></i>Tools</button>
+                <div class="form-check m-0 ms-2">
+                    <Checkbox Value="_freeOnly" ValueChanged="@((bool v) => _freeOnly = v)" DisplayText="Free only" />
+                </div>
+            </div>
+        </BodyTemplate>
+    </Card>
+
+    @if (Filtered.Count == 0)
+    {
+        <div class="text-center text-body-secondary py-5">
+            <i class="fa-solid fa-magnifying-glass fa-2x mb-2"></i>
+            <p class="mb-0">No models match the current filters.</p>
+        </div>
+    }
+    else
+    {
+        <div class="row g-3">
+            @foreach (var m in Filtered)
+            {
+                var selected = string.Equals(SelectedModel?.Id, m.Id, StringComparison.OrdinalIgnoreCase);
+                <div class="col-12 col-md-6 col-xl-4">
+                    <div class="card h-100 @(selected ? "border-primary" : string.Empty)">
+                        <div class="card-body d-flex flex-column gap-2">
+                            <div class="d-flex align-items-center gap-2">
+                                <ProviderIcon ProviderName="@(string.IsNullOrWhiteSpace(m.Family) ? "Other" : m.Family)" FallbackIconClass="fa-solid fa-cube" CssClass="flex-shrink-0" />
+                                <div class="flex-grow-1 overflow-hidden">
+                                    <div class="fw-bold text-truncate">@ShortenModelName(m.Id)</div>
+                                    <small class="text-body-secondary">@(string.IsNullOrWhiteSpace(m.Family) ? "Other" : m.Family)</small>
+                                </div>
+                                @if (m.IsFree)
+                                {
+                                    <Badge Color="Color.Success"><i class="fa-solid fa-gift me-1"></i>Free</Badge>
+                                }
+                                <FavouriteStar Favourite="m.Favourite" />
+                                @if (!string.IsNullOrEmpty(m.State) && !m.State.Equals("enabled", StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <StateBadge State="@m.State" />
+                                }
+                            </div>
+
+                            <div class="d-flex flex-wrap gap-1">
+                                <TierBadge Tier="@m.Tier" />
+                                <EloBadge Elo="@m.ArenaElo" Rank="@m.LeaderboardRank" />
+                                @if (m.Capabilities.Contains("vision", StringComparer.OrdinalIgnoreCase))
+                                {
+                                    <Badge Color="Color.Info"><i class="fa-solid fa-eye me-1"></i>Vision</Badge>
+                                }
+                                @if (m.Capabilities.Contains("reasoning", StringComparer.OrdinalIgnoreCase))
+                                {
+                                    <Badge Color="Color.Warning"><i class="fa-solid fa-brain me-1"></i>Reason</Badge>
+                                }
+                                @if (m.Capabilities.Contains("tools", StringComparer.OrdinalIgnoreCase))
+                                {
+                                    <Badge Color="Color.Primary"><i class="fa-solid fa-wrench me-1"></i>Tools</Badge>
+                                }
+                                @if (m.Capabilities.Contains("audio", StringComparer.OrdinalIgnoreCase))
+                                {
+                                    <Badge Color="Color.Success"><i class="fa-solid fa-microphone me-1"></i>Audio</Badge>
+                                }
+                            </div>
+
+                            <div class="d-flex justify-content-between small text-body-secondary">
+                                <span><i class="fa-solid fa-arrows-left-right me-1"></i>@(FormatTokens(m.ContextWindow).Length == 0 ? "—" : $"{FormatTokens(m.ContextWindow)} ctx")</span>
+                                <span><i class="fa-solid fa-tag me-1"></i>@PriceLabel(m)</span>
+                            </div>
+
+                            <Button Color="@(selected ? Color.Primary : Color.Secondary)"
+                                    Size="Size.Small" class="mt-auto"
+                                    OnClick="() => SelectAsync(m)">
+                                @(selected ? "Selected" : "Select")
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

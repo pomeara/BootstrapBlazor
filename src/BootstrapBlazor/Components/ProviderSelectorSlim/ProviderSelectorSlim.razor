@@ -1,0 +1,33 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.BootstrapComponentBase
+
+@* Compact single-row provider ICON toolbar (g4f.dev/#/providers style, density-tuned).
+   Each provider is a small icon chip — not a big card — so dozens fit in one toolbar row
+   (wraps only when needed). Offline providers are dimmed and not selectable; favourites
+   get a star overlay; the active one is filled. Hover shows label / model count / state. *@
+<div class="provider-selector-slim @CssClass" @attributes="AdditionalAttributes">
+    <div class="d-flex flex-wrap gap-1 align-items-center p-2 border rounded bg-body">
+        @foreach (var set in Sets)
+        {
+            var active = string.Equals(set.Name, SelectedProvider, StringComparison.OrdinalIgnoreCase);
+            <button type="button"
+                    class="pss-chip btn btn-sm position-relative d-inline-flex align-items-center justify-content-center @(active ? "btn-primary" : "btn-outline-secondary") @(set.IsOnline ? string.Empty : "opacity-50")"
+                    style="width:36px;height:36px;padding:0"
+                    title="@ChipTitle(set)"
+                    @onclick="() => SelectAsync(set)">
+                <ProviderIcon ProviderName="@set.Name" />
+                @if (set.IsFavourite)
+                {
+                    <FavouriteStar Favourite="true" class="position-absolute top-0 end-0" />
+                }
+            </button>
+        }
+    </div>
+
+    @if (!Sets.Any())
+    {
+        <div class="text-center text-body-secondary py-3 border rounded">
+            <i class="fa-solid fa-folder-open me-1"></i>No providers.
+        </div>
+    }
+</div>

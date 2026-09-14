@@ -42,6 +42,21 @@
     <div class="small text-body-secondary mt-1">@(_navProvider ?? "—") / @(_navModel ?? "—")</div>
 </DemoBlock>
 
+<DemoBlock Title="ProviderSelectorSlim" Introduction="Compact provider icon-chip toolbar — one 36px chip per provider (g4f.dev style); offline chips dim and ignore clicks, favourites carry a star overlay, hover shows label + model count." Name="ProviderSelectorSlim">
+    <ProviderSelectorSlim Providers="_sets" SelectedProvider="@_slimProvider" SelectedProviderChanged="OnSlimProviderChanged" />
+    <span class="small text-body-secondary ms-2">Selected: @(_slimProvider ?? "—")</span>
+</DemoBlock>
+
+<DemoBlock Title="CompactModelPicker" Introduction="One-row model picker for toolbars and nav bars — icon + compact select whose items carry favourite/ELO/tier/state atoms, with an optional ON/OFF badge for the active provider." Name="CompactModelPicker">
+    <CompactModelPicker Providers="_sets" Provider="@_provider" SelectedModel="@_compactModel" SelectedModelChanged="OnCompactModelChanged" ShowStatusBadge="true" PlaceHolder="Pick model..." />
+    <span class="small text-body-secondary ms-2">Model: @(_compactModel ?? "—")</span>
+</DemoBlock>
+
+<DemoBlock Title="ProviderSelectorDetailed" Introduction="Filterable model-card browser (build.nvidia.com style) — search, modality and capability toggles plus free-only drive a responsive card grid; each card shows context, badges and pricing with a Select action." Name="ProviderSelectorDetailed">
+    <ProviderSelectorDetailed Models="_detailedModels" SelectedModel="@_detailedModel" SelectedModelChanged="OnDetailedModelChanged" />
+    <span class="small text-body-secondary">Selected: @(_detailedModel?.Id ?? "—")</span>
+</DemoBlock>
+
 @code {
     private string? _provider = "openrouter";
     private string? _model;
@@ -55,6 +70,11 @@
     private bool _pmRefreshed;
     private string? _navProvider;
     private string? _navModel;
+    private string? _slimProvider = "openrouter";
+    private string? _compactModel;
+    private ProviderModelEntry? _detailedModel;
+
+    private List<ProviderModelEntry> _detailedModels => _sets.SelectMany(s => s.Models).ToList();
 
     private List<ProviderModelSet> _sets = new()
     {
@@ -125,6 +145,10 @@
         _navModel = null;
     }
     private void OnNavModelChanged(string? value) => _navModel = value;
+
+    private void OnSlimProviderChanged(string? value) => _slimProvider = value;
+    private void OnCompactModelChanged(string? value) => _compactModel = value;
+    private void OnDetailedModelChanged(ProviderModelEntry? value) => _detailedModel = value;
 
     // Card selector gets enriched local-runtime metadata (sizes, quantization) that only
     // card surfaces show; the dropdown demos reuse _sets as-is.

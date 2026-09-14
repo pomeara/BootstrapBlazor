@@ -718,3 +718,35 @@ html[data-bs-theme="dark"] img.provider-icon {
 .model-pull-panel .mpp-status {
     font-size: 0.75rem;
 }
+
+/* ----------
+ * ProviderSelectorSlim - compact provider icon-chip toolbar (batch 5)
+ * ---------- */
+.provider-selector-slim .pss-chip .provider-icon {
+    font-size: 1rem;
+}
+
+.provider-selector-slim .pss-chip:hover:not(.btn-primary) {
+    border-color: var(--bs-primary);
+}
+
+/* ----------
+ * CompactModelPicker - one-row model picker (batch 5)
+ * ---------- */
+.compact-model-picker .compact-picker-icon {
+    font-size: 1rem;
+    margin-right: 0.375rem;
+    color: var(--bs-secondary-color);
+}
+
+.compact-model-picker .compact-picker-status {
+    margin-left: 0.375rem;
+    font-size: 0.65rem;
+}
+
+/* ----------
+ * ProviderSelectorDetailed - filterable model-card browser (batch 5)
+ * ---------- */
+.provider-selector-detailed .card:hover {
+    border-color: var(--bs-primary-border-subtle);
+}
