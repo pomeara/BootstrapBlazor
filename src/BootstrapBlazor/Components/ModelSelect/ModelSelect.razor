@@ -1,0 +1,29 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.ModelSelectorBase
+
+<div class="model-select @CssClass" @attributes="AdditionalAttributes">
+    <Select TValue="string" Items="_items" @bind-Value="SelectedValue"
+            Color="Color.None" Size="Size.Small"
+            ShowLabel="@ShowLabel" PlaceHolder="@PlaceHolder"
+            IsPopover="true">
+        <ItemTemplate>
+            <div class="d-flex align-items-center gap-2">
+                <i class="fa-solid fa-cube text-body-secondary"></i>
+                <span>@context?.Text</span>
+                @if (context?.Value is string v && ModelsById.TryGetValue(v, out var model))
+                {
+                    @if (model.Favourite)
+                    {
+                        <FavouriteStar Favourite="true" />
+                    }
+                    <EloBadge Elo="@model.ArenaElo" Rank="@model.LeaderboardRank" />
+                    <TierBadge Tier="@model.Tier" />
+                    @if (!string.IsNullOrEmpty(model.State) && !model.State.Equals("enabled", StringComparison.OrdinalIgnoreCase))
+                    {
+                        <StateBadge State="@model.State" />
+                    }
+                }
+            </div>
+        </ItemTemplate>
+    </Select>
+</div>

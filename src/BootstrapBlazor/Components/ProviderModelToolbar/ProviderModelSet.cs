@@ -16,6 +16,12 @@ public sealed record ProviderModelSet
     /// <summary>Optional display name — falls back to <see cref="Name"/>.</summary>
     public string? DisplayName { get; init; }
 
+    /// <summary>True when the provider endpoint is reachable/enabled — selectors show online state.</summary>
+    public bool IsOnline { get; init; } = true;
+
+    /// <summary>True when the user starred this provider — favourite-first auto-selection.</summary>
+    public bool IsFavourite { get; init; }
+
     /// <summary>Models offered by this provider.</summary>
     public List<ProviderModelEntry> Models { get; init; } = [];
 }

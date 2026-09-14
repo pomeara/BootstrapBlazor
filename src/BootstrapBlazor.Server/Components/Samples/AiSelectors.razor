@@ -1,0 +1,83 @@
+@page "/ai-selectors"
+@namespace BootstrapBlazor.Server.Components.Samples
+@using BootstrapBlazor.Components
+
+<h3>AI Kit — Selector Molecules</h3>
+
+<DemoBlock Title="ProviderSelect" Introduction="Provider dropdown with online status — fed by a ProviderModelSet list, no catalog coupling." Name="ProviderSelect">
+    <ProviderSelect Providers="_sets" SelectedProvider="@_provider" SelectedProviderChanged="OnProviderChanged" />
+    <span class="small text-body-secondary ms-2">Selected: @(_provider ?? "—")</span>
+</DemoBlock>
+
+<DemoBlock Title="ModelSelect" Introduction="Model dropdown for one provider — favourite/free auto-select, disabled models hidden, per-model atoms in the list. Bind a provider name and the dropdown follows." Name="ModelSelect">
+    <ModelSelect Providers="_sets" Provider="@_provider" SelectedModel="@_model" SelectedModelChanged="OnModelChanged" ShowPricing="true" />
+    <span class="small text-body-secondary ms-2">Model: @(_model ?? "—")</span>
+</DemoBlock>
+
+<DemoBlock Title="ModelSelect (no auto-select)" Introduction="AutoSelect=false keeps a deliberately empty rest state until the user picks." Name="ModelSelectNoAuto">
+    <ModelSelect Providers="_sets" Provider="@_provider" SelectedModel="@_manualModel" SelectedModelChanged="OnManualModelChanged" AutoSelect="false" />
+    <span class="small text-body-secondary ms-2">Model: @(_manualModel ?? "—")</span>
+</DemoBlock>
+
+<DemoBlock Title="GroupedModelSelect" Introduction="Family-grouped model dropdown — grouped by Family with context-window hints and per-model atoms." Name="GroupedModelSelect">
+    <GroupedModelSelect Providers="_sets" Provider="@_provider" SelectedModel="@_groupedModel" SelectedModelChanged="OnGroupedModelChanged" />
+    <span class="small text-body-secondary ms-2">Model: @(_groupedModel ?? "—")</span>
+</DemoBlock>
+
+@code {
+    private string? _provider = "openrouter";
+    private string? _model;
+    private string? _manualModel;
+    private string? _groupedModel;
+
+    private List<ProviderModelSet> _sets = new()
+    {
+        new()
+        {
+            Name = "openrouter",
+            DisplayName = "OpenRouter",
+            IsOnline = true,
+            IsFavourite = true,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "meta-llama/llama-3.2-70b", DisplayName = "Llama 3.2 70B", Family = "llama", IsFree = true, Favourite = true, Tier = "best", ArenaElo = 1388, LeaderboardRank = 5, ContextWindow = 131072, Capabilities = { "text", "vision" } },
+                new() { Id = "qwen/qwen3-coder", DisplayName = "Qwen3 Coder", Family = "qwen", IsFree = true, Tier = "coding", ContextWindow = 262144, Capabilities = { "text", "code" } },
+                new() { Id = "openai/gpt-4o", DisplayName = "GPT-4o", Family = "gpt", State = "disabled", Tier = "fast", ContextWindow = 128000, PricePerMillionInput = 2.5m, Capabilities = { "text", "vision", "audio" } }
+            }
+        },
+        new()
+        {
+            Name = "groq",
+            DisplayName = "Groq",
+            IsOnline = true,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama-3.1-8b-instant", Family = "llama", IsFree = true, Tier = "fast", ContextWindow = 131072, Capabilities = { "text" } },
+                new() { Id = "mixtral-8x7b-32768", Family = "mixtral", PricePerMillionInput = 0.24m, ContextWindow = 32768, Capabilities = { "text" } }
+            }
+        },
+        new()
+        {
+            Name = "ollama",
+            DisplayName = "Ollama (local)",
+            IsOnline = false,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama3.2:8b", Family = "llama", IsFree = true, ContextWindow = 131072, Capabilities = { "text" } },
+                new() { Id = "deepseek-r1:14b", Family = "deepseek", IsFree = true, Tier = "reasoning", ContextWindow = 131072, Capabilities = { "text", "reasoning" } }
+            }
+        }
+    };
+
+    private void OnProviderChanged(string? value)
+    {
+        _provider = value;
+        _model = null;
+        _manualModel = null;
+        _groupedModel = null;
+    }
+
+    private void OnModelChanged(string? value) => _model = value;
+    private void OnManualModelChanged(string? value) => _manualModel = value;
+    private void OnGroupedModelChanged(string? value) => _groupedModel = value;
+}

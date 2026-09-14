@@ -1,0 +1,9 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+<div class="provider-select @CssClass" @attributes="AdditionalAttributes">
+    <Select TValue="string" Items="_items" @bind-Value="SelectedValue"
+            Color="Color.None" Size="@Size"
+            ShowLabel="@ShowLabel" PlaceHolder="@PlaceHolder"
+            IsPopover="true" />
+</div>

@@ -578,3 +578,11 @@ html[data-bs-theme="dark"] img.provider-icon {
 .cap-filter-badge:hover {
     opacity: 0.75;
 }
+
+.provider-select,
+.model-select,
+.grouped-model-select {
+    display: inline-block;
+    min-width: 200px;
+    max-width: 100%;
+}

@@ -5,7 +5,8 @@
 namespace BootstrapBlazor.Components;
 
 /// <summary>
-/// One selectable model with capability tags for filtering.
+/// One selectable model with capability tags for filtering plus the display metadata
+/// selectors and model cards render (family, free/state/favourite flags, leaderboard, context, price).
 /// </summary>
 public sealed record ProviderModelEntry
 {
@@ -17,4 +18,31 @@ public sealed record ProviderModelEntry
 
     /// <summary>Capability tags (e.g. text, vision, audio, video, code, reasoning).</summary>
     public List<string> Capabilities { get; init; } = [];
+
+    /// <summary>Model family (e.g. "llama") — drives grouped selectors; falls back to "Other".</summary>
+    public string? Family { get; init; }
+
+    /// <summary>True when the model is free to call.</summary>
+    public bool IsFree { get; init; }
+
+    /// <summary>Enabled state (e.g. "enabled", "disabled") — empty or "enabled" means usable.</summary>
+    public string? State { get; init; }
+
+    /// <summary>True when the user starred this model.</summary>
+    public bool Favourite { get; init; }
+
+    /// <summary>Selection tier label (e.g. "best", "fast", "coding").</summary>
+    public string? Tier { get; init; }
+
+    /// <summary>Chatbot-arena ELO score, when ranked.</summary>
+    public int? ArenaElo { get; init; }
+
+    /// <summary>Leaderboard position, when ranked.</summary>
+    public int? LeaderboardRank { get; init; }
+
+    /// <summary>Context window in tokens.</summary>
+    public int? ContextWindow { get; init; }
+
+    /// <summary>Input price per million tokens, when paid.</summary>
+    public decimal? PricePerMillionInput { get; init; }
 }
