@@ -1,0 +1,19 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Provider chip — icon + name, optional favourite/state meta. *@
+<span class="@ClassString" @attributes="AdditionalAttributes">
+    @if (ShowIcon)
+    {
+        <ProviderIcon ProviderName="@ProviderName" IconPath="@IconPath" class="provider-badge-icon" />
+    }
+    <span class="provider-badge-name">@GetDisplayName()</span>
+    @if (ShowMeta)
+    {
+        <FavouriteStar Favourite="Favourite" class="ms-1" />
+        @if (!string.IsNullOrEmpty(State) && !State.Equals("enabled", StringComparison.OrdinalIgnoreCase))
+        {
+            <StateBadge State="@State" class="ms-1" />
+        }
+    }
+</span>

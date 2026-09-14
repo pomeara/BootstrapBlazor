@@ -1,0 +1,12 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Provider icon — image when an icon path is supplied, fallback icon otherwise. *@
+@if (!string.IsNullOrEmpty(IconSrc))
+{
+    <img src="@IconSrc" alt="@GetDisplayName()" class="@ClassString" title="@GetDisplayName()" @attributes="AdditionalAttributes" />
+}
+else
+{
+    <i class="@FallbackIconClass @AdditionalClassString" title="@GetDisplayName()" @attributes="AdditionalAttributes"></i>
+}

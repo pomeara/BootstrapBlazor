@@ -1,0 +1,14 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Quota usage badge — green/amber/red by usage percent. *@
+<Badge Color="@StatusColor" class="@ClassString" @attributes="AdditionalAttributes">
+    @if (!string.IsNullOrEmpty(StatusText))
+    {
+        @StatusText
+    }
+    else
+    {
+        @($"{UsagePercent:F0}%")
+    }
+</Badge>
