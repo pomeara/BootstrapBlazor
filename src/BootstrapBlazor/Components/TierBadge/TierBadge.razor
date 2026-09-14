@@ -1,0 +1,10 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Tier badge (best/fast/vision/coding/reasoning). Renders nothing without a tier. *@
+@if (!string.IsNullOrWhiteSpace(Tier))
+{
+    <Badge Color="@TierColor" @attributes="AdditionalAttributes">
+        <i class="@TierIcon me-1"></i>@Tier
+    </Badge>
+}

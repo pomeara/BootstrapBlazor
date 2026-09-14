@@ -1,0 +1,7 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Enabled/disabled/unknown state badge. *@
+<Badge Color="@StateColor" IsPill="true" @attributes="AdditionalAttributes">
+    <i class="@Icon me-1"></i>@StateLabel
+</Badge>

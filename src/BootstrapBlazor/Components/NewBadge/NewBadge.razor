@@ -1,0 +1,9 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* "New" freshness chip — shows when the model first appeared within the configured window;
+   tooltip carries the compact age. Renders nothing otherwise. *@
+@if (Utils.ModelFreshness.IsNew(FirstSeenUtc))
+{
+    <span class="badge rounded-pill text-bg-success" title="@Title" @attributes="AdditionalAttributes">NEW</span>
+}

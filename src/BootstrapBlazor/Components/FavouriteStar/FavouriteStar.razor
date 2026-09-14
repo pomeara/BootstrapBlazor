@@ -1,0 +1,7 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Favourite star — filled when favourite, outline otherwise. *@
+<span class="@ClassString" title="@(Favourite ? "Favourite" : "Not favourite")">
+    <i class="@(Favourite ? "fa-solid" : "fa-regular") fa-star"></i>
+</span>

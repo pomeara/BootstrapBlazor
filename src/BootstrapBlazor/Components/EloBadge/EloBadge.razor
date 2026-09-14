@@ -1,0 +1,11 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Leaderboard ELO (+ optional rank) badge. Hidden when no ELO. *@
+@if (Elo.HasValue)
+{
+    var title = Rank.HasValue ? $"Arena ELO {Elo} · rank #{Rank}" : $"Arena ELO {Elo}";
+    <Badge Color="Color.Dark" title="@title" @attributes="AdditionalAttributes">
+        <i class="fa-solid fa-ranking-star me-1"></i>@Elo@(Rank.HasValue ? $" · #{Rank}" : "")
+    </Badge>
+}
