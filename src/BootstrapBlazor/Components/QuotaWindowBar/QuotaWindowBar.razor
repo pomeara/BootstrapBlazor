@@ -1,0 +1,18 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* A single rolling quota window — labelled progress bar with used/limit and a reset countdown. *@
+<div class="@ClassString" @attributes="AdditionalAttributes">
+    <div class="d-flex justify-content-between small mb-1">
+        <span class="fw-semibold">@Label</span>
+        <span class="text-body-secondary">@Countdown</span>
+    </div>
+    <div class="progress mb-1 quota-window-bar">
+        <div class="progress-bar @BarClass" role="progressbar"
+             style="width: @($"{Percent:F0}%")"
+             aria-valuenow="@((int)Percent)" aria-valuemin="0" aria-valuemax="100">
+            @Percent.ToString("F0")%
+        </div>
+    </div>
+    <div class="small text-body-secondary">@UsedLabel &middot; resets @ResetLabel</div>
+</div>

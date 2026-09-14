@@ -1,0 +1,10 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Single benchmark score (category + value) with key-specific icon/color. Hidden when no score. *@
+@if (Score.HasValue)
+{
+    <Badge Color="@KeyColor" title="@Title" @attributes="AdditionalAttributes">
+        <i class="@KeyIcon me-1"></i>@Key · @Score.Value.ToString("0.0")
+    </Badge>
+}
