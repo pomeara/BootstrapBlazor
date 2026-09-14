@@ -1,0 +1,24 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Reusable empty state placeholder. *@
+<div class="empty-state text-center py-5">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <div class="empty-state-icon mb-3">
+            <i class="@ResolvedIcon"></i>
+        </div>
+    }
+    <h5 class="mb-2">@Title</h5>
+    <p class="empty-state-message mb-3">@DisplayMessage</p>
+    @if (Actions is not null)
+    {
+        <div class="empty-state-actions mb-3">
+            @Actions
+        </div>
+    }
+    @if (!string.IsNullOrEmpty(ActionText) && OnAction.HasDelegate)
+    {
+        <Button Color="Color.Primary" OnClick="HandleAction" Icon="fa-solid fa-plus" Text="@ActionText" />
+    }
+</div>

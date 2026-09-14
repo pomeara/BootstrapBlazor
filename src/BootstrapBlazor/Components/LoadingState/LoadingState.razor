@@ -1,0 +1,15 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Reusable loading state indicator — centered both horizontally and vertically. *@
+<div class="loading-state-wrap">
+    <div class="loading-state-inner">
+        <div class="spinner-border text-@SpinnerColor" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+        @if (!string.IsNullOrEmpty(Message))
+        {
+            <p class="mt-2 text-body-secondary">@Message</p>
+        }
+    </div>
+</div>

@@ -1,0 +1,212 @@
+/* BootstrapBlazor UI atoms — shared styles for SectionTitle, EmptyState, StatCard,
+   LoadingState, ControlTag, NavBarStat, HeaderMetric and ToolbarSeparator.
+   Uses Bootstrap theme CSS variables (no hardcoded colors) so all atoms adapt to
+   light/dark themes. Link once per app:
+   <link rel="stylesheet" href="_content/BootstrapBlazor/css/atoms.css" /> */
+
+/* ── SectionTitle ── */
+.section-title {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.section-title-icon-default {
+    color: var(--bb-primary);
+}
+
+.section-title-icon-success {
+    color: var(--bs-success);
+}
+
+.section-title-icon-warning {
+    color: var(--bs-warning);
+}
+
+.section-title-icon-danger {
+    color: var(--bs-danger);
+}
+
+.section-title-icon-info {
+    color: var(--bs-info);
+}
+
+.section-title-icon-secondary {
+    color: var(--bs-secondary-color);
+}
+
+/* ── EmptyState ── */
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+}
+
+.empty-state-message {
+    color: var(--bs-secondary-color);
+}
+
+/* ── StatCard ── */
+.stat-card {
+    border-radius: 0.5rem;
+    transition: transform 0.15s ease-in-out;
+}
+
+.stat-card--colored:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card--plain {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+}
+
+.stat-card--plain:hover {
+    transform: translateY(-2px);
+}
+
+.stat-card__icon {
+    font-size: 1.5rem;
+    opacity: 0.7;
+    color: var(--bs-primary);
+}
+
+.stat-card__body {
+    flex: 1;
+}
+
+.stat-card__value {
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.stat-card__label {
+    font-size: 0.8125rem;
+    color: var(--bs-body-secondary);
+}
+
+.stat-card__subtext {
+    font-size: 0.75rem;
+    color: var(--bs-body-secondary);
+    opacity: 0.8;
+}
+
+.stat-card__label-heading {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    color: var(--bs-body-secondary);
+    margin-bottom: 0.25rem;
+}
+
+/* ── LoadingState ── */
+.loading-state-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 200px;
+    width: 100%;
+}
+
+.loading-state-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+}
+
+/* ── ControlTag ── */
+.control-tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.2rem 0.5rem;
+    font-size: 0.75rem;
+    background-color: var(--bs-primary-bg-subtle, #e7f1ff);
+    color: var(--bs-primary-text-emphasis, #055160);
+    border: 1px solid var(--bs-primary-border-subtle, #b6d4fe);
+    border-radius: 0.375rem;
+    cursor: pointer;
+    transition: all 0.15s ease-in-out;
+    user-select: none;
+}
+
+.control-tag:hover {
+    background-color: var(--bs-primary, #0d6efd);
+    color: #fff;
+    border-color: var(--bs-primary, #0d6efd);
+}
+
+.control-tag:active {
+    transform: scale(0.95);
+}
+
+.control-tag-copied {
+    background-color: var(--bs-success, #198754);
+    color: #fff;
+    border-color: var(--bs-success, #198754);
+}
+
+.control-tag-category {
+    margin-left: 0.35rem;
+    padding: 0.1rem 0.3rem;
+    font-size: 0.65rem;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+}
+
+/* ── NavBarStat ── */
+.navbar-stat {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    white-space: nowrap;
+}
+
+.navbar-stat-value {
+    font-weight: 600;
+    color: var(--bs-body-color);
+}
+
+.navbar-stat-label {
+    font-size: 0.75rem;
+    color: var(--bs-secondary-color);
+}
+
+/* ── HeaderMetric ── */
+.header-metric {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.125rem;
+    padding: 0.25rem 0.75rem;
+    min-width: 56px;
+}
+
+.header-metric-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--bs-body-secondary, #6c757d);
+    white-space: nowrap;
+}
+
+.header-metric-value {
+    font-size: 1rem;
+    white-space: nowrap;
+}
+
+/* ── ToolbarSeparator ── */
+.toolbar-separator {
+    display: inline-block;
+    width: 1px;
+    height: 20px;
+    background-color: var(--bs-border-color, #dee2e6);
+    flex-shrink: 0;
+    vertical-align: middle;
+}

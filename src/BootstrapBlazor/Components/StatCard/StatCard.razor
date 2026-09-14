@@ -1,0 +1,57 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Reusable statistics card supporting colored, plain, and custom content modes. *@
+@if (ChildContent is not null)
+{
+    <div class="stat-card @CssClass">
+        @if (!string.IsNullOrWhiteSpace(Label))
+        {
+            <div class="stat-card__label-heading">@Label</div>
+        }
+        @ChildContent
+    </div>
+}
+else if (Plain)
+{
+    <div class="stat-card stat-card--plain @CssClass" @onclick="HandleClick" style="@ClickCursorStyle">
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <div class="stat-card__icon"><i class="@Icon"></i></div>
+        }
+        <div class="stat-card__body">
+            <div class="stat-card__value @ValueCssClass">
+                @Prefix@FormattedValue@Suffix
+            </div>
+            <div class="stat-card__label">@Label</div>
+            @if (!string.IsNullOrEmpty(SubText))
+            {
+                <div class="stat-card__subtext">@SubText</div>
+            }
+        </div>
+    </div>
+}
+else
+{
+    <div class="stat-card stat-card--colored h-100 @CssClass" @onclick="HandleClick" style="@ClickCursorStyle">
+        <div class="card bg-@ColorClass text-@TextClass h-100">
+            <div class="card-body">
+                @if (!string.IsNullOrEmpty(Icon))
+                {
+                    <div class="d-flex align-items-center">
+                        <i class="fa-solid @Icon fa-2x me-3 opacity-50"></i>
+                        <div>
+                            <h3 class="mb-0">@Prefix@FormattedValue@Suffix</h3>
+                            <p class="mb-0 small">@Label</p>
+                        </div>
+                    </div>
+                }
+                else
+                {
+                    <h3>@Prefix@FormattedValue@Suffix</h3>
+                    <p class="mb-0">@Label</p>
+                }
+            </div>
+        </div>
+    </div>
+}

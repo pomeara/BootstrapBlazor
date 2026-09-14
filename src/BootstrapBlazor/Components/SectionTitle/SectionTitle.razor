@@ -1,0 +1,15 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Reusable section title with optional icon and badge. *@
+<h5 class="@CssClass">
+    @if (!string.IsNullOrEmpty(Icon))
+    {
+        <span class="fa-solid @Icon @IconColor me-2"></span>
+    }
+    @Title
+    @if (Badge != null)
+    {
+        @Badge
+    }
+</h5>

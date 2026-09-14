@@ -1,0 +1,15 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Click-to-copy identifier badge. *@
+<span class="control-tag @(_copied ? "control-tag-copied" : "")" @onclick="CopyToClipboard" role="button" tabindex="0">
+    <i class="fa-solid fa-tag me-1"></i>@Name
+    @if (!string.IsNullOrEmpty(Category))
+    {
+        <span class="control-tag-category">@Category</span>
+    }
+    @if (_copied)
+    {
+        <i class="fa-solid fa-check ms-1 text-success"></i>
+    }
+</span>
