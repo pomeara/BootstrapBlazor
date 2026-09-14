@@ -182,9 +182,14 @@ internal static class MenusLocalizerExtensions
                 {
                     Text = "AI Usage Cards",
                     Url = "ai-usage"
+                },
+                new()
+                {
+                    Text = "AI Streaming",
+                    Url = "ai-streaming"
                 }
             };
-            AddBadge(item, count: 6);
+            AddBadge(item, count: 7);
         }
 
         void AddBootstrapBlazorUtility(DemoMenuItem item)

@@ -1,0 +1,59 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.ModelSelectorBase
+
+@* Minimal prompt panel: engine + model pick, prompt box, streaming output.
+   The stream comes from the host via ChatStream (provider, model, prompt) →
+   chunks; the component owns selection state, the run button and rendering. *@
+<Card class="chat-panel h-100" @attributes="AdditionalAttributes">
+    <HeaderTemplate>
+        <div class="d-flex justify-content-between align-items-center w-100">
+            <span class="fw-bold">
+                <i class="fa-solid fa-comments me-2 chat-icon"></i>@Title
+            </span>
+        </div>
+    </HeaderTemplate>
+    <BodyTemplate>
+        <div class="row g-2 align-items-center mb-3 pb-3 border-bottom">
+            <div class="col-auto">
+                <label class="chat-label mb-0">Engine</label>
+                <Select TValue="string" Items="_providerItems" @bind-Value="ProviderValue" IsPopover="true" />
+            </div>
+            <div class="col-auto">
+                <label class="chat-label mb-0">Model</label>
+                <Select TValue="string" Items="_modelItems" @bind-Value="ModelValue" IsPopover="true" />
+            </div>
+        </div>
+        <div class="row g-2 mb-3">
+            <div class="col">
+                <Textarea rows="3" PlaceHolder="@PromptPlaceHolder" CssClass="font-monospace" @bind-Value="@_prompt" />
+            </div>
+            <div class="col-auto">
+                <Button Color="Color.Primary" Size="Size.Small" OnClick="RunChatAsync" IsDisabled="@_isRunning">
+                    @if (_isRunning)
+                    {
+                        <Spinner Size="Size.Small" class="me-1" />
+                        <span>Running...</span>
+                    }
+                    else
+                    {
+                        <i class="fa-solid fa-play me-1"></i>
+                        <span>RUN</span>
+                    }
+                </Button>
+            </div>
+        </div>
+        @if (!string.IsNullOrEmpty(_result))
+        {
+            <div class="chat-output">
+                <pre class="chat-result-text">@_result</pre>
+            </div>
+        }
+        else
+        {
+            <div class="text-center py-4 chat-placeholder">
+                <i class="fa-solid fa-terminal fa-2x mb-2"></i>
+                <p class="small mb-0">@EmptyText</p>
+            </div>
+        }
+    </BodyTemplate>
+</Card>

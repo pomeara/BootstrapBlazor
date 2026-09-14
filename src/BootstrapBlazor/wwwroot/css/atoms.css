@@ -665,3 +665,56 @@ html[data-bs-theme="dark"] img.provider-icon {
 .navbar-model-selector .nms-status-badge { font-size: .6rem; letter-spacing: .04em; }
 .navbar-model-selector.navbar-model-selector-compact .select { min-width: 120px; max-width: 200px; font-size: .8rem; }
 .navbar-model-selector.navbar-model-selector-compact { gap: .4rem; }
+
+/* ----------
+ * ChatPanel - prompt panel with provider/model pick + streaming output (batch 4e)
+ * ---------- */
+.chat-panel .chat-icon {
+    color: var(--bs-primary);
+}
+
+.chat-panel .chat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--bs-secondary-color);
+    margin-right: 0.5rem;
+}
+
+.chat-panel .chat-output {
+    max-height: 400px;
+    overflow-y: auto;
+    background: var(--bs-tertiary-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: var(--bs-border-radius);
+    padding: 0.75rem 1rem;
+}
+
+.chat-panel .chat-result-text {
+    color: var(--bs-success);
+    font-family: var(--bs-font-monospace);
+    font-size: 0.8rem;
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+.chat-panel .chat-placeholder {
+    color: var(--bs-secondary-color);
+}
+
+/* ----------
+ * ModelPullPanel - pull-a-model form with striped progress bar (batch 4e)
+ * ---------- */
+.model-pull-panel .pull-progress {
+    height: 4px;
+}
+
+.model-pull-panel .pull-progress-bar {
+    width: 100%;
+}
+
+.model-pull-panel .mpp-status {
+    font-size: 0.75rem;
+}

@@ -1,0 +1,95 @@
+@page "/ai-streaming"
+@namespace BootstrapBlazor.Server.Components.Samples
+@using BootstrapBlazor.Components
+
+<h3>AI Kit — Streaming Panels</h3>
+
+<DemoBlock Title="ChatPanel" Introduction="Prompt panel with provider/model pick (shared auto-select policy), a prompt box and a streaming output area. The host supplies ChatStream — (provider, model, prompt) → text chunks — and the component renders each chunk as it arrives." Name="ChatPanel">
+    <ChatPanel Providers="_sets" ChatStream="FakeChatStreamAsync" OnResponseComplete="OnChatComplete" />
+    <div class="small text-body-secondary mt-1">@_chatRuns run(s), last response @_lastChatLength chars</div>
+</DemoBlock>
+
+<DemoBlock Title="ModelPullPanel" Introduction="Pull-a-model form for local runtimes — a name input plus a live progress bar fed by the host's PullStream (IAsyncEnumerable of ModelPullProgress). Provider-agnostic: the host decides which registry the pull targets." Name="ModelPullPanel">
+    <ModelPullPanel PullStream="FakePullStreamAsync" OnModelPulled="OnModelPulled" />
+    <div class="small text-body-secondary mt-1">@_pullCount successful pull(s)</div>
+</DemoBlock>
+
+@code {
+    private int _chatRuns;
+    private int _lastChatLength;
+    private int _pullCount;
+
+    private List<ProviderModelSet> _sets = new()
+    {
+        new()
+        {
+            Name = "openrouter",
+            DisplayName = "OpenRouter",
+            IsOnline = true,
+            IsFavourite = true,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "meta-llama/llama-3.2-70b", DisplayName = "Llama 3.2 70B", Family = "llama", IsFree = true, Favourite = true, ContextWindow = 131072, Capabilities = { "text", "vision" } },
+                new() { Id = "qwen/qwen3-coder", DisplayName = "Qwen3 Coder", Family = "qwen", IsFree = true, ContextWindow = 262144, Capabilities = { "text", "code" } }
+            }
+        },
+        new()
+        {
+            Name = "ollama",
+            DisplayName = "Ollama (local)",
+            IsOnline = true,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "llama3.2", Family = "llama", ContextWindow = 131072, SizeBytes = 2_019_936_256, ParameterCount = "3B", Quantization = "Q4_K_M", Capabilities = { "text" } },
+                new() { Id = "qwen2.5-coder:7b", DisplayName = "Qwen2.5 Coder 7B", Family = "qwen", ContextWindow = 32768, SizeBytes = 4_700_000_000, ParameterCount = "7B", Quantization = "Q4_K_M", Capabilities = { "text", "code" } }
+            }
+        },
+        new()
+        {
+            Name = "zhipu",
+            DisplayName = "Zhipu",
+            IsOnline = false,
+            Models = new List<ProviderModelEntry>
+            {
+                new() { Id = "glm-4.5", Family = "glm", ContextWindow = 128000, Capabilities = { "text" } }
+            }
+        }
+    };
+
+    private async IAsyncEnumerable<string> FakeChatStreamAsync(string provider, string model, string prompt)
+    {
+        var response = $"[{provider}/{model}] Echo: {prompt} — this fake stream demonstrates per-chunk rendering.";
+        foreach (var word in response.Split(' '))
+        {
+            await Task.Delay(120);
+            yield return word + " ";
+        }
+    }
+
+    private Task OnChatComplete(string response)
+    {
+        _chatRuns++;
+        _lastChatLength = response.Length;
+        return Task.CompletedTask;
+    }
+
+    private async IAsyncEnumerable<ModelPullProgress> FakePullStreamAsync(string modelName)
+    {
+        yield return new ModelPullProgress($"pulling manifest for {modelName}");
+        await Task.Delay(400);
+        for (var percent = 20; percent <= 100; percent += 20)
+        {
+            yield return new ModelPullProgress("downloading layers", percent);
+            await Task.Delay(250);
+        }
+        yield return new ModelPullProgress("verifying sha256");
+        await Task.Delay(300);
+        yield return new ModelPullProgress("success");
+    }
+
+    private Task OnModelPulled()
+    {
+        _pullCount++;
+        return Task.CompletedTask;
+    }
+}

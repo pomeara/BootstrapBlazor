@@ -1,0 +1,25 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapBlazor.Components.BootstrapComponentBase
+
+@* Pull-a-model form: name input + progress bar driven by the host's PullStream
+   (IAsyncEnumerable of ModelPullProgress). Provider-agnostic — the host decides
+   which registry the pull targets. *@
+<div class="model-pull-panel mt-3 pt-3 border-top border-secondary border-opacity-25" @attributes="AdditionalAttributes">
+    <label class="form-label text-secondary small text-uppercase fw-bold">@Title</label>
+    <div class="input-group input-group-sm">
+        <BootstrapInput TValue="string" PlaceHolder="@PlaceHolder" @bind-Value="_modelName" />
+        <Button Color="Color.Primary" Size="Size.Small" class="px-3"
+                OnClick="PullModelAsync"
+                IsDisabled="@(_isPulling || string.IsNullOrWhiteSpace(_modelName))"
+                Icon="fa-solid fa-cloud-download" Text="Pull" />
+    </div>
+    @if (_isPulling)
+    {
+        <div class="progress bg-dark border border-secondary border-opacity-25 mt-2 pull-progress">
+            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary pull-progress-bar"></div>
+        </div>
+        <div class="text-info mpp-status mt-1">
+            <i class="fa-solid fa-sync fa-spin me-1"></i>@_progressText
+        </div>
+    }
+</div>
