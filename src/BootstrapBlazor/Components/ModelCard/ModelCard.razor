@@ -1,0 +1,83 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Compact AI model card — icon, badges, capabilities, pricing. *@
+<div class="@ClassString" @attributes="AdditionalAttributes">
+    <div class="model-card-header d-flex align-items-center gap-2">
+        @if (ShowIcon && !string.IsNullOrEmpty(Model.IconPath))
+        {
+            <img src="@Model.IconPath" alt="@(Model.Family ?? Model.Id)" class="model-card-icon" />
+        }
+        <div class="model-card-title flex-grow-1">
+            <div class="fw-bold small text-truncate">@GetDisplayName()</div>
+            @if (!string.IsNullOrEmpty(Model.Family))
+            {
+                <div class="text-body-secondary model-card-subtext">@Model.Family</div>
+            }
+        </div>
+        @if (Model.Recommended)
+        {
+            <i class="fa-solid fa-star text-warning" title="Recommended"></i>
+        }
+    </div>
+    @if (ShowBadges)
+    {
+        <div class="model-card-badges mt-1 d-flex flex-wrap gap-1">
+            <NewBadge FirstSeenUtc="Model.FirstSeenUtc" />
+            <TierBadge Tier="Model.Tier" />
+            <EloBadge Elo="Model.ArenaElo" Rank="Model.LeaderboardRank" />
+            @if (!string.IsNullOrEmpty(Model.ParameterCount))
+            {
+                <Badge Color="Color.Primary">@Model.ParameterCount</Badge>
+            }
+            @if (Model.ContextWindow.HasValue)
+            {
+                <Badge Color="Color.Info">@Model.ContextDisplay ctx</Badge>
+            }
+            @if (!string.IsNullOrEmpty(Model.Quantization))
+            {
+                <Badge Color="Color.Secondary">@Model.Quantization</Badge>
+            }
+            @if (Model.IsLocal)
+            {
+                <Badge Color="Color.Dark">Local</Badge>
+            }
+        </div>
+    }
+    @if (ShowCapabilities && (Model.SupportsVision || Model.SupportsReasoning || Model.SupportsTools || Model.SupportsAudio))
+    {
+        <div class="model-card-capabilities mt-1 d-flex flex-wrap gap-1">
+            @if (Model.SupportsVision)
+            {
+                <CapabilityTag Capability="Vision" />
+            }
+            @if (Model.SupportsReasoning)
+            {
+                <CapabilityTag Capability="Reasoning" />
+            }
+            @if (Model.SupportsTools)
+            {
+                <CapabilityTag Capability="Tools" />
+            }
+            @if (Model.SupportsAudio)
+            {
+                <CapabilityTag Capability="Audio" />
+            }
+        </div>
+    }
+    @if (ShowPricing)
+    {
+        <div class="model-card-pricing mt-1">
+            @if (Model.IsFree)
+            {
+                <Badge Color="Color.Success">Free</Badge>
+            }
+            else
+            {
+                <span class="text-body-secondary model-card-subtext">
+                    @FormatPrice(Model.PricePerMillionInput) in · @FormatPrice(Model.PricePerMillionOutput) out
+                </span>
+            }
+        </div>
+    }
+</div>

@@ -496,3 +496,21 @@ html[data-bs-theme="dark"] img.provider-icon {
 .quota-window { font-variant-numeric: tabular-nums; }
 .quota-window .progress { border-radius: 0.375rem; }
 .quota-window-bar { height: 22px; }
+
+/* ---------------------------------- */
+/* ModelCard — compact AI model card */
+/* ---------------------------------- */
+.model-card {
+    padding: 0.75rem;
+    border-radius: 0.5rem;
+    background-color: var(--bs-card-bg);
+    border: 1px solid var(--bs-border-color);
+    transition: box-shadow 0.15s ease-in-out;
+}
+.model-card:hover { box-shadow: 0 0.125rem 0.25rem var(--bs-border-color-translucent); }
+.model-card-icon { width: 24px; height: 24px; object-fit: contain; flex-shrink: 0; }
+.model-card-title { min-width: 0; }
+.model-card-subtext { font-size: 0.7rem; }
+.model-card-badges,
+.model-card-capabilities,
+.model-card-pricing { padding-left: 0; }
