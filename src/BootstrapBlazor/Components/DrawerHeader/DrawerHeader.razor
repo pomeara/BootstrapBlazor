@@ -1,0 +1,20 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Drawer header with title, optional pin, and close actions. *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    <div class="drawer-header-left">
+        @if (!string.IsNullOrEmpty(Icon))
+        {
+            <i class="@Icon me-2"></i>
+        }
+        <span class="drawer-header-title">@Title</span>
+    </div>
+    <div class="drawer-header-actions">
+        @if (ShowPin)
+        {
+            <Button Color="Color.None" class="drawer-pin-btn" OnClick="HandlePin" Icon="@(IsPinned ? "fa-solid fa-thumbtack" : "fa-solid fa-thumbtack fa-rotate-90")" title="@PinTooltipText" />
+        }
+        <Button Color="Color.None" class="drawer-close-btn" OnClick="HandleClose" Icon="fa-solid fa-xmark" title="@CloseTooltipText" />
+    </div>
+</div>

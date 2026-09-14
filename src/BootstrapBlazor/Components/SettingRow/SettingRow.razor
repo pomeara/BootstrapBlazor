@@ -1,0 +1,19 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Settings row cell: TWO settings per rendered row (col-md-6 halves) — label (with optional
+   help tooltip) left, control right, within the cell. Wrap runs of rows in <div class="row g-2">
+   in the panel. Set Full="true" for a wide control that needs the entire row. Drop any control
+   into the child content (Switch, BootstrapInputNumber, Select, ChoiceGroup, …). *@
+<div @attributes="AdditionalAttributes" class="@ClassString">
+    <div class="setting-row">
+        <div class="setting-row-label" title="@Help">
+            <label>@Label</label>
+            @if (!string.IsNullOrWhiteSpace(Help))
+            {
+                <i class="fa-solid fa-circle-info setting-row-help" aria-hidden="true"></i>
+            }
+        </div>
+        <div class="setting-row-control">@ChildContent</div>
+    </div>
+</div>

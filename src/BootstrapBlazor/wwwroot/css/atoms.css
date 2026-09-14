@@ -234,3 +234,106 @@
 .mini-card-icon { display: flex; align-items: center; }
 .mini-card-title { font-weight: 600; white-space: nowrap; }
 .mini-card-body { display: flex; align-items: center; gap: 0.5rem; min-width: 0; }
+
+/* ---------------------------------- */
+/* DrawerHeader — drawer title row with pin/close actions */
+/* ---------------------------------- */
+.drawer-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid var(--bs-border-color);
+}
+.drawer-header-left { display: flex; align-items: center; }
+.drawer-header-title { font-weight: 600; font-size: 1rem; }
+.drawer-header-actions { display: flex; align-items: center; gap: 0.25rem; }
+
+/* ---------------------------------- */
+/* DrawerFooter — right-aligned action row */
+/* ---------------------------------- */
+.drawer-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-top: 1px solid var(--bs-border-color);
+}
+
+/* ---------------------------------- */
+/* DrawerTabStrip — tab strip for multi-panel drawers */
+/* ---------------------------------- */
+.drawer-tab-strip {
+    display: flex;
+    border-bottom: 1px solid var(--bs-border-color);
+    overflow-x: auto;
+}
+.drawer-tab {
+    padding: 0.5rem 1rem;
+    border: none;
+    background: transparent;
+    color: var(--bs-body-color);
+    cursor: pointer;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    font-size: 0.875rem;
+}
+.drawer-tab:hover { background: var(--bs-tertiary-bg); }
+.drawer-tab.active { border-bottom-color: var(--bs-primary); font-weight: 600; }
+
+/* ---------------------------------- */
+/* SettingRow — two-settings-per-row cell (wrap runs in <div class="row g-2">) */
+/* ---------------------------------- */
+.setting-row {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.375rem 0;
+    min-height: 2.25rem;
+    height: 100%;
+}
+/* Dashed separator above every cell not in the first (visual) row of its wrapper */
+.setting-cell:nth-child(n+3) .setting-row {
+    border-top: 1px dashed var(--bs-border-color);
+}
+.setting-row-label {
+    flex: 0 0 45%;
+    max-width: 15rem;
+    display: flex;
+    align-items: center;
+    gap: 0.375rem;
+    cursor: default;
+}
+.setting-row-label label {
+    font-weight: 600;
+    font-size: 0.875rem;
+    margin: 0;
+}
+.setting-row-help {
+    color: var(--bs-secondary-color);
+    font-size: 0.8rem;
+    cursor: help;
+}
+.setting-row-control {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    flex-wrap: wrap;
+}
+/* Controls placed in a row stay compact — no full-width stretch.
+   Icons/flags inside a control never balloon: cap them to text height. */
+.setting-row-control .form-control,
+.setting-row-control .form-select {
+    width: auto;
+    min-width: 7rem;
+    max-width: 24rem;
+}
+.setting-row-control img {
+    max-height: 1.5rem;
+    max-width: 2.25rem;
+    width: auto;
+    height: auto;
+}

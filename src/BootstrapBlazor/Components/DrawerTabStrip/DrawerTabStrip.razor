@@ -1,0 +1,19 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Tab strip for multi-panel drawers — renders nothing for a single panel. *@
+@if (Panels.Count > 1)
+{
+    <div @attributes="AdditionalAttributes" class="@ClassString">
+        @foreach (var panel in Panels)
+        {
+            <button type="button" class="@GetTabClass(panel)" @onclick="() => SelectPanel(panel.Key)">
+                @if (!string.IsNullOrEmpty(panel.Icon))
+                {
+                    <i class="@panel.Icon me-1"></i>
+                }
+                @panel.Title
+            </button>
+        }
+    </div>
+}

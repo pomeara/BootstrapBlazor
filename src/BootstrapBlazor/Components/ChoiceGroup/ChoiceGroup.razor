@@ -1,0 +1,13 @@
+@namespace BootstrapBlazor.Components
+@inherits BootstrapComponentBase
+
+@* Segmented button group for small choice sets (log levels, nav modes, tab styles).
+   Preferred over Select when every option deserves to be visible at once — one click,
+   no dropdown. Marks the active choice with btn-primary. *@
+<div @attributes="AdditionalAttributes" class="@ClassString" role="group" aria-label="@Label">
+    @foreach (var item in Items)
+    {
+        var isActive = string.Equals(Value, item.Value, StringComparison.OrdinalIgnoreCase);
+        <button type="button" class="@(isActive ? "btn btn-primary" : "btn btn-outline-secondary")" title="@item.Text" @onclick="() => Select(item.Value)">@item.Text</button>
+    }
+</div>
