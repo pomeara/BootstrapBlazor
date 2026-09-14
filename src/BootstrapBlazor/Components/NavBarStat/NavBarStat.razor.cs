@@ -43,4 +43,8 @@ public sealed partial class NavBarStat
         Color.Secondary => "secondary",
         _ => "primary"
     };
+
+    private string? ClassString => CssBuilder.Default("navbar-stat me-3")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 }

@@ -4,7 +4,7 @@
 @* Reusable statistics card supporting colored, plain, and custom content modes. *@
 @if (ChildContent is not null)
 {
-    <div class="stat-card @CssClass">
+    <div @attributes="AdditionalAttributes" class="@CustomClassString">
         @if (!string.IsNullOrWhiteSpace(Label))
         {
             <div class="stat-card__label-heading">@Label</div>
@@ -14,7 +14,7 @@
 }
 else if (Plain)
 {
-    <div class="stat-card stat-card--plain @CssClass" @onclick="HandleClick" style="@ClickCursorStyle">
+    <div @attributes="AdditionalAttributes" class="@PlainClassString" @onclick="HandleClick" style="@ClickCursorStyle">
         @if (!string.IsNullOrEmpty(Icon))
         {
             <div class="stat-card__icon"><i class="@Icon"></i></div>
@@ -33,7 +33,7 @@ else if (Plain)
 }
 else
 {
-    <div class="stat-card stat-card--colored h-100 @CssClass" @onclick="HandleClick" style="@ClickCursorStyle">
+    <div @attributes="AdditionalAttributes" class="@ColoredClassString" @onclick="HandleClick" style="@ClickCursorStyle">
         <div class="card bg-@ColorClass text-@TextClass h-100">
             <div class="card-body">
                 @if (!string.IsNullOrEmpty(Icon))

@@ -2,7 +2,7 @@
 @inherits BootstrapComponentBase
 
 @* Reusable empty state placeholder. *@
-<div class="empty-state text-center py-5">
+<div @attributes="AdditionalAttributes" class="@ClassString">
     @if (!string.IsNullOrEmpty(Icon))
     {
         <div class="empty-state-icon mb-3">

@@ -20,4 +20,8 @@ public sealed partial class LoadingState
     /// </summary>
     [Parameter]
     public string SpinnerColor { get; set; } = "primary";
+
+    private string? ClassString => CssBuilder.Default("loading-state-wrap")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 }

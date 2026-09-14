@@ -52,6 +52,10 @@ public sealed partial class EmptyState
     [Parameter]
     public RenderFragment? Actions { get; set; }
 
+    private string? ClassString => CssBuilder.Default("empty-state text-center py-5")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     private string DisplayMessage => !string.IsNullOrEmpty(Message) ? Message : Description;
 
     private string ResolvedIcon => Icon?.Contains(' ') == true

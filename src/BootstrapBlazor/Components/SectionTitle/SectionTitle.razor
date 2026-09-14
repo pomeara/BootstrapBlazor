@@ -2,7 +2,7 @@
 @inherits BootstrapComponentBase
 
 @* Reusable section title with optional icon and badge. *@
-<h5 class="@CssClass">
+<h5 @attributes="AdditionalAttributes" class="@ClassString">
     @if (!string.IsNullOrEmpty(Icon))
     {
         <span class="fa-solid @Icon @IconColor me-2"></span>

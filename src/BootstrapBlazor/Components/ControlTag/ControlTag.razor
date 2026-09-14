@@ -2,7 +2,7 @@
 @inherits BootstrapComponentBase
 
 @* Click-to-copy identifier badge. *@
-<span class="control-tag @(_copied ? "control-tag-copied" : "")" @onclick="CopyToClipboard" role="button" tabindex="0">
+<span @attributes="AdditionalAttributes" class="@ClassString" @onclick="CopyToClipboard" role="button" tabindex="0">
     <i class="fa-solid fa-tag me-1"></i>@Name
     @if (!string.IsNullOrEmpty(Category))
     {

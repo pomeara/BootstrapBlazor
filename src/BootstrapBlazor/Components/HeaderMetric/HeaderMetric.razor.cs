@@ -26,4 +26,8 @@ public sealed partial class HeaderMetric
     /// </summary>
     [Parameter]
     public string ValueColor { get; set; } = "";
+
+    private string? ClassString => CssBuilder.Default("header-metric")
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 }

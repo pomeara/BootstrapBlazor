@@ -123,6 +123,21 @@ public sealed partial class StatCard
 
     private string ClickCursorStyle => (Clickable || OnClick.HasDelegate) ? "cursor: pointer;" : string.Empty;
 
+    private string? CustomClassString => CssBuilder.Default("stat-card")
+        .AddClass(CssClass)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    private string? PlainClassString => CssBuilder.Default("stat-card stat-card--plain")
+        .AddClass(CssClass)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
+    private string? ColoredClassString => CssBuilder.Default("stat-card stat-card--colored h-100")
+        .AddClass(CssClass)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
+
     private async Task HandleClick()
     {
         if (OnClick.HasDelegate)

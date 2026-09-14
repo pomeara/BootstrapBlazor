@@ -40,4 +40,9 @@ public sealed partial class SectionTitle
     /// </summary>
     [Parameter]
     public RenderFragment? Badge { get; set; }
+
+    private string? ClassString => CssBuilder.Default()
+        .AddClass(CssClass)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 }

@@ -4,7 +4,7 @@
 @* Reusable badge list with overflow indicator. *@
 @if (Items != null && Items.Any())
 {
-    <div class="d-flex flex-wrap gap-1">
+    <div @attributes="AdditionalAttributes" class="d-flex flex-wrap gap-1">
         @foreach (var item in Items)
         {
             <span class="badge @BadgeColor">@GetItemName(item)</span>

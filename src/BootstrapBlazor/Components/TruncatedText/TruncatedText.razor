@@ -4,5 +4,5 @@
 @* Truncated text with the full value exposed as the title tooltip. *@
 @if (!string.IsNullOrEmpty(Value))
 {
-    <span title="@Value">@DisplayText</span>
+    <span @attributes="AdditionalAttributes" title="@Value">@DisplayText</span>
 }

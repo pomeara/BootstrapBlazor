@@ -27,18 +27,20 @@ public sealed partial class ControlTag
     public string? Category { get; set; }
 
     [Inject]
-    private IJSRuntime JS { get; set; } = null!;
-
-    [Inject]
     private ILogger<ControlTag> Logger { get; set; } = null!;
 
     private bool _copied;
+
+    private string? ClassString => CssBuilder.Default("control-tag")
+        .AddClass("control-tag-copied", _copied)
+        .AddClassFromAttributes(AdditionalAttributes)
+        .Build();
 
     private async Task CopyToClipboard()
     {
         try
         {
-            await JS.InvokeVoidAsync("navigator.clipboard.writeText", Name);
+            await JSRuntime.InvokeVoidAsync("navigator.clipboard.writeText", Name);
             _copied = true;
             StateHasChanged();
             await Task.Delay(1000);
